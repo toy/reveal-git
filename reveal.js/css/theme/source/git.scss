@@ -1,0 +1,38 @@
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+// Include theme-specific fonts
+@font-face {
+	font-family: 'Adelle Bold';
+	src: url('../../lib/font/adelle_bold-webfont.eot');
+	src: url('../../lib/font/adelle_bold-webfont.eot?#iefix') format('embedded-opentype'),
+				url('../../lib/font/adelle_bold-webfont.woff') format('woff'),
+				url('../../lib/font/adelle_bold-webfont.ttf') format('truetype'),
+				url('../../lib/font/adelle_bold-webfont.svg#AdelleBold') format('svg');
+
+	font-weight: bold;
+	font-style: normal;
+}
+
+// Override theme settings (see ../template/settings.scss)
+$mainFont: 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;
+$mainFontSize: 30px;
+$headingFont: 'Adelle Bold', 'adelle', Georgia, 'Times New Roman', serif;
+$headingColor: #eeeeee;
+$headingTextTransform: lowercase;
+$backgroundColor: #000;
+$linkColor: #03a688;
+$linkColorHover: #04d8b1;
+$selectionBackgroundColor: #ef391a;
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+.reveal {
+	h1, h2 { color: #ef391a; }
+	pre { font-size: 0.8em; }
+	code { background: #3f3f3f; color: #dcdcdc; padding: 0 3px; margin: 0 -3px; }
+}
