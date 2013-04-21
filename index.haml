@@ -1,0 +1,48 @@
+<!doctype html>
+%html{:lang => "en"}
+	%head
+		%meta{:charset => "utf-8"}
+		%title git for svn users
+		%meta{:content => "Presentatation about git for svn users", :name => "description"}
+		%meta{:content => "Ivan Kuchin", :name => "author"}
+		%meta{:content => "yes", :name => "apple-mobile-web-app-capable"}
+		%meta{:content => "black-translucent", :name => "apple-mobile-web-app-status-bar-style"}
+		%meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
+		%link{:href => "reveal.js/css/reveal.min.css", :rel => "stylesheet"}
+		%link#theme{:href => "reveal.js/css/theme/git.css", :rel => "stylesheet"}
+		%link{:href => "reveal.js/lib/css/zenburn.css", :rel => "stylesheet"}
+		:javascript
+			document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		/[if lt IE 9]
+			<script src="reveal.js/lib/js/html5shiv.js"></script>
+	%body
+		.reveal
+			.slides
+
+				%section
+					%h1 git
+
+		%script{:src => "reveal.js/lib/js/head.min.js"}
+		%script{:src => "reveal.js/js/reveal.min.js"}
+		:javascript
+			Reveal.initialize({
+				width: 1300,
+				height: 875,
+				margin: 0.05,
+				minScale: 0.5,
+				maxScale: window.location.search.match( /print-pdf/gi ) ? 1.0 : 10.0,
+
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				theme: Reveal.getQueryHash().theme,
+				transition: 'default',
+				dependencies: [
+					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					//{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList && !(document.location.hostname == 'localhost' || document.location.hostname == ''); } },
+				]
+			});
