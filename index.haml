@@ -15,22 +15,498 @@
 			document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
 		/[if lt IE 9]
 			<script src="reveal.js/lib/js/html5shiv.js"></script>
+		:scss
+			.reveal {
+				table {
+					margin-left: auto; margin-right: auto; width: 100%;
+					td { text-align: center; }
+				}
+
+				pre {
+					code { background: #222; word-wrap: break-word; }
+				}
+
+				p.small { font-size: 0.7em; }
+
+				span.tag {
+					font-style: italic;
+					&::before { content: "@" }
+				}
+
+				p.commands {
+					code { white-space: nowrap; margin: 0 3px; }
+				}
+
+				.narrowSnippets {
+					pre { width: 40%; }
+				}
+			}
+
+			.blackout .reveal .state-background { background: rgba( 0, 0, 0, 0.2 ); }
+			.alert .reveal .state-background { background: rgba( 200, 50, 30, 0.2 ); }
+			.soothe .reveal .state-background { background: rgba( 50, 200, 90, 0.2 ); }
+			.whiteout .reveal .state-background { background: rgba( 255, 255, 255, 0.2 ); }
+			.cobalt .reveal .state-background { background: rgba( 22, 152, 213, 0.2 ); }
+			.mint .reveal .state-background { background: rgba( 22, 213, 75, 0.2 ); }
+			.submerge .reveal .state-background { background: rgba( 12, 25, 77, 0.2); }
+			.lila .reveal .state-background { background: rgba( 180, 50, 140, 0.2 ); }
+			.sunset .reveal .state-background { background: rgba( 255, 122, 0, 0.2 ); }
+
 	%body
 		.reveal
 			.slides
 
-				%section#begin
+				%section#begin{data: {state: "blackout"}}
 					%h1
 						git
 						%span{style: 'font-size: 0.2em'} for svn users
 					.fragment{style: 'width: 70%; position: realtive; margin: 5px auto; padding: 5px; background: rgba(255, 255, 255, 0.05)'}
 						%q Source code control the way it was meant to be!
 						%p{style: 'text-align: right'} — Linus Torvalds
-					%p{style: 'margin-top: 3em'}
-						%small Presentation by Ivan Kuchin (PH-EDU/GS-AIS-GDI)
+					%p.small{style: 'margin-top: 3em'}
+						Presentation by Ivan Kuchin (PH-EDU/GS-AIS-GDI)
 
-				%section#end
+				%section{data: {state: "whiteout"}}
+					%h2 Plan
+					%p.fragment Why git?
+					%p.fragment Cons
+					%p.fragment What is git?
+					%p.fragment Dos and don'ts
+					%p.fragment Commands
+					%p.fragment Hands-on
+					%p.fragment Resources
+
+				%section{data: {state: "soothe"}}
+					%section
+						%h2 Why git?
+						%p.fragment Branching and merging
+						%p.fragment Distributed VCS
+						%p.fragment Small and fast
+						%p.fragment Robust
+						%p.fragment Staging area
+						%f.fragment Open Source
+
+					%section
+						%h2 Why git?
+						%h3 Branching and merging
+						%p.fragment Branch is just a named reference to a commit
+						%p.fragment Create branch for every feature, test or experiment
+						%p.fragment No copying or linking files and no history entry
+						%p.fragment Easily switch branches
+						%p.fragment Merge worthwhile and delete unseccessful
+						%p.fragment You are not obliged to share your branches
+
+					%section
+						%h2 Why git?
+						%h3 Distributed VCS
+						%p.fragment
+							Every repository is self-contained
+							%span.fragment and works as a backup
+						%p.fragment Commit early, commit often, commit without disturbing others
+						%p.fragment Merge before sharing changes, not before you commit
+						%p.fragment Server is not required until you need to share/publish work
+						%p.fragment Different ways to share your work (commits/patches, network/mail/sneakernet)
+						%p.fragment Workflow depends on your team, not on your VCS
+						%p.fragment <code>git init</code> is enough when you need source control
+
+					%section
+						%h2 Why git?
+						%h3 Small and fast
+						%p.fragment Nearly all operations run locally
+						%p.fragment
+							%a{href: "http://git-scm.com/about/small-and-fast"} 1-325x faster than SVN (except clone)
+						%p.fragment Was built for speed, performance and handling big projects from start
+						%p
+							.fragment
+								po/.svn
+								%span.fragment — 4.1M
+								%span.fragment — 1 revision
+							.fragment
+								po/.git
+								%span.fragment — 3.2M
+								%span.fragment — 1839 commits
+
+					%section
+						%h2 Why git?
+						%h3 Robust
+						%p.fragment Simple data model
+						%p.fragment Integrity provided by SHA1 hashes
+						%p.fragment Tracks content rather than differences
+						%p.fragment Changes to content or meta info creates <del>alternative hitory</del> different hashes
+						%p.fragment
+							So history is mutable
+							%span.fragment
+								but changes can't be hidden
+								%span.fragment (no Nineteen Eighty-Four)
+
+					%section
+						%h2 Why git?
+						%h3 Staging area
+						%p.fragment Prepare and review changes before committing
+						%p.fragment Easily split changes to multiple commits (even in one file)
+						%p.fragment Commit while still working
+
+				%section{data: {state: "alert"}}
+					%h2 Cons
+					%p.fragment No subtree checkout
+					%p.fragment Directories are not tracked
+					%p.fragment Commmits are not sequentially numbered
+					%p.fragment Higher learning curve
+
+				%section{data: {state: "cobalt"}}
+					%section
+						%h2 What is git?
+						%h3 Parts
+						%p Workspace — checked out files
+						%p Stage area or Index — changes staged for commit
+						%p Repository — commits, branches, tags
+						%p Remote repository — named url (ssh, git, http, https, local/file), shared commits, branches, tags
+
+					%section
+						%h2 What is git?
+						%h3 Example
+						.fragment.fade-in{style: "font-size: 0.9em;"}
+							<pre style="width: 90%">* <b><span style='color:#0A0'>4d89687</span></b> - <span style='color:#AAA'>change markdown code…</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'> (hakimel&#x2F;master, hakimel&#x2F;dev)</span></b><br>*   <b><span style='color:#0A0'>cb7a9c9</span></b> - <span style='color:#AAA'>merge master into dev</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>|\  <br>| * <b><span style='color:#0A0'>5132ccd</span></b> - <span style='color:#AAA'>setup instructions #357</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>* |   <b><span style='color:#0A0'>f157aec</span></b> - <span style='color:#AAA'>Merge branch &#x27;remotes-plugin-natural-bindings&#x27;…</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>|\ \  <br>| * | <b><span style='color:#0A0'>352ec7e</span></b> - <span style='color:#AAA'>remotes plugin more…</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'> (HEAD, remotes-plugin-natural-bindings)</span></b><br>| |&#x2F;  <br>* | <b><span style='color:#0A0'>0344f2f</span></b> - <span style='color:#AAA'>fix ios flicker bug with linear transition #410</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>* | <b><span style='color:#0A0'>028d918</span></b> - <span style='color:#AAA'>merge marked tweak</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'> (origin&#x2F;dev)</span></b><br>* | <b><span style='color:#0A0'>39b53a7</span></b> - <span style='color:#AAA'>minify marked #433</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>* |   <b><span style='color:#0A0'>beda5f4</span></b> - <span style='color:#AAA'>merge showdown to marked migration</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>|\ \  <br>| * | <b><span style='color:#0A0'>381da38</span></b> - <span style='color:#AAA'>Replace the ShowDown Markdown engine with marked</span> <b><span style='color:#AAA'>— Amit Kotlovski</span></b><b><span style='color:#A50'></span></b><br>| |&#x2F;  <br>* | <b><span style='color:#0A0'>0441c26</span></b> - <span style='color:#AAA'>Adds support for auto escaping HTML in code blocks.</span> <b><span style='color:#AAA'>— Raymond Camden</span></b><b><span style='color:#A50'></span></b><br>|&#x2F;  <br>* <b><span style='color:#0A0'>247771e</span></b> - <span style='color:#AAA'>update control styles…</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'> (origin&#x2F;master, origin&#x2F;HEAD, master)</span></b><br>* <b><span style='color:#0A0'>36a8f12</span></b> - <span style='color:#AAA'>add isVerticalSlide utility method</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b></pre>
+
+					%section
+						%h2 What is git?
+						%h3 Objects
+						%p 4 object types identified by SHA1 hash:
+						:markdown
+							* `blob` — file content
+							* `tree` — «directory content» — names and permissions of `blobs` and `trees`
+							* `commit` — author/committer + date, message, `tree` and parent `commits`
+							* `tag` — tagger + date, message and `commit`
+
+					%section
+						%h2 What is git?
+						%h3 References
+						%p Names pointing at commits
+						%ul
+							%li Branches at <code>refs/heads/*</code>
+							%li
+								Tags at <code>refs/tags/*</code>
+								%ul
+									%li lightweight tags point to commits
+									%li annotated and signed tags point to tag objects
+							%li
+								<code>HEAD</code> — reference to current commit/parent for next commit
+								%br
+								can be a reference to branch, tag or simply commit hash
+							%li
+								Remote branches at <code>refs/remotes/*</code>
+								%ul
+									%li Fetching from remote creates remote branches
+									%li Pushing to remote changes remote branches
+							%li Stashing work in progress also creates reference
+
+					%section.narrowSnippets
+						%h2 What is git?
+						%h3 Merging
+						%p Merge feature to master:
+						:markdown
+								>>       C---D feature
+								>>      /
+								>> A---B master
+						%p Fast-forward:
+						:markdown
+								>> A---B---C---D master, feature
+						%p No fast-forward:
+						:markdown
+								>>       C---D feature
+								>>      /     \
+								>> A---B-------M master
+
+					%section.narrowSnippets
+						%h2 What is git?
+						%h3 Merging and rebasing
+						%p Merge non fast-forward feature to master:
+						:markdown
+								>>       C---D feature
+								>>      /
+								>> A---B---E master
+						%p Merge:
+						:markdown
+								>>       C---D feature
+								>>      /     \
+								>> A---B---E---M master
+						%p Rebase and merge:
+						:markdown
+								>>           C'--D' feature
+								>>          /     \
+								>> A---B---E-------M master
+
+					%section.narrowSnippets
+						%h2 What is git?
+						%h3 Cherry picking
+						%p Copy change to master:
+						:markdown
+								>>       C---X---E feature
+								>>      /
+								>> A---B master
+						%p Cherry-pick:
+						:markdown
+								>>       C---X---E feature
+								>>      /
+								>> A---B---X' master
+						%p Rebase skips change:
+						:markdown
+								>>           C'--E' feature
+								>>          /
+								>> A---B---X' master
+
+					%section
+						%h2 What is git?
+						%h3 Revisions
+						:markdown
+							* SHA1 hash `2477`, `247771e129`, `247771e129f431fc751140d8da4c2fe60815a51f`
+							* Reference `HEAD`, `master`, `heads/master`, `refs/heads/master`, `v1.0`
+							* Ancestor commit `HEAD~`, `HEAD~~`, `master~10`, `master^`, `feature^2`
+							* Reflog (prior value of reference) `HEAD@{1}`, `master@{10}`, `@{10}`, `@{yesterday}`
+							* Upstream `@{u}`, `feature@{u}`
+							* Read more at [gitrevisions](https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html)
+
+					%section
+						%h2 What is git?
+						%h3 Ignore patterns
+						:markdown
+								/*.zip
+								/stacktrace.log
+								/target/
+								/out/
+						:markdown
+							* `.gitignore` — for team, tracked, can be in subdirectories
+							* `.git/info/exclude` — for you
+							* `~/.gitignore` — for all your repos (name specified in `~/.gitconfig`)
+
+				%section{data: {state: "sunset"}}
+					%h2 Dos and don'ts
+					%p.fragment.highlight-green Commit early and often
+					%p.fragment.highlight-green Choose (and agree with your team) a workflow
+					%p.fragment.highlight-green Create branches
+					%p.fragment.highlight-green Make useful commit messages
+					%p.fragment.highlight-green Keep up to date
+					%p.fragment.highlight-green Enforce standards
+					%p.fragment.highlight-red Don't change <del>official</del> published history
+					%p.fragment.highlight-red Don't change tags
+
+				%section{data: {state: "submerge"}}
+					%section
+						%h2 Commands
+						%h4.fragment{data: {fragment_index: 1}} porcelain (high level)
+						%p.fragment.commands.small{data: {fragment_index: 3}}
+							Main:
+							- %w[add am archive bisect branch bundle checkout cherry-pick citool clean clone commit describe diff fetch format-patch gc grep gui init log merge mv notes pull push rebase reset revert rm shortlog show stash status submodule tag gitk].each do |command|
+								%code= command
+						%p.fragment.commands.small{data: {fragment_index: 4}}
+							Ancillary:
+							- %w[annotate archimport blame cherry config count-objects cvsexportcommit cvsimport cvsserver difftool fast-export fast-import filter-branch fsck get-tar-commit-id help imap-send instaweb merge-tree mergetool p4 pack-refs prune quiltimport reflog relink remote repack replace request-pull rerere rev-parse send-email show-branch svn verify-tag whatchanged].each do |command|
+								%code= command
+						%h4.fragment{data: {fragment_index: 2}} plumbing (low level)
+						%p.fragment.commands.small{data: {fragment_index: 5}}
+							- %w[apply cat-file check-attr check-ignore check-ref-format checkout-index column commit-tree credential credential-cache credential-store daemon diff-files diff-index diff-tree fetch-pack fmt-merge-msg for-each-ref hash-object http-backend http-fetch http-push index-pack ls-files ls-remote ls-tree mailinfo mailsplit merge-base merge-file merge-index merge-one-file mktag mktree name-rev pack-objects pack-redundant parse-remote patch-id prune-packed read-tree receive-pack rev-list send-pack sh-i18n sh-setup shell show-index show-ref stripspace symbolic-ref unpack-file unpack-objects update-index update-ref update-server-info upload-archive upload-pack var verify-pack write-tree].each do |command|
+								%code= command
+
+					%section
+						%h2 Commands
+						%h3 Essential 1/2
+						%p.fragment <code>help</code>
+						%p.fragment <code>init</code>, <code>clone</code> — init/clone repository
+						%p.fragment <code>status</code> — show status of workspace and stage area
+						%p.fragment <code>add</code>, <code>mv</code>, <code>rm</code> or just <code>add -A</code> — stage changes
+						%p.fragment <code>commit</code> — create commit
+						%p.fragment <code>log</code> — show commit history
+						%p.fragment <code>diff</code> — show changes
+						%p.fragment <code>merge</code> — join histories
+						%p.fragment <code>rebase</code> — move history changes
+						%p.fragment <code>cherry-pick</code> — copy history changes
+
+					%section
+						%h2 Commands
+						%h3 Essential 2/2
+						%p.fragment <code>checkout</code> — checkout branch or paths
+						%p.fragment <code>reset</code> — reset current HEAD, workspace, stage area
+						%p.fragment <code>branch</code> — crete, list, delete branches
+						%p.fragment <code>tag</code> — crete, list, delete tags
+						%p.fragment <code>remote</code> — crete, list, delete remotes
+						%p.fragment <code>fetch</code> — fetch remote refs and objects
+						%p.fragment <code>pull</code> — fetch and merge from remote
+						%p.fragment <code>push</code> — update remote refs and upload objects
+
+					%section
+						%h2 Commands
+						%h3 Helpful
+						%p.fragment <code>revert</code> — commit reverting change
+						%p.fragment <code>clean</code> — remove untracked files
+						%p.fragment <code>show</code> — show objects
+						%p.fragment <code>blame</code> — show author of changes
+						%p.fragment <code>stash</code> — put aside your work
+						%p.fragment <code>bisect</code> — find <del>the bad guy</del> commit introducing bug
+						%h3.fragment and advanced
+						%p.fragment <code>svn</code> — work with svn repository
+						%p.fragment <code>submodule</code>, <code>subtree</code> — attach foreigh repositories
+						%p.fragment <code>filter-branch</code> — rewrite history using filters
+
+					%section
+						%h2 Commands
+						%h3 Customize
+						.fragment
+							%h4 Define aliases
+							:markdown
+									[alias]
+										s = status
+										ci = commit
+										a = add --all
+										d = diff --ignore-space-change
+										wd = diff --color-words
+										lg = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+						.fragment
+							%h4 Create your commands
+							%p Everything in PATH like <code>git-*</code> can be called like <code>git *</code>
+
+				%section{data: {state: "lila"}}
+					%section
+						%h2 Hands-on
+						%h3 Identify yourself
+						:markdown
+								$ git config --global user.name 'Ivan Kuchin'
+								$ git config --global user.email ivan.kuchin@cern.ch
+					%section
+						%h2 Hands-on
+						%h3 Create new repository
+						:markdown
+								$ mkdir hello-world
+								$ cd hello-world
+								$ git init
+								Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
+					%section
+						%h2 Hands-on
+						%h3 Commit first file
+						%p Create file README with content:
+						<pre><code>Prints &quot;Hello, World&quot;.</code></pre>
+						%p Stage
+						<pre><code><span style="color:#0A0">$</span> git add README</code></pre>
+						%p Commit
+						<pre><code><span style="color:#0A0">$</span> git commit --message 'README'<br />[master (root-commit) 22bef9e] README<br /> 1 file changed, 1 insertion(+)<br /> create mode 100644 README</code></pre>
+					%section
+						%h2 Hands-on
+						%h3 Checkout new branch
+						<pre><code><span style="color:#0A0">$</span> git checkout -b implementation<br />Switched to a new branch 'implementation'</code></pre>
+					%section
+						%h2 Hands-on
+						%h3 Start implementing
+						%p Create file HelloWorld.java with content:
+						<pre><code>public class HelloWorld {<br />  public static void main(String[] args) {<br />    System.out.println(&quot;Hello, World&quot;)<br />  }<br />}</code></pre>
+						%p Stage
+						<pre><code><span style="color:#0A0">$</span> git add HelloWorld.java</code></pre>
+						%p Commit
+						<pre><code><span style="color:#0A0">$</span> git commit --message 'Implemented HelloWorld'<br />[implementation d802a79] Implemented HelloWorld<br /> 1 file changed, 5 insertions(+)<br /> create mode 100644 HelloWorld.java</code></pre>
+					%section
+						%h2 Hands-on
+						%h3 Test and fix
+						%p Oops…
+						<pre><code><span style="color:#0A0">$</span> javac HelloWorld.java<br />HelloWorld.java:3: ';' expected<br />    System.out.println("Hello, World")<br />                                      ^<br />1 error</code></pre>
+						%p Fix HelloWorld.java:
+						<pre><code>System.out.println(&quot;Hello, World!&quot;);</code></pre>
+						%p It works!
+						<pre><code><span style="color:#0A0">$</span> javac HelloWorld.java &amp;&amp; java HelloWorld<br />Hello, World!</code></pre>
+					%section
+						%h2 Hands-on
+						%h3 Ignore build results
+						<pre><code><span style="color:#0A0">$</span> git status<br /># On branch implementation<br /># Changes not staged for commit:<br />#   (use "git add <file>..." to update what will be committed)<br />#   (use "git checkout -- <file>..." to discard changes in working directory)<br />#<br />#	<span style='color:#A00'>modified:   HelloWorld.java</span><br />#<br /># Untracked files:<br />#   (use "git add <file>..." to include in what will be committed)<br />#<br />#	<span style='color:#A00'>HelloWorld.class</span><br />no changes added to commit (use "git add" and/or "git commit -a")</code></pre>
+						%p Create file .gitignore with content:
+						<pre><code>/*.class</code></pre>
+					%section
+						%h2 Hands-on
+						%h3 Commit changes
+						%p Amend last commit with fix
+						<pre><code><span style="color:#0A0">$</span> git add HelloWorld.java</code></pre>
+						<pre><code><span style="color:#0A0">$</span> git commit --amend --message 'Implemented HelloWorld'<br />[implementation 4a45ee6] Implemented HelloWorld<br /> 1 file changed, 5 insertions(+)<br /> create mode 100644 HelloWorld.java</code></pre>
+						%p Commit ignore pattern
+						<pre><code><span style="color:#0A0">$</span> git add .gitignore</code></pre>
+						<pre><code><span style="color:#0A0">$</span> git commit --message 'ignore /*.class'<br />[implementation 1fff466] ignore /*.class<br /> 1 file changed, 1 insertion(+)<br /> create mode 100644 .gitignore</code></pre>
+					%section
+						%h2 Hands-on
+						%h3 Merge and delete branch
+						<pre><code><span style="color:#0A0">$</span> git co master<br />Switched to branch 'master'</code></pre>
+						<pre><code><span style="color:#0A0">$</span> git merge --no-ff implementation --message 'merge initial implementation'<br />Merge made by the 'recursive' strategy.<br /> .gitignore      | 1 <span style='color:#0A0'>+</span><br /> HelloWorld.java | 5 <span style='color:#0A0'>+++++</span><br /> 2 files changed, 6 insertions(+)<br /> create mode 100644 .gitignore<br /> create mode 100644 HelloWorld.java</code></pre>
+						<pre><code><span style="color:#0A0">$</span> git branch -d implementation<br />Deleted branch implementation (was 1fff466).</code></pre>
+					%section
+						%h2 Hands-on
+						%h3 Show history
+						<pre><code><span style="color:#0A0">$</span> git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)%n'<br />*   <b><span style='color:#A50'>2398259</span></b> - <span style='color:#AAA'>merge initial implementation</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'> (HEAD, master)</span></b><br /><span style='color:#A00'>|</span><span style='color:#0A0'>\</span>  <br /><span style='color:#A00'>|</span> <span style='color:#0A0'>|</span>   <br /><span style='color:#A00'>|</span> * <b><span style='color:#A50'>1fff466</span></b> - <span style='color:#AAA'>ignore /*.class</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'></span></b><br /><span style='color:#A00'>|</span> <span style='color:#0A0'>|</span>   <br /><span style='color:#A00'>|</span> * <b><span style='color:#A50'>4a45ee6</span></b> - <span style='color:#AAA'>Implemented HelloWorld</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'></span></b><br /><span style='color:#A00'>|</span><span style='color:#A00'>/</span>  <br /><span style='color:#A00'>|</span>  <br />* <b><span style='color:#A50'>22bef9e</span></b> - <span style='color:#AAA'>README</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'></span></b></code></pre>
+
+				%section{data: {state: "mint"}}
+					%section
+						%h2 Resources
+						%h3 Guis
+						%ul
+							%li builtin <code>git gui</code> and <code>gitk</code>
+							%li
+								%a{href: "http://www.jetbrains.com/idea/features/version_control.html"} IntelliJ IDEA Git Integration
+								%span.tag OS X
+								%span.tag Windows
+								%span.tag Linux
+							%li
+								%a{href: "http://sourcetreeapp.com/"} Atlassian SourceTree
+								%span.tag OS X
+								%span.tag Windows
+							%li
+								= succeed ',' do
+									%a{href: "http://gitx.frim.nl/"} GitX
+								= succeed ',' do
+									%a{href: "http://gitx.laullon.com/"} GitX (L)
+								%a{href: "http://mac.github.com/"} GitHub Mac
+								%span.tag OS X
+							%li
+								= succeed ',' do
+									%a{href: "http://windows.github.com/"} GitHub Windows
+								= succeed ',' do
+									%a{href: "https://code.google.com/p/tortoisegit/"} TortoiseGit
+								%a{href: "https://code.google.com/p/gitextensions/"} Git Extensions
+								%span.tag Windows
+							%li
+								%a{href: "https://github.com/jessevdk/gitg"} gitg
+								%span.tag Linux
+							%li
+								= succeed ',' do
+									%a{href: "http://www.collab.net/giteyeapp"} GitEye
+								= succeed ',' do
+									%a{href: "http://www.syntevo.com/smartgithg/index.html"} SmartGit
+								%a{href: "http://git-cola.github.io/"} git-cola
+								%span.tag OS X
+								%span.tag Windows
+								%span.tag Linux
+
+					%section
+						%h2 Resources
+						%h3 Links
+						%ul
+							%li
+								%a{href: 'http://try.github.com/'} try.github.com
+							%li
+								%a{href: 'http://gitref.org/'} gitref.org
+							%li
+								%a{href: "http://www.vogella.com/articles/Git/article.html"} vogella.com/articles/Git/article.html
+							%li
+								%a{href: 'http://git-scm.com/about'} git-scm.com/about
+							%li
+								%a{href: 'http://git-scm.com/book'} git-scm.com/book
+							%li
+								%a{href: 'http://ndpsoftware.com/git-cheatsheet.html'} ndpsoftware.com/git-cheatsheet.html
+								%a{href: 'https://github.com/ndp/git-cheatsheet'} @github
+							%li
+								%a{href: "https://www.kernel.org/pub/software/scm/git/docs/"} kernel.org/pub/software/scm/git/docs
+
+				%section#end{data: {state: "blackout"}}
 					%h1 so, git?
+					%p.fragment{style: 'margin-top: 3em'}
+						Created using:
+						= succeed ',' do
+							%a{href: "https://github.com/hakimel/reveal.js"} reveal.js
+						= succeed ',' do
+							%a{href: "http://haml-lang.com/"} HAML
+						%a{href: "http://sass-lang.com/"} SASS
 
 		%script{:src => "reveal.js/lib/js/head.min.js"}
 		%script{:src => "reveal.js/js/reveal.min.js"}
