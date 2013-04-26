@@ -19,8 +19,18 @@
 		.reveal
 			.slides
 
-				%section
-					%h1 git
+				%section#begin
+					%h1
+						git
+						%span{style: 'font-size: 0.2em'} for svn users
+					.fragment{style: 'width: 70%; position: realtive; margin: 5px auto; padding: 5px; background: rgba(255, 255, 255, 0.05)'}
+						%q Source code control the way it was meant to be!
+						%p{style: 'text-align: right'} — Linus Torvalds
+					%p{style: 'margin-top: 3em'}
+						%small Presentation by Ivan Kuchin (PH-EDU/GS-AIS-GDI)
+
+				%section#end
+					%h1 so, git?
 
 		%script{:src => "reveal.js/lib/js/head.min.js"}
 		%script{:src => "reveal.js/js/reveal.min.js"}
