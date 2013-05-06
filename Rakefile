@@ -2,9 +2,13 @@ gem 'sass'
 require 'haml'
 require 'nokogiri'
 require 'set'
+require 'digest/sha1'
 
 def convert
-  html = Haml::Engine.new(File.read('index.haml'), :format => :xhtml).render
+  haml = File.read('index.haml')
+  ssha = Digest::SHA1.hexdigest(haml)[0, 6]
+  haml.gsub!('[[SHASH]]', "[#{ssha}]")
+  html = Haml::Engine.new(haml, :format => :xhtml).render
 
   doc = Nokogiri::HTML(html)
   ids = Set.new
