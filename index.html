@@ -3,7 +3,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>git for svn users [42f5d9]</title>
+    <title>git for svn users [2a082e]</title>
     <meta content="Presentatation about git for svn users" name="description">
     <meta content="Ivan Kuchin" name="author">
     <meta content="yes" name="apple-mobile-web-app-capable">
@@ -41,7 +41,7 @@
           white-space: nowrap;
           margin: 0 3px; }
         .reveal .narrowSnippets pre {
-          width: 40%; }
+          width: 50%; }
         
         .blackout .reveal .state-background {
           background: rgba(0, 0, 0, 0.2); }
@@ -251,56 +251,68 @@
             <h2>What is git?</h2>
             <h3>Merging</h3>
             <p>Merge feature to master:</p>
-            <pre><code>       C---D feature
-      /
- A---B master
+            <pre><code>                   C---D feature
+                  /
+             A---B master
 </code></pre>
-            <p>Fast-forward:</p>
-            <pre><code> A---B---C---D master, feature
+            <div class="fragment">
+              <p>Fast-forward:</p>
+              <pre><code>             A---B---C---D master, feature
 </code></pre>
-            <p>No fast-forward:</p>
-            <pre><code>       C---D feature
-      /     \
- A---B-------M master
+            </div>
+            <div class="fragment">
+              <p>No fast-forward:</p>
+              <pre><code>                   C---D feature
+                  /     \
+             A---B-------M master
 </code></pre>
+            </div>
           </section>
           <section class="narrowSnippets" id="what-is-git_merging-and-rebasing">
             <h2>What is git?</h2>
             <h3>Merging and rebasing</h3>
             <p>Merge non fast-forward feature to master:</p>
-            <pre><code>       C---D feature
-      /
- A---B---E master
+            <pre><code>                   C---D feature
+                  /
+             A---B---E master
 </code></pre>
-            <p>Merge:</p>
-            <pre><code>       C---D feature
-      /     \
- A---B---E---M master
+            <div class="fragment">
+              <p>Merge:</p>
+              <pre><code>                   C---D feature
+                  /     \
+             A---B---E---M master
 </code></pre>
-            <p>Rebase and merge:</p>
-            <pre><code>           C'--D' feature
-          /     \
- A---B---E-------M master
+            </div>
+            <div class="fragment">
+              <p>Rebase and merge:</p>
+              <pre><code>                       C'--D' feature
+                      /     \
+             A---B---E-------M master
 </code></pre>
+            </div>
           </section>
           <section class="narrowSnippets" id="what-is-git_cherry-picking">
             <h2>What is git?</h2>
             <h3>Cherry picking</h3>
             <p>Copy change to master:</p>
-            <pre><code>       C---X---E feature
-      /
- A---B master
+            <pre><code>                   C---X---E feature
+                  /
+             A---B master
 </code></pre>
-            <p>Cherry-pick:</p>
-            <pre><code>       C---X---E feature
-      /
- A---B---X' master
+            <div class="fragment">
+              <p>Cherry-pick:</p>
+              <pre><code>                   C---X---E feature
+                  /
+             A---B---X' master
 </code></pre>
-            <p>Rebase skips change:</p>
-            <pre><code>           C'--E' feature
-          /
- A---B---X' master
+            </div>
+            <div class="fragment">
+              <p>Rebase skips change:</p>
+              <pre><code>                       C'--E' feature
+                      /
+             A---B---X' master
 </code></pre>
+            </div>
           </section>
           <section id="what-is-git_revisions">
             <h2>What is git?</h2>
@@ -316,11 +328,11 @@
 </li>
               <li>Upstream <code>@{u}</code>, <code>feature@{u}</code>
 </li>
-              <li>Read more at <a href="https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html">gitrevisions</a>
+              <li>Read more about <a href="https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html">gitrevisions</a>
 </li>
             </ul>
           </section>
-          <section id="what-is-git_ignore-patterns">
+          <section class="narrowSnippets" id="what-is-git_ignore-patterns">
             <h2>What is git?</h2>
             <h3>Ignore patterns</h3>
             <pre><code>/*.zip
@@ -502,27 +514,36 @@
             <h2>Commands</h2>
             <h3>Essential 1/2</h3>
             <p class="fragment"><code>help</code></p>
-            <p class="fragment"><code>init</code>, <code>clone</code> — init/clone repository</p>
+            <div class="fragment">
+              <p><code>init</code> — init repository</p>
+              <p><code>clone</code> — clone repository</p>
+            </div>
             <p class="fragment"><code>status</code> — show status of workspace and stage area</p>
             <p class="fragment"><code>add</code>, <code>mv</code>, <code>rm</code> or just <code>add -A</code> — stage changes</p>
             <p class="fragment"><code>commit</code> — create commit</p>
             <p class="fragment"><code>log</code> — show commit history</p>
             <p class="fragment"><code>diff</code> — show changes</p>
-            <p class="fragment"><code>merge</code> — join histories</p>
-            <p class="fragment"><code>rebase</code> — move history changes</p>
-            <p class="fragment"><code>cherry-pick</code> — copy history changes</p>
+            <div class="fragment">
+              <p><code>merge</code> — join histories</p>
+              <p><code>rebase</code> — move history changes</p>
+              <p><code>cherry-pick</code> — copy history changes</p>
+            </div>
           </section>
           <section id="commands_essential-2-2">
             <h2>Commands</h2>
             <h3>Essential 2/2</h3>
             <p class="fragment"><code>checkout</code> — checkout branch or paths</p>
             <p class="fragment"><code>reset</code> — reset current HEAD, workspace, stage area</p>
-            <p class="fragment"><code>branch</code> — crete, list, delete branches</p>
-            <p class="fragment"><code>tag</code> — crete, list, delete tags</p>
-            <p class="fragment"><code>remote</code> — crete, list, delete remotes</p>
-            <p class="fragment"><code>fetch</code> — fetch remote refs and objects</p>
-            <p class="fragment"><code>pull</code> — fetch and merge from remote</p>
-            <p class="fragment"><code>push</code> — update remote refs and upload objects</p>
+            <div class="fragment">
+              <p><code>branch</code> — crete, list, delete branches</p>
+              <p><code>tag</code> — crete, list, delete tags</p>
+              <p><code>remote</code> — crete, list, delete remotes</p>
+            </div>
+            <div class="fragment">
+              <p><code>fetch</code> — fetch remote refs and objects</p>
+              <p><code>pull</code> — fetch and merge from remote</p>
+              <p><code>push</code> — update remote refs and upload objects</p>
+            </div>
           </section>
           <section id="commands_helpful_and-advanced">
             <h2>Commands</h2>

@@ -38,7 +38,7 @@
 				}
 
 				.narrowSnippets {
-					pre { width: 40%; }
+					pre { width: 50%; }
 				}
 			}
 
@@ -205,55 +205,61 @@
 						%h3 Merging
 						%p Merge feature to master:
 						:markdown
-								>>       C---D feature
-								>>      /
-								>> A---B master
-						%p Fast-forward:
-						:markdown
-								>> A---B---C---D master, feature
-						%p No fast-forward:
-						:markdown
-								>>       C---D feature
-								>>      /     \
-								>> A---B-------M master
+								>>                   C---D feature
+								>>                  /
+								>>             A---B master
+						.fragment
+							%p Fast-forward:
+							:markdown
+									>>             A---B---C---D master, feature
+						.fragment
+							%p No fast-forward:
+							:markdown
+									>>                   C---D feature
+									>>                  /     \
+									>>             A---B-------M master
 
 					%section.narrowSnippets
 						%h2 What is git?
 						%h3 Merging and rebasing
 						%p Merge non fast-forward feature to master:
 						:markdown
-								>>       C---D feature
-								>>      /
-								>> A---B---E master
-						%p Merge:
-						:markdown
-								>>       C---D feature
-								>>      /     \
-								>> A---B---E---M master
-						%p Rebase and merge:
-						:markdown
-								>>           C'--D' feature
-								>>          /     \
-								>> A---B---E-------M master
+								>>                   C---D feature
+								>>                  /
+								>>             A---B---E master
+						.fragment
+							%p Merge:
+							:markdown
+									>>                   C---D feature
+									>>                  /     \
+									>>             A---B---E---M master
+						.fragment
+							%p Rebase and merge:
+							:markdown
+									>>                       C'--D' feature
+									>>                      /     \
+									>>             A---B---E-------M master
 
 					%section.narrowSnippets
 						%h2 What is git?
 						%h3 Cherry picking
 						%p Copy change to master:
 						:markdown
-								>>       C---X---E feature
-								>>      /
-								>> A---B master
-						%p Cherry-pick:
-						:markdown
-								>>       C---X---E feature
-								>>      /
-								>> A---B---X' master
-						%p Rebase skips change:
-						:markdown
-								>>           C'--E' feature
-								>>          /
-								>> A---B---X' master
+								>>                   C---X---E feature
+								>>                  /
+								>>             A---B master
+						.fragment
+							%p Cherry-pick:
+							:markdown
+									>>                   C---X---E feature
+									>>                  /
+									>>             A---B---X' master
+						.fragment
+							%p Rebase skips change:
+							:markdown
+									>>                       C'--E' feature
+									>>                      /
+									>>             A---B---X' master
 
 					%section
 						%h2 What is git?
@@ -264,9 +270,9 @@
 							* Ancestor commit `HEAD~`, `HEAD~~`, `master~10`, `master^`, `feature^2`
 							* Reflog (prior value of reference) `HEAD@{1}`, `master@{10}`, `@{10}`, `@{yesterday}`
 							* Upstream `@{u}`, `feature@{u}`
-							* Read more at [gitrevisions](https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html)
+							* Read more about [gitrevisions](https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html)
 
-					%section
+					%section.narrowSnippets
 						%h2 What is git?
 						%h3 Ignore patterns
 						:markdown
@@ -311,27 +317,32 @@
 						%h2 Commands
 						%h3 Essential 1/2
 						%p.fragment <code>help</code>
-						%p.fragment <code>init</code>, <code>clone</code> — init/clone repository
+						.fragment
+							%p <code>init</code> — init repository
+							%p <code>clone</code> — clone repository
 						%p.fragment <code>status</code> — show status of workspace and stage area
 						%p.fragment <code>add</code>, <code>mv</code>, <code>rm</code> or just <code>add -A</code> — stage changes
 						%p.fragment <code>commit</code> — create commit
 						%p.fragment <code>log</code> — show commit history
 						%p.fragment <code>diff</code> — show changes
-						%p.fragment <code>merge</code> — join histories
-						%p.fragment <code>rebase</code> — move history changes
-						%p.fragment <code>cherry-pick</code> — copy history changes
+						.fragment
+							%p <code>merge</code> — join histories
+							%p <code>rebase</code> — move history changes
+							%p <code>cherry-pick</code> — copy history changes
 
 					%section
 						%h2 Commands
 						%h3 Essential 2/2
 						%p.fragment <code>checkout</code> — checkout branch or paths
 						%p.fragment <code>reset</code> — reset current HEAD, workspace, stage area
-						%p.fragment <code>branch</code> — crete, list, delete branches
-						%p.fragment <code>tag</code> — crete, list, delete tags
-						%p.fragment <code>remote</code> — crete, list, delete remotes
-						%p.fragment <code>fetch</code> — fetch remote refs and objects
-						%p.fragment <code>pull</code> — fetch and merge from remote
-						%p.fragment <code>push</code> — update remote refs and upload objects
+						.fragment
+							%p <code>branch</code> — crete, list, delete branches
+							%p <code>tag</code> — crete, list, delete tags
+							%p <code>remote</code> — crete, list, delete remotes
+						.fragment
+							%p <code>fetch</code> — fetch remote refs and objects
+							%p <code>pull</code> — fetch and merge from remote
+							%p <code>push</code> — update remote refs and upload objects
 
 					%section
 						%h2 Commands
