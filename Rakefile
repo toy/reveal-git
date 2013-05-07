@@ -43,7 +43,7 @@ desc "Building server"
 task :server do
   require 'webrick'
 
-  port = 8080
+  port = 8888
   puts "Starting server: http://localhost:#{port}"
   server = WEBrick::HTTPServer.new(
     :Port => port,
