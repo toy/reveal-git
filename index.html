@@ -580,21 +580,19 @@
           </section>
         </section>
         <section data-state="lila">
-          <section id="hands-on_identify-yourself">
+          <section id="hands-on_a-bit-of-config">
             <h2>Hands-on</h2>
-            <h3>Identify yourself</h3>
-            <pre><code>$ git config --global user.name 'Ivan Kuchin'
-$ git config --global user.email ivan.kuchin@cern.ch
-</code></pre>
+            <h3>A bit of config</h3>
+            <pre><code><b><span style="color:#A00"><blink>~</blink></span></b><b>$</b> git config --global user.name 'Ivan Kuchin'<br><b><span style="color:#A00"><blink>~</blink></span></b><b>$</b> git config --global user.email ivan.kuchin@cern.ch<br><b><span style="color:#A00"><blink>~</blink></span></b><b>$</b> git config --global color.ui auto</code></pre>
+            <div class="fragment">
+              <p>And ancient bash magic:</p>
+              <pre><code><b><span style="color:#A00"><blink>~</blink></span></b><b>$</b> GIT_PS1_SHOWDIRTYSTATE=true<br><b><span style="color:#A00"><blink>~</blink></span></b><b>$</b> GIT_PS1_SHOWSTASHSTATE=true<br><b><span style="color:#A00"><blink>~</blink></span></b><b>$</b> GIT_PS1_SHOWUNTRACKEDFILES=true<br><b><span style="color:#A00"><blink>~</blink></span></b><b>$</b> GIT_PS1_SHOWUPSTREAM=auto<br><b><span style="color:#A00"><blink>~</blink></span></b><b>$</b> PS1='\[\e[m\e[1;31;38;5m\]\w$(__git_ps1 "\[\e[0;1m\]×\[\e[1;36;38;5;57m\]%s")\[\e[0;1m\]\$\[\e[m\] '</code></pre>
+            </div>
           </section>
           <section id="hands-on_create-new-repository">
             <h2>Hands-on</h2>
             <h3>Create new repository</h3>
-            <pre><code>$ mkdir hello-world
-$ cd hello-world
-$ git init
-Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
-</code></pre>
+            <pre><code><b><span style="color:#A00"><blink>~</blink></span></b><b>$</b> mkdir hello-world<br><b><span style="color:#A00"><blink>~</blink></span></b><b>$</b> cd hello-world<br><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>$</b> git init<br>Initialized empty Git repository in /Users/ikuchin/hello-world/.git/</code></pre>
           </section>
           <section id="hands-on_commit-first-file">
             <h2>Hands-on</h2>
@@ -605,17 +603,17 @@ Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
             </div>
             <div class="fragment">
               <p>Stage</p>
-              <pre><code><span style="color:#0A0">$</span> git add README</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>master #%</blink></span></b></b><b>$</b> git add README</code></pre>
             </div>
             <div class="fragment">
               <p>Commit</p>
-              <pre><code><span style="color:#0A0">$</span> git commit --message 'README'<br>[master (root-commit) a195791] README<br> 1 file changed, 1 insertion(+)<br> create mode 100644 README</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>master #</blink></span></b></b><b>$</b> git commit --message 'README'<br>[master (root-commit) a195791] README<br> 1 file changed, 1 insertion(+)<br> create mode 100644 README</code></pre>
             </div>
           </section>
           <section id="hands-on_checkout-new-branch">
             <h2>Hands-on</h2>
             <h3>Checkout new branch</h3>
-            <pre><code><span style="color:#0A0">$</span> git checkout -b implementation<br>Switched to a new branch 'implementation'</code></pre>
+            <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>master</blink></span></b></b><b>$</b> git checkout -b implementation<br>Switched to a new branch 'implementation'</code></pre>
           </section>
           <section id="hands-on_start-implementing">
             <h2>Hands-on</h2>
@@ -626,11 +624,11 @@ Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
             </div>
             <div class="fragment">
               <p>Stage</p>
-              <pre><code><span style="color:#0A0">$</span> git add HelloWorld.java</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>implementation %</blink></span></b></b><b>$</b> git add HelloWorld.java</code></pre>
             </div>
             <div class="fragment">
               <p>Commit</p>
-              <pre><code><span style="color:#0A0">$</span> git commit --message 'Implemented HelloWorld'<br>[implementation b8633fb] Implemented HelloWorld<br> 1 file changed, 5 insertions(+)<br> create mode 100644 HelloWorld.java</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>implementation +</blink></span></b></b><b>$</b> git commit --message 'Implemented HelloWorld'<br>[implementation b8633fb] Implemented HelloWorld<br> 1 file changed, 5 insertions(+)<br> create mode 100644 HelloWorld.java</code></pre>
             </div>
           </section>
           <section id="hands-on_test-and-fix">
@@ -638,7 +636,7 @@ Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
             <h3>Test and fix</h3>
             <div class="fragment">
               <p>Oops…</p>
-              <pre><code><span style="color:#0A0">$</span> javac HelloWorld.java<br>HelloWorld.java:3: ';' expected<br>      System.out.println("Hello, World")<br>                                        ^<br>1 error</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>implementation</blink></span></b></b><b>$</b> javac HelloWorld.java<br>HelloWorld.java:3: ';' expected<br>      System.out.println("Hello, World")<br>                                        ^<br>1 error</code></pre>
             </div>
             <div class="fragment">
               <p>Fix HelloWorld.java:</p>
@@ -646,7 +644,7 @@ Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
             </div>
             <div class="fragment">
               <p>It works!</p>
-              <pre><code><span style="color:#0A0">$</span> javac HelloWorld.java &amp;&amp; java HelloWorld<br>Hello, World!</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>implementation *</blink></span></b></b><b>$</b> javac HelloWorld.java &amp;&amp; java HelloWorld<br>Hello, World!</code></pre>
             </div>
           </section>
           <section id="hands-on_ignore-build-results">
@@ -654,7 +652,7 @@ Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
             <h3>Ignore build results</h3>
             <div class="fragment">
               <p>Check status</p>
-              <pre><code><span style="color:#0A0">$</span> git status<br># On branch implementation<br># Changes not staged for commit:<br>#   (use "git add <file>..." to update what will be committed)<br>#   (use "git checkout -- <file>..." to discard changes in working directory)<br>#<br>#	<span style="color:#A00">modified:   HelloWorld.java</span><br>#<br># Untracked files:<br>#   (use "git add <file>..." to include in what will be committed)<br>#<br>#	<span style="color:#A00">HelloWorld.class</span><br>no changes added to commit (use "git add" and/or "git commit -a")</file></file></file></code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>implementation *%</blink></span></b></b><b>$</b> git status<br># On branch implementation<br># Changes not staged for commit:<br>#   (use "git add <file>..." to update what will be committed)<br>#   (use "git checkout -- <file>..." to discard changes in working directory)<br>#<br>#	<span style="color:#A00">modified:   HelloWorld.java</span><br>#<br># Untracked files:<br>#   (use "git add <file>..." to include in what will be committed)<br>#<br>#	<span style="color:#A00">HelloWorld.class</span><br>no changes added to commit (use "git add" and/or "git commit -a")</file></file></file></code></pre>
             </div>
             <div class="fragment">
               <p>Create file .gitignore with content:</p>
@@ -666,13 +664,13 @@ Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
             <h3>Commit changes</h3>
             <div class="fragment">
               <p>Amend last commit with fix</p>
-              <pre><code><span style="color:#0A0">$</span> git add HelloWorld.java</code></pre>
-              <pre><code><span style="color:#0A0">$</span> git commit --amend --message 'Implemented HelloWorld'<br>[implementation c636cda] Implemented HelloWorld<br> 1 file changed, 5 insertions(+)<br> create mode 100644 HelloWorld.java</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>implementation *%</blink></span></b></b><b>$</b> git add HelloWorld.java</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>implementation +%</blink></span></b></b><b>$</b> git commit --amend --message 'Implemented HelloWorld'<br>[implementation c636cda] Implemented HelloWorld<br> 1 file changed, 5 insertions(+)<br> create mode 100644 HelloWorld.java</code></pre>
             </div>
             <div class="fragment">
               <p>Commit ignore pattern</p>
-              <pre><code><span style="color:#0A0">$</span> git add .gitignore</code></pre>
-              <pre><code><span style="color:#0A0">$</span> git commit --message 'ignore /*.class'<br>[implementation 49f679b] ignore /*.class<br> 1 file changed, 1 insertion(+)<br> create mode 100644 .gitignore</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>implementation %</blink></span></b></b><b>$</b> git add .gitignore</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>implementation +</blink></span></b></b><b>$</b> git commit --message 'ignore /*.class'<br>[implementation 49f679b] ignore /*.class<br> 1 file changed, 1 insertion(+)<br> create mode 100644 .gitignore</code></pre>
             </div>
           </section>
           <section id="hands-on_merge-and-delete-branch">
@@ -680,21 +678,21 @@ Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
             <h3>Merge and delete branch</h3>
             <div class="fragment">
               <p>Switch to master</p>
-              <pre><code><span style="color:#0A0">$</span> git co master<br>Switched to branch 'master'</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>implementation</blink></span></b></b><b>$</b> git co master<br>Switched to branch 'master'</code></pre>
             </div>
             <div class="fragment">
               <p>Merge branch</p>
-              <pre><code><span style="color:#0A0">$</span> git merge --no-ff implementation --message 'merge initial implementation'<br>Merge made by the 'recursive' strategy.<br> .gitignore      | 1 <span style="color:#0A0">+</span><br> HelloWorld.java | 5 <span style="color:#0A0">+++++</span><br> 2 files changed, 6 insertions(+)<br> create mode 100644 .gitignore<br> create mode 100644 HelloWorld.java</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>master %</blink></span></b></b><b>$</b> git merge --no-ff implementation --message 'merge initial implementation'<br>Merge made by the 'recursive' strategy.<br> .gitignore      | 1 <span style="color:#0A0">+</span><br> HelloWorld.java | 5 <span style="color:#0A0">+++++</span><br> 2 files changed, 6 insertions(+)<br> create mode 100644 .gitignore<br> create mode 100644 HelloWorld.java</code></pre>
             </div>
             <div class="fragment">
               <p>Delete branch</p>
-              <pre><code><span style="color:#0A0">$</span> git branch -d implementation<br>Deleted branch implementation (was 49f679b).</code></pre>
+              <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>master</blink></span></b></b><b>$</b> git branch -d implementation<br>Deleted branch implementation (was 49f679b).</code></pre>
             </div>
           </section>
           <section id="hands-on_show-history">
             <h2>Hands-on</h2>
             <h3>Show history</h3>
-            <pre><code><span style="color:#0A0">$</span> git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)%n'<br>*   <b><span style="color:#A50">07d8359</span></b> - <span style="color:#AAA">merge initial implementation</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"> (HEAD, master)</span></b><br><span style="color:#A00">|</span><span style="color:#0A0">\</span>  <br><span style="color:#A00">|</span> <span style="color:#0A0">|</span>   <br><span style="color:#A00">|</span> * <b><span style="color:#A50">49f679b</span></b> - <span style="color:#AAA">ignore /*.class</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b><br><span style="color:#A00">|</span> <span style="color:#0A0">|</span>   <br><span style="color:#A00">|</span> * <b><span style="color:#A50">c636cda</span></b> - <span style="color:#AAA">Implemented HelloWorld</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b><br><span style="color:#A00">|</span><span style="color:#A00">/</span>  <br><span style="color:#A00">|</span>  <br>* <b><span style="color:#A50">a195791</span></b> - <span style="color:#AAA">README</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b></code></pre>
+            <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>master</blink></span></b></b><b>$</b> git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)%n'<br>*   <b><span style="color:#A50">07d8359</span></b> - <span style="color:#AAA">merge initial implementation</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"> (HEAD, master)</span></b><br><span style="color:#A00">|</span><span style="color:#0A0">\</span>  <br><span style="color:#A00">|</span> <span style="color:#0A0">|</span>   <br><span style="color:#A00">|</span> * <b><span style="color:#A50">49f679b</span></b> - <span style="color:#AAA">ignore /*.class</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b><br><span style="color:#A00">|</span> <span style="color:#0A0">|</span>   <br><span style="color:#A00">|</span> * <b><span style="color:#A50">c636cda</span></b> - <span style="color:#AAA">Implemented HelloWorld</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b><br><span style="color:#A00">|</span><span style="color:#A00">/</span>  <br><span style="color:#A00">|</span>  <br>* <b><span style="color:#A50">a195791</span></b> - <span style="color:#AAA">README</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b></code></pre>
           </section>
         </section>
         <section data-state="mint">

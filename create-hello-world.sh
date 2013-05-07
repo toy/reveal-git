@@ -4,13 +4,30 @@
 export GIT_AUTHOR_DATE='2025-01-01T00:00:00'
 export GIT_COMMITTER_DATE=$GIT_AUTHOR_DATE
 
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWUPSTREAM='auto'
+. /opt/local/share/git-core/git-prompt.sh
+
+function hps(){
+  printf "\e[1;31;38;5m$*\e[0;1m\$\e[m"
+}
+
+function hps_git(){
+  echo $(__git_ps1 "\e[1;31;38;5m$*\e[0;1m×\e[1;36;38;5;57m%s\e[0;1m\$\e[m")
+}
+
 function hcat(){
   ruby -e '
-  require "cgi"
-    command = ARGV[0]
-    output = "<span style=\"color:#0A0\">$</span> #{CGI.escapeHTML(command)}\n#{`(#{command}) 2>&1 | a2h`}".chomp
+    ps, command = ARGV
+    print "#{ps} #{command}\n#{`(#{command}) 2>&1`}".chomp
+  ' "$(hps_git '~/hello-world')" "$*" |
+  a2h |
+  ruby -e '
+    output = $stdin.read
     puts "  <pre><code>#{output.gsub("\n", "<br />")}</code></pre>" unless output.empty?
-  ' "$*"
+  '
 }
 
 function hfile(){
@@ -28,31 +45,48 @@ function hsection(){
   echo '  %h3 '$*
 }
 
-function fragment(){
-  echo '  .fragment'
-  while read line
-  do
-    echo "    $line"
-  done
+function houtput(){
+  ruby -e 'print $stdin.read.chomp' |
+  a2h |
+  ruby -e 'puts "  <pre><code>#{$stdin.read.gsub("\n", "<br />")}</code></pre>"'
 }
 
-hsection 'Identify yourself'
-echo '  :markdown'
-echo "        $ git config --global user.name 'Ivan Kuchin'"
-echo "        $ git config --global user.email ivan.kuchin@cern.ch"
+function fragment(){
+  echo '  .fragment'
+  ruby -pe 'print "  "'
+}
+
+hsection 'A bit of config'
+(
+  echo "$(hps '~') git config --global user.name 'Ivan Kuchin'"
+  echo "$(hps '~') git config --global user.email ivan.kuchin@cern.ch"
+  echo "$(hps '~') git config --global color.ui auto"
+) | houtput
+(
+  echo '  %p And ancient bash magic:'
+  HPS1='\[\e[m\e[1;31;38;5m\]\w$(__git_ps1 "\[\e[0;1m\]×\[\e[1;36;38;5;57m\]%s")\[\e[0;1m\]\$\[\e[m\] '
+  (
+    echo "$(hps '~') GIT_PS1_SHOWDIRTYSTATE=true"
+    echo "$(hps '~') GIT_PS1_SHOWSTASHSTATE=true"
+    echo "$(hps '~') GIT_PS1_SHOWUNTRACKEDFILES=true"
+    echo "$(hps '~') GIT_PS1_SHOWUPSTREAM=auto"
+    echo "$(hps '~') PS1='$HPS1'"
+  ) | houtput
+) 2>&1 | fragment
 
 hsection 'Create new repository'
-echo '  :markdown'
-echo '        $ mkdir hello-world'
-echo '        $ cd hello-world'
-echo '        $ git init'
-echo '        Initialized empty Git repository in /Users/ikuchin/hello-world/.git/'
 mkdir -p example-repos
 cd example-repos
 rm -rf hello-world
 mkdir hello-world
 cd hello-world
 git init > /dev/null
+(
+  echo "$(hps '~') mkdir hello-world"
+  echo "$(hps '~') cd hello-world"
+  echo "$(hps '~/hello-world') git init"
+  echo 'Initialized empty Git repository in /Users/ikuchin/hello-world/.git/'
+) | houtput
 
 # identify only for this repo
 git config user.name 'Ivan Kuchin'
