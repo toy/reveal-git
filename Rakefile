@@ -1,5 +1,7 @@
 gem 'sass'
 require 'haml'
+require 'sass'
+require 'kramdown'
 require 'nokogiri'
 require 'set'
 require 'digest/sha1'
