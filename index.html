@@ -689,6 +689,14 @@
               <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>master</blink></span></b></b><b>$</b> git branch -d implementation<br>Deleted branch implementation (was d249b35).</code></pre>
             </div>
           </section>
+          <section id="hands-on_resulting-files">
+            <h2>Hands-on</h2>
+            <h3>Resulting files</h3>
+            <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>master</blink></span></b></b><b>$</b> git ls-files<br>.gitignore<br>HelloWorld.java<br>README</code></pre>
+            <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>master</blink></span></b></b><b>$</b> git show HEAD:.gitignore<br>/*.class</code></pre>
+            <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>master</blink></span></b></b><b>$</b> git show HEAD:HelloWorld.java<br>public class HelloWorld {<br>  public static void main(String[] args) {<br>    System.out.println("Hello, World!");<br>  }<br>}</code></pre>
+            <pre><code><b><span style="color:#A00"><blink>~/hello-world</blink></span></b><b>×<b><span style="color:#0AA"><blink>master</blink></span></b></b><b>$</b> git show HEAD:README<br>Prints "Hello, World".</code></pre>
+          </section>
           <section id="hands-on_show-history">
             <h2>Hands-on</h2>
             <h3>Show history</h3>

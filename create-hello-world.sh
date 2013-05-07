@@ -191,5 +191,12 @@ hsection 'Merge and delete branch'
   hcat git branch -d implementation
 ) | fragment
 
+hsection 'Resulting files'
+hcat git ls-files
+for file in $(git ls-files)
+do
+  hcat git show HEAD:$file
+done
+
 hsection 'Show history'
 hcat "git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)%n'"
