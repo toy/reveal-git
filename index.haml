@@ -401,7 +401,7 @@
 							<pre><code><span style="color:#0A0">$</span> git add README</code></pre>
 						.fragment
 							%p Commit
-							<pre><code><span style="color:#0A0">$</span> git commit --message 'README'<br />[master (root-commit) b08f0a0] README<br /> 1 file changed, 1 insertion(+)<br /> create mode 100644 README</code></pre>
+							<pre><code><span style="color:#0A0">$</span> git commit --message 'README'<br />[master (root-commit) a195791] README<br /> 1 file changed, 1 insertion(+)<br /> create mode 100644 README</code></pre>
 					%section
 						%h2 Hands-on
 						%h3 Checkout new branch
@@ -417,7 +417,7 @@
 							<pre><code><span style="color:#0A0">$</span> git add HelloWorld.java</code></pre>
 						.fragment
 							%p Commit
-							<pre><code><span style="color:#0A0">$</span> git commit --message 'Implemented HelloWorld'<br />[implementation 5dc549b] Implemented HelloWorld<br /> 1 file changed, 5 insertions(+)<br /> create mode 100644 HelloWorld.java</code></pre>
+							<pre><code><span style="color:#0A0">$</span> git commit --message 'Implemented HelloWorld'<br />[implementation b8633fb] Implemented HelloWorld<br /> 1 file changed, 5 insertions(+)<br /> create mode 100644 HelloWorld.java</code></pre>
 					%section
 						%h2 Hands-on
 						%h3 Test and fix
@@ -445,11 +445,11 @@
 						.fragment
 							%p Amend last commit with fix
 							<pre><code><span style="color:#0A0">$</span> git add HelloWorld.java</code></pre>
-							<pre><code><span style="color:#0A0">$</span> git commit --amend --message 'Implemented HelloWorld'<br />[implementation a1aa7bc] Implemented HelloWorld<br /> 1 file changed, 5 insertions(+)<br /> create mode 100644 HelloWorld.java</code></pre>
+							<pre><code><span style="color:#0A0">$</span> git commit --amend --message 'Implemented HelloWorld'<br />[implementation c636cda] Implemented HelloWorld<br /> 1 file changed, 5 insertions(+)<br /> create mode 100644 HelloWorld.java</code></pre>
 						.fragment
 							%p Commit ignore pattern
 							<pre><code><span style="color:#0A0">$</span> git add .gitignore</code></pre>
-							<pre><code><span style="color:#0A0">$</span> git commit --message 'ignore /*.class'<br />[implementation b7751e9] ignore /*.class<br /> 1 file changed, 1 insertion(+)<br /> create mode 100644 .gitignore</code></pre>
+							<pre><code><span style="color:#0A0">$</span> git commit --message 'ignore /*.class'<br />[implementation 49f679b] ignore /*.class<br /> 1 file changed, 1 insertion(+)<br /> create mode 100644 .gitignore</code></pre>
 					%section
 						%h2 Hands-on
 						%h3 Merge and delete branch
@@ -461,11 +461,11 @@
 							<pre><code><span style="color:#0A0">$</span> git merge --no-ff implementation --message 'merge initial implementation'<br />Merge made by the 'recursive' strategy.<br /> .gitignore      | 1 <span style='color:#0A0'>+</span><br /> HelloWorld.java | 5 <span style='color:#0A0'>+++++</span><br /> 2 files changed, 6 insertions(+)<br /> create mode 100644 .gitignore<br /> create mode 100644 HelloWorld.java</code></pre>
 						.fragment
 							%p Delete branch
-							<pre><code><span style="color:#0A0">$</span> git branch -d implementation<br />Deleted branch implementation (was b7751e9).</code></pre>
+							<pre><code><span style="color:#0A0">$</span> git branch -d implementation<br />Deleted branch implementation (was 49f679b).</code></pre>
 					%section
 						%h2 Hands-on
 						%h3 Show history
-						<pre><code><span style="color:#0A0">$</span> git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)%n'<br />*   <b><span style='color:#A50'>2928b5b</span></b> - <span style='color:#AAA'>merge initial implementation</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'> (HEAD, master)</span></b><br /><span style='color:#A00'>|</span><span style='color:#0A0'>\</span>  <br /><span style='color:#A00'>|</span> <span style='color:#0A0'>|</span>   <br /><span style='color:#A00'>|</span> * <b><span style='color:#A50'>b7751e9</span></b> - <span style='color:#AAA'>ignore /*.class</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'></span></b><br /><span style='color:#A00'>|</span> <span style='color:#0A0'>|</span>   <br /><span style='color:#A00'>|</span> * <b><span style='color:#A50'>a1aa7bc</span></b> - <span style='color:#AAA'>Implemented HelloWorld</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'></span></b><br /><span style='color:#A00'>|</span><span style='color:#A00'>/</span>  <br /><span style='color:#A00'>|</span>  <br />* <b><span style='color:#A50'>b08f0a0</span></b> - <span style='color:#AAA'>README</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'></span></b></code></pre>
+						<pre><code><span style="color:#0A0">$</span> git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)%n'<br />*   <b><span style='color:#A50'>07d8359</span></b> - <span style='color:#AAA'>merge initial implementation</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'> (HEAD, master)</span></b><br /><span style='color:#A00'>|</span><span style='color:#0A0'>\</span>  <br /><span style='color:#A00'>|</span> <span style='color:#0A0'>|</span>   <br /><span style='color:#A00'>|</span> * <b><span style='color:#A50'>49f679b</span></b> - <span style='color:#AAA'>ignore /*.class</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'></span></b><br /><span style='color:#A00'>|</span> <span style='color:#0A0'>|</span>   <br /><span style='color:#A00'>|</span> * <b><span style='color:#A50'>c636cda</span></b> - <span style='color:#AAA'>Implemented HelloWorld</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'></span></b><br /><span style='color:#A00'>|</span><span style='color:#A00'>/</span>  <br /><span style='color:#A00'>|</span>  <br />* <b><span style='color:#A50'>a195791</span></b> - <span style='color:#AAA'>README</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'></span></b></code></pre>
 
 				%section{data: {state: "mint"}}
 					%section

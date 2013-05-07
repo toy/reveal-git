@@ -3,7 +3,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>git for svn users [094fc3]</title>
+    <title>git for svn users [a4f38f]</title>
     <meta content="Presentatation about git for svn users" name="description">
     <meta content="Ivan Kuchin" name="author">
     <meta content="yes" name="apple-mobile-web-app-capable">
@@ -609,7 +609,7 @@ Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
             </div>
             <div class="fragment">
               <p>Commit</p>
-              <pre><code><span style="color:#0A0">$</span> git commit --message 'README'<br>[master (root-commit) b08f0a0] README<br> 1 file changed, 1 insertion(+)<br> create mode 100644 README</code></pre>
+              <pre><code><span style="color:#0A0">$</span> git commit --message 'README'<br>[master (root-commit) a195791] README<br> 1 file changed, 1 insertion(+)<br> create mode 100644 README</code></pre>
             </div>
           </section>
           <section id="hands-on_checkout-new-branch">
@@ -630,7 +630,7 @@ Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
             </div>
             <div class="fragment">
               <p>Commit</p>
-              <pre><code><span style="color:#0A0">$</span> git commit --message 'Implemented HelloWorld'<br>[implementation 5dc549b] Implemented HelloWorld<br> 1 file changed, 5 insertions(+)<br> create mode 100644 HelloWorld.java</code></pre>
+              <pre><code><span style="color:#0A0">$</span> git commit --message 'Implemented HelloWorld'<br>[implementation b8633fb] Implemented HelloWorld<br> 1 file changed, 5 insertions(+)<br> create mode 100644 HelloWorld.java</code></pre>
             </div>
           </section>
           <section id="hands-on_test-and-fix">
@@ -667,12 +667,12 @@ Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
             <div class="fragment">
               <p>Amend last commit with fix</p>
               <pre><code><span style="color:#0A0">$</span> git add HelloWorld.java</code></pre>
-              <pre><code><span style="color:#0A0">$</span> git commit --amend --message 'Implemented HelloWorld'<br>[implementation a1aa7bc] Implemented HelloWorld<br> 1 file changed, 5 insertions(+)<br> create mode 100644 HelloWorld.java</code></pre>
+              <pre><code><span style="color:#0A0">$</span> git commit --amend --message 'Implemented HelloWorld'<br>[implementation c636cda] Implemented HelloWorld<br> 1 file changed, 5 insertions(+)<br> create mode 100644 HelloWorld.java</code></pre>
             </div>
             <div class="fragment">
               <p>Commit ignore pattern</p>
               <pre><code><span style="color:#0A0">$</span> git add .gitignore</code></pre>
-              <pre><code><span style="color:#0A0">$</span> git commit --message 'ignore /*.class'<br>[implementation b7751e9] ignore /*.class<br> 1 file changed, 1 insertion(+)<br> create mode 100644 .gitignore</code></pre>
+              <pre><code><span style="color:#0A0">$</span> git commit --message 'ignore /*.class'<br>[implementation 49f679b] ignore /*.class<br> 1 file changed, 1 insertion(+)<br> create mode 100644 .gitignore</code></pre>
             </div>
           </section>
           <section id="hands-on_merge-and-delete-branch">
@@ -688,13 +688,13 @@ Initialized empty Git repository in /Users/ikuchin/hello-world/.git/
             </div>
             <div class="fragment">
               <p>Delete branch</p>
-              <pre><code><span style="color:#0A0">$</span> git branch -d implementation<br>Deleted branch implementation (was b7751e9).</code></pre>
+              <pre><code><span style="color:#0A0">$</span> git branch -d implementation<br>Deleted branch implementation (was 49f679b).</code></pre>
             </div>
           </section>
           <section id="hands-on_show-history">
             <h2>Hands-on</h2>
             <h3>Show history</h3>
-            <pre><code><span style="color:#0A0">$</span> git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)%n'<br>*   <b><span style="color:#A50">2928b5b</span></b> - <span style="color:#AAA">merge initial implementation</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"> (HEAD, master)</span></b><br><span style="color:#A00">|</span><span style="color:#0A0">\</span>  <br><span style="color:#A00">|</span> <span style="color:#0A0">|</span>   <br><span style="color:#A00">|</span> * <b><span style="color:#A50">b7751e9</span></b> - <span style="color:#AAA">ignore /*.class</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b><br><span style="color:#A00">|</span> <span style="color:#0A0">|</span>   <br><span style="color:#A00">|</span> * <b><span style="color:#A50">a1aa7bc</span></b> - <span style="color:#AAA">Implemented HelloWorld</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b><br><span style="color:#A00">|</span><span style="color:#A00">/</span>  <br><span style="color:#A00">|</span>  <br>* <b><span style="color:#A50">b08f0a0</span></b> - <span style="color:#AAA">README</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b></code></pre>
+            <pre><code><span style="color:#0A0">$</span> git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)%n'<br>*   <b><span style="color:#A50">07d8359</span></b> - <span style="color:#AAA">merge initial implementation</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"> (HEAD, master)</span></b><br><span style="color:#A00">|</span><span style="color:#0A0">\</span>  <br><span style="color:#A00">|</span> <span style="color:#0A0">|</span>   <br><span style="color:#A00">|</span> * <b><span style="color:#A50">49f679b</span></b> - <span style="color:#AAA">ignore /*.class</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b><br><span style="color:#A00">|</span> <span style="color:#0A0">|</span>   <br><span style="color:#A00">|</span> * <b><span style="color:#A50">c636cda</span></b> - <span style="color:#AAA">Implemented HelloWorld</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b><br><span style="color:#A00">|</span><span style="color:#A00">/</span>  <br><span style="color:#A00">|</span>  <br>* <b><span style="color:#A50">a195791</span></b> - <span style="color:#AAA">README</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"></span></b></code></pre>
           </section>
         </section>
         <section data-state="mint">

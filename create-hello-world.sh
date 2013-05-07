@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# Make commit ids independent of date
+export GIT_AUTHOR_DATE='2025-01-01T00:00:00'
+export GIT_COMMITTER_DATE=$GIT_AUTHOR_DATE
+
 function hcat(){
   ruby -e '
   require "cgi"
