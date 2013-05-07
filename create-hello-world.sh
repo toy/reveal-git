@@ -38,18 +38,19 @@ function fragment(){
 
 hsection 'Identify yourself'
 echo '  :markdown'
-echo "      $ git config --global user.name 'Ivan Kuchin'"
-echo "      $ git config --global user.email ivan.kuchin@cern.ch"
+echo "        $ git config --global user.name 'Ivan Kuchin'"
+echo "        $ git config --global user.email ivan.kuchin@cern.ch"
 
 hsection 'Create new repository'
 echo '  :markdown'
-echo '      $ mkdir hello-world'
-echo '      $ cd hello-world'
-echo '      $ git init'
-echo '      Initialized empty Git repository in /Users/ikuchin/hello-world/.git/'
+echo '        $ mkdir hello-world'
+echo '        $ cd hello-world'
+echo '        $ git init'
+echo '        Initialized empty Git repository in /Users/ikuchin/hello-world/.git/'
 mkdir -p example-repos
 cd example-repos
-mkdir hello-world || exit 1
+rm -rf hello-world
+mkdir hello-world
 cd hello-world
 git init > /dev/null
 
