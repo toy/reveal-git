@@ -87,6 +87,10 @@ git init > /dev/null
   echo "$(hps '~/hello-world') git init"
   echo 'Initialized empty Git repository in /Users/ikuchin/hello-world/.git/'
 ) | houtput
+(
+  echo '  %p Status'
+  hcat git status
+) | fragment
 
 # identify only for this repo
 git config user.name 'Ivan Kuchin'
