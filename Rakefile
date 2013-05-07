@@ -72,7 +72,9 @@ end
 
 desc "Create pack"
 task :pack do
-  system 'git archive -v -opack.zip master *.{png,ico,html} reveal.js/{css/*.css,css/*/*.css,js/*.min.js,lib,plugin,LICENSE,*.html,README.md}'
+  rm_rf 'pack'
+  mkdir 'pack'
+  sh 'git archive -v HEAD *.{png,ico,html} reveal.js/{css/*.css,css/*/*.css,js/*.min.js,lib,plugin,LICENSE,*.html,README.md} | tar -xC pack'
 end
 
 task :default => :build
