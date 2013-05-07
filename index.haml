@@ -26,6 +26,8 @@
 					code { background: #222; word-wrap: break-word; }
 				}
 
+				sub, sup { font-size: smaller; }
+
 				p.small { font-size: 0.7em; }
 
 				span.tag {
@@ -79,22 +81,24 @@
 				%section{data: {state: "soothe"}}
 					%section
 						%h2 Why git?
-						%p.fragment Branching and merging
-						%p.fragment Distributed VCS
-						%p.fragment Small and fast
-						%p.fragment Robust
-						%p.fragment Staging area
-						%f.fragment Open Source
+						%p Branching and merging
+						%p Distributed
+						%p Small and fast
+						%p Robust
+						%p Staging area
+						%aside.notes
+							%p Stash, clean, bisect
+							%p Open source
 
 					%section
 						%h2 Why git?
 						%h3 Branching and merging
-						%p.fragment Branch is just a named reference to a commit
+						%p.fragment Branches are cheap
+						%p.fragment Just named references, no copying or linking files, no history entry
 						%p.fragment Create branch for every feature, test or experiment
-						%p.fragment No copying or linking files and no history entry
 						%p.fragment Easily switch branches
 						%p.fragment Merge worthwhile and delete unseccessful
-						%p.fragment You are not obliged to share your branches
+						%p.fragment No obligation to share branches
 
 					%section
 						%h2 Why git?
@@ -102,10 +106,12 @@
 						%p.fragment
 							Every repository is self-contained
 							%span.fragment and works as a backup
-						%p.fragment Commit early, commit often, commit without disturbing others
+						%p.fragment
+							Commit early, commit often, commit without disturbing others
+							%sup.fragment helps merging
 						%p.fragment Merge before sharing changes, not before you commit
 						%p.fragment Server is not required until you need to share/publish work
-						%p.fragment Different ways to share your work (commits/patches, network/mail/sneakernet)
+						%p.fragment Different workflows (git flow, pull requests)
 						%p.fragment Workflow depends on your team, not on your VCS
 						%p.fragment <code>git init</code> is enough when you need source control
 
@@ -114,14 +120,15 @@
 						%h3 Small and fast
 						%p.fragment Nearly all operations run locally
 						%p.fragment
-							%a{href: "http://git-scm.com/about/small-and-fast"} 1-325x faster than SVN (except clone)
+							%a{href: "http://git-scm.com/about/small-and-fast"} Even network operations are several times faster than SVN (except clone)
 						%p.fragment Was built for speed, performance and handling big projects from start
-						%p
-							.fragment
+						.fragment
+							An example:
+							%p.fragment
 								po/.svn
 								%span.fragment — 4.1M
 								%span.fragment — 1 revision
-							.fragment
+							%p.fragment
 								po/.git
 								%span.fragment — 3.2M
 								%span.fragment — 1839 commits
@@ -129,29 +136,25 @@
 					%section
 						%h2 Why git?
 						%h3 Robust
-						%p.fragment Simple data model
-						%p.fragment Integrity provided by SHA1 hashes
-						%p.fragment Tracks content rather than differences
-						%p.fragment Changes to content or meta info creates <del>alternative hitory</del> different hashes
-						%p.fragment
-							So history is mutable
-							%span.fragment
-								but changes can't be hidden
-								%span.fragment (no Nineteen Eighty-Four)
+						%p.fragment Simple data model with integrity using SHA1 hashes
+						%p.fragment Tracks content rather than differences/files
+						%p.fragment Tries its best to protect your data
+						%p.fragment Allows changing history (Ministry of Truth is satisfied)
+						%p.fragment But makes it obviously alternative (Ministry of Truth is furious)
 
 					%section
 						%h2 Why git?
 						%h3 Staging area
 						%p.fragment Prepare and review changes before committing
-						%p.fragment Easily split changes to multiple commits (even in one file)
+						%p.fragment Easily split changes to multiple commits (including in one file)
 						%p.fragment Commit while still working
 
 				%section{data: {state: "alert"}}
 					%h2 Cons
 					%p.fragment No subtree checkout
-					%p.fragment Directories are not tracked
 					%p.fragment Commmits are not sequentially numbered
 					%p.fragment Higher learning curve
+					%p.fragment Directories are not tracked
 
 				%section{data: {state: "cobalt"}}
 					%section

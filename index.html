@@ -3,7 +3,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>git for svn users [a6beb2]</title>
+    <title>git for svn users [7a6529]</title>
     <meta content="Presentatation about git for svn users" name="description">
     <meta content="Ivan Kuchin" name="author">
     <meta content="yes" name="apple-mobile-web-app-capable">
@@ -31,6 +31,8 @@
         .reveal pre code {
           background: #222;
           word-wrap: break-word; }
+        .reveal sub, .reveal sup {
+          font-size: smaller; }
         .reveal p.small {
           font-size: 0.7em; }
         .reveal span.tag {
@@ -101,22 +103,25 @@
         <section data-state="soothe">
           <section id="why-git">
             <h2>Why git?</h2>
-            <p class="fragment">Branching and merging</p>
-            <p class="fragment">Distributed VCS</p>
-            <p class="fragment">Small and fast</p>
-            <p class="fragment">Robust</p>
-            <p class="fragment">Staging area</p>
-            <f class="fragment">Open Source</f>
+            <p>Branching and merging</p>
+            <p>Distributed</p>
+            <p>Small and fast</p>
+            <p>Robust</p>
+            <p>Staging area</p>
+            <aside class="notes">
+              <p>Stash, clean, bisect</p>
+              <p>Open source</p>
+            </aside>
           </section>
           <section id="why-git_branching-and-merging">
             <h2>Why git?</h2>
             <h3>Branching and merging</h3>
-            <p class="fragment">Branch is just a named reference to a commit</p>
+            <p class="fragment">Branches are cheap</p>
+            <p class="fragment">Just named references, no copying or linking files, no history entry</p>
             <p class="fragment">Create branch for every feature, test or experiment</p>
-            <p class="fragment">No copying or linking files and no history entry</p>
             <p class="fragment">Easily switch branches</p>
             <p class="fragment">Merge worthwhile and delete unseccessful</p>
-            <p class="fragment">You are not obliged to share your branches</p>
+            <p class="fragment">No obligation to share branches</p>
           </section>
           <section id="why-git_distributed-vcs">
             <h2>Why git?</h2>
@@ -125,10 +130,13 @@
               Every repository is self-contained
               <span class="fragment">and works as a backup</span>
             </p>
-            <p class="fragment">Commit early, commit often, commit without disturbing others</p>
+            <p class="fragment">
+              Commit early, commit often, commit without disturbing others
+              <sup class="fragment">helps merging</sup>
+            </p>
             <p class="fragment">Merge before sharing changes, not before you commit</p>
             <p class="fragment">Server is not required until you need to share/publish work</p>
-            <p class="fragment">Different ways to share your work (commits/patches, network/mail/sneakernet)</p>
+            <p class="fragment">Different workflows (git flow, pull requests)</p>
             <p class="fragment">Workflow depends on your team, not on your VCS</p>
             <p class="fragment"><code>git init</code> is enough when you need source control</p>
           </section>
@@ -137,52 +145,46 @@
             <h3>Small and fast</h3>
             <p class="fragment">Nearly all operations run locally</p>
             <p class="fragment">
-              <a href="http://git-scm.com/about/small-and-fast">1-325x faster than SVN (except clone)</a>
+              <a href="http://git-scm.com/about/small-and-fast">Even network operations are several times faster than SVN (except clone)</a>
             </p>
             <p class="fragment">Was built for speed, performance and handling big projects from start</p>
-            <p>
-              </p>
-<div class="fragment">
+            <div class="fragment">
+              An example:
+              <p class="fragment">
                 po/.svn
                 <span class="fragment">— 4.1M</span>
                 <span class="fragment">— 1 revision</span>
-              </div>
-              <div class="fragment">
+              </p>
+              <p class="fragment">
                 po/.git
                 <span class="fragment">— 3.2M</span>
                 <span class="fragment">— 1839 commits</span>
-              </div>
-            
+              </p>
+            </div>
           </section>
           <section id="why-git_robust">
             <h2>Why git?</h2>
             <h3>Robust</h3>
-            <p class="fragment">Simple data model</p>
-            <p class="fragment">Integrity provided by SHA1 hashes</p>
-            <p class="fragment">Tracks content rather than differences</p>
-            <p class="fragment">Changes to content or meta info creates <del>alternative hitory</del> different hashes</p>
-            <p class="fragment">
-              So history is mutable
-              <span class="fragment">
-                but changes can't be hidden
-                <span class="fragment">(no Nineteen Eighty-Four)</span>
-              </span>
-            </p>
+            <p class="fragment">Simple data model with integrity using SHA1 hashes</p>
+            <p class="fragment">Tracks content rather than differences/files</p>
+            <p class="fragment">Tries its best to protect your data</p>
+            <p class="fragment">Allows changing history (Ministry of Truth is satisfied)</p>
+            <p class="fragment">But makes it obviously alternative (Ministry of Truth is furious)</p>
           </section>
           <section id="why-git_staging-area">
             <h2>Why git?</h2>
             <h3>Staging area</h3>
             <p class="fragment">Prepare and review changes before committing</p>
-            <p class="fragment">Easily split changes to multiple commits (even in one file)</p>
+            <p class="fragment">Easily split changes to multiple commits (including in one file)</p>
             <p class="fragment">Commit while still working</p>
           </section>
         </section>
         <section data-state="alert" id="cons">
           <h2>Cons</h2>
           <p class="fragment">No subtree checkout</p>
-          <p class="fragment">Directories are not tracked</p>
           <p class="fragment">Commmits are not sequentially numbered</p>
           <p class="fragment">Higher learning curve</p>
+          <p class="fragment">Directories are not tracked</p>
         </section>
         <section data-state="cobalt">
           <section id="what-is-git_parts">
