@@ -70,7 +70,7 @@ end
 
 desc "Create pack"
 task :pack do
-  system 'git archive -v -opack.zip master *.{png,ico,html} reveal.js/{css/**/*.css,js/*.min.js,lib,plugin,LICENSE,*.html,README.md}'
+  system 'git archive -v -opack.zip master *.{png,ico,html} reveal.js/{css/*.css,css/*/*.css,js/*.min.js,lib,plugin,LICENSE,*.html,README.md}'
 end
 
 task :default => :build
