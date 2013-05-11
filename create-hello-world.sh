@@ -56,6 +56,26 @@ function fragment(){
   ruby -pe 'print "  "'
 }
 
+mkdir -p example-repos
+cd example-repos
+rm -rf hello-world
+mkdir hello-world
+cd hello-world
+git init > /dev/null
+
+# identify only for this repo
+git config user.name 'Ivan Kuchin'
+git config user.email ivan.kuchin@cern.ch
+# force it to use ansi colors
+git config color.ui always
+git config color.branch always
+git config color.diff always
+git config color.interactive always
+git config color.pager true
+git config color.showbranch always
+git config color.status always
+git config color.ui always
+
 hsection 'A bit of config'
 (
   echo "$(hps '~') git config --global user.name 'Ivan Kuchin'"
@@ -75,12 +95,6 @@ hsection 'A bit of config'
 ) 2>&1 | fragment
 
 hsection 'Create new repository'
-mkdir -p example-repos
-cd example-repos
-rm -rf hello-world
-mkdir hello-world
-cd hello-world
-git init > /dev/null
 (
   echo "$(hps '~') mkdir hello-world"
   echo "$(hps '~') cd hello-world"
@@ -91,19 +105,6 @@ git init > /dev/null
   echo '  %p Status'
   hcat git status
 ) | fragment
-
-# identify only for this repo
-git config user.name 'Ivan Kuchin'
-git config user.email ivan.kuchin@cern.ch
-# force it to use ansi colors
-git config color.ui always
-git config color.branch always
-git config color.diff always
-git config color.interactive always
-git config color.pager true
-git config color.showbranch always
-git config color.status always
-git config color.ui always
 
 hsection 'Create README'
 (
