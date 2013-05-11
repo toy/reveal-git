@@ -105,22 +105,42 @@ git config color.showbranch always
 git config color.status always
 git config color.ui always
 
-hsection 'Commit first file'
+hsection 'Create README'
 (
   echo '  %p Create file README with content:'
   hfile 'Prints "Hello, World".' > README
 ) 2>&1 | fragment
 (
+  echo '  %p Status'
+  hcat git status
+) | fragment
+
+hsection 'Stage README'
+(
   echo '  %p Stage'
   hcat git add README
 ) | fragment
 (
+  echo '  %p Status'
+  hcat git status
+) | fragment
+
+hsection 'Commit README'
+(
   echo '  %p Commit'
   hcat "git commit --message 'README'"
+) | fragment
+(
+  echo '  %p Status'
+  hcat git status
 ) | fragment
 
 hsection 'Checkout new branch'
 hcat git checkout -b implementation
+(
+  echo '  %p Status'
+  hcat git status
+) | fragment
 
 hsection 'Start implementing'
 (
