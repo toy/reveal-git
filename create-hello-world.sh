@@ -148,11 +148,7 @@ hsection 'Test and fix'
 (
   echo '  %p Fix HelloWorld.java:'
   hfile 'System.out.println("Hello, World!");' > /dev/null
-  echo 'public class HelloWorld {
-  public static void main(String[] args) {
-    System.out.println("Hello, World!");
-  }
-}' > HelloWorld.java
+  ruby -pi -e 'gsub(%q{World")}, %q{World!");})' HelloWorld.java
 ) 2>&1 | fragment
 (
   echo '  %p It works!'
