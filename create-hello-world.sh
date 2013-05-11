@@ -136,6 +136,7 @@ hsection 'Commit README'
 ) | fragment
 
 hsection 'Checkout new branch'
+echo '  %p <code>git checkout -b abc</code> == <code>git branch abc && git checkout abc</code>'
 hcat git checkout -b implementation
 (
   echo '  %p Status'
