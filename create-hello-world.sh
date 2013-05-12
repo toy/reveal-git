@@ -213,7 +213,7 @@ hsection 'Commit changes separately'
   ) | fragment
 ) | fragment
 
-hsection 'Merge and delete branch'
+hsection 'Merge branch'
 (
   echo '  %p Switch to master'
   hcat git co master
@@ -221,10 +221,6 @@ hsection 'Merge and delete branch'
 (
   echo '  %p Merge branch'
   hcat "git merge --no-ff implementation --message 'merge initial implementation'"
-) | fragment
-(
-  echo '  %p Delete branch'
-  hcat git branch -d implementation
 ) | fragment
 
 hsection 'Resulting files'
