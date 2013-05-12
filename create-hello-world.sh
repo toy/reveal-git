@@ -177,26 +177,40 @@ hsection 'Test and fix'
   hcat "javac HelloWorld.java && java HelloWorld"
 ) | fragment
 
-hsection 'Ignore build results'
+hsection 'Check status'
 (
-  echo '  %p Check status'
   hcat git status
 ) | fragment
+
+hsection 'Show diff'
+(
+  hcat git diff
+) | fragment
+
+hsection 'Ignore build results'
 (
   echo '  %p Create file .gitignore with content:'
   hfile '/*.class' > .gitignore
 ) 2>&1 | fragment
+(
+  echo '  %p Check status'
+  hcat git status
+) | fragment
 
-hsection 'Commit changes'
+hsection 'Commit changes separately'
 (
   echo '  %p Amend last commit with fix'
   hcat git add HelloWorld.java
-  hcat "git commit --amend --message 'Implemented HelloWorld'"
+  (
+    hcat "git commit --amend --message 'Implemented HelloWorld'"
+  ) | fragment
 ) | fragment
 (
   echo '  %p Commit ignore pattern'
   hcat git add .gitignore
-  hcat "git commit --message 'ignore /*.class'"
+  (
+    hcat "git commit --message 'ignore /*.class'"
+  ) | fragment
 ) | fragment
 
 hsection 'Merge and delete branch'
