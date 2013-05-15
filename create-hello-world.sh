@@ -223,12 +223,12 @@ hsection 'Merge branch'
   hcat "git merge --no-ff implementation --message 'merge initial implementation'"
 ) | fragment
 
+hsection 'Show history'
+hcat "git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)%n'"
+
 hsection 'Resulting files'
 hcat git ls-files
 for file in $(git ls-files)
 do
   hcat git show HEAD:$file
 done
-
-hsection 'Show history'
-hcat "git log --graph --all --format=format:'%C(bold yellow)%h%C(reset) - %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)%n'"
