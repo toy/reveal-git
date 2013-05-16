@@ -379,8 +379,10 @@
 							%p Everything in PATH like <code>git-*</code> can be called like <code>git *</code>
 
 				%section{data: {state: "lila"}}
-					- script, cache = %w[create-hello-world.sh .create-hello-world.cache]
-					- system "./#{script} 2>&1 | haml > #{cache}" unless File.exist?(cache) && File.mtime(cache) > File.mtime(script)
+					- script, cache_dir = %w[create-hello-world.sh .create-hello-world.cache]
+					- cache = "#{cache_dir}/#{`git hash-object #{script}`.strip}"
+					- Dir.mkdir(cache_dir) unless File.directory?(cache_dir)
+					- system "./#{script} | haml > #{cache}" unless File.exist?(cache)
 					= File.read(cache)
 
 				%section{data: {state: "mint"}}
