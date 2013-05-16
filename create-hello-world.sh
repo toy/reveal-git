@@ -101,9 +101,9 @@ hsection 'Create new repository'
   hcat git status
 ) | fragment
 
-hsection 'Create README'
+hsection 'Create readme'
 (
-  echo '  %p Create file README with content:'
+  echo '  %p Create file <code>README</code> with content:'
   printf 'Prints "Hello, World".' | htee README
 ) | fragment
 (
@@ -111,9 +111,9 @@ hsection 'Create README'
   hcat git status
 ) | fragment
 
-hsection 'Stage README'
+hsection 'Stage first file'
 (
-  echo '  %p Stage'
+  echo '  %p Stage <code>README</code>'
   hcat git add README
 ) | fragment
 (
@@ -121,7 +121,7 @@ hsection 'Stage README'
   hcat git status
 ) | fragment
 
-hsection 'Commit README'
+hsection 'Commit first file'
 (
   echo '  %p Commit'
   hcat "git commit --message 'README'"
@@ -172,14 +172,14 @@ hsection 'Test and fix'
   hcat "javac HelloWorld.java && java HelloWorld"
 ) | fragment
 
-hsection 'Check status'
-(
-  hcat git status
-) | fragment
-
 hsection 'Show diff'
 (
   hcat git diff
+) | fragment
+
+hsection 'Check status'
+(
+  hcat git status
 ) | fragment
 
 hsection 'Ignore build results'
