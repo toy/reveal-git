@@ -30,7 +30,7 @@ function hcat(){
   '
 }
 
-function hfile(){
+function htee(){
   a2h | ruby -e '
     data = $stdin.read.chomp
     ARGV.each do |path|
@@ -44,12 +44,6 @@ function hsection(){
   echo '%section'
   echo '  %h2 Hands-on'
   echo '  %h3 '$*
-}
-
-function houtput(){
-  ruby -e 'print $stdin.read.chomp' |
-  a2h |
-  ruby -e 'puts "  <pre><code>#{$stdin.read.gsub("\n", "<br />")}</code></pre>"'
 }
 
 function fragment(){
@@ -82,7 +76,7 @@ hsection 'A bit of config'
   echo "$(hps '~') git config --global user.name 'Ivan Kuchin'"
   echo "$(hps '~') git config --global user.email ivan.kuchin@cern.ch"
   echo "$(hps '~') git config --global color.ui auto"
-) | houtput
+) | htee
 (
   echo '  %p And ancient bash magic:'
   HPS1='\[\e[m\e[1;31;38;5m\]\w$(__git_ps1 "\[\e[0;1m\]×\[\e[1;36;38;5;57m\]%s")\[\e[0;1m\]\$\[\e[m\] '
@@ -92,7 +86,7 @@ hsection 'A bit of config'
     echo "$(hps '~') GIT_PS1_SHOWUNTRACKEDFILES=true"
     echo "$(hps '~') GIT_PS1_SHOWUPSTREAM=auto"
     echo "$(hps '~') PS1='$HPS1'"
-  ) | houtput
+  ) | htee
 ) | fragment
 
 hsection 'Create new repository'
@@ -101,7 +95,7 @@ hsection 'Create new repository'
   echo "$(hps '~') cd hello-world"
   echo "$(hps '~/hello-world') git init"
   echo 'Initialized empty Git repository in /Users/ikuchin/hello-world/.git/'
-) | houtput
+) | htee
 (
   echo '  %p Status'
   hcat git status
@@ -110,7 +104,7 @@ hsection 'Create new repository'
 hsection 'Create README'
 (
   echo '  %p Create file README with content:'
-  printf 'Prints "Hello, World".' | hfile README
+  printf 'Prints "Hello, World".' | htee README
 ) | fragment
 (
   echo '  %p Status'
@@ -152,7 +146,7 @@ hsection 'Start implementing'
   public static void main(String[] args) {
     System.out.println("Hello, World")
   }
-}' | hfile HelloWorld.java
+}' | htee HelloWorld.java
 ) | fragment
 (
   echo '  %p Stage'
@@ -170,7 +164,7 @@ hsection 'Test and fix'
 ) | fragment
 (
   echo '  %p Fix HelloWorld.java:'
-  printf 'System.out.println("Hello, World!");' | hfile /dev/null
+  printf 'System.out.println("Hello, World!");' | htee
   ruby -pi -e 'gsub(%q{World")}, %q{World!");})' HelloWorld.java
 ) | fragment
 (
@@ -191,7 +185,7 @@ hsection 'Show diff'
 hsection 'Ignore build results'
 (
   echo '  %p Create file .gitignore with content:'
-  printf '/*.class' | hfile .gitignore
+  printf '/*.class' | htee .gitignore
 ) | fragment
 (
   echo '  %p Check status'
