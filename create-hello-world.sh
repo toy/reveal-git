@@ -11,11 +11,11 @@ GIT_PS1_SHOWUPSTREAM='auto'
 . /opt/local/share/git-core/git-prompt.sh
 
 function hps(){
-  printf "\e[1;31;38;5m$*\e[0;1m\$\e[m"
+  printf "\e[1;33m$*\e[0;1m\$\e[m"
 }
 
 function hps_git(){
-  echo $(__git_ps1 "\e[1;31;38;5m$*\e[0;1m×\e[1;36;38;5;57m%s\e[0;1m\$\e[m")
+  __git_ps1 "\e[1;33m$*\e[0;1m×\e[1;36m%s\e[0;1m\$\e[m"
 }
 
 function hcat(){
@@ -79,7 +79,7 @@ hsection 'A bit of config'
 ) | htee
 (
   echo '  %p And ancient bash magic:'
-  HPS1='\[\e[m\e[1;31;38;5m\]\w$(__git_ps1 "\[\e[0;1m\]×\[\e[1;36;38;5;57m\]%s")\[\e[0;1m\]\$\[\e[m\] '
+  HPS1='\[\e[m\e[1;33m\]\w$(__git_ps1 "\[\e[0;1m\]×\[\e[1;36m\]%s")\[\e[0;1m\]\$\[\e[m\] '
   (
     echo "$(hps '~') GIT_PS1_SHOWDIRTYSTATE=true"
     echo "$(hps '~') GIT_PS1_SHOWSTASHSTATE=true"
