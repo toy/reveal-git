@@ -33,10 +33,12 @@ function hcat(){
 function hfile(){
   ruby -e '
     require "cgi"
-    data = ARGV[0]
-    puts data
-    $stderr.puts "  <pre><code>#{CGI.escapeHTML(data).gsub("\n", "<br />")}</code></pre>"
-  ' "$*"
+    data = $stdin.read.chomp
+    ARGV.each do |path|
+      File.open(path, "w"){ |f| f.puts data }
+    end
+    puts "  <pre><code>#{CGI.escapeHTML(data).gsub("\n", "<br />")}</code></pre>"
+  ' $*
 }
 
 function hsection(){
@@ -92,7 +94,7 @@ hsection 'A bit of config'
     echo "$(hps '~') GIT_PS1_SHOWUPSTREAM=auto"
     echo "$(hps '~') PS1='$HPS1'"
   ) | houtput
-) 2>&1 | fragment
+) | fragment
 
 hsection 'Create new repository'
 (
@@ -109,8 +111,8 @@ hsection 'Create new repository'
 hsection 'Create README'
 (
   echo '  %p Create file README with content:'
-  hfile 'Prints "Hello, World".' > README
-) 2>&1 | fragment
+  printf 'Prints "Hello, World".' | hfile README
+) | fragment
 (
   echo '  %p Status'
   hcat git status
@@ -147,12 +149,12 @@ hcat git checkout -b implementation
 hsection 'Start implementing'
 (
   echo '  %p Create file HelloWorld.java with content:'
-  hfile 'public class HelloWorld {
+  printf 'public class HelloWorld {
   public static void main(String[] args) {
     System.out.println("Hello, World")
   }
-}' > HelloWorld.java
-) 2>&1 | fragment
+}' | hfile HelloWorld.java
+) | fragment
 (
   echo '  %p Stage'
   hcat git add HelloWorld.java
@@ -169,9 +171,9 @@ hsection 'Test and fix'
 ) | fragment
 (
   echo '  %p Fix HelloWorld.java:'
-  hfile 'System.out.println("Hello, World!");' > /dev/null
+  printf 'System.out.println("Hello, World!");' | hfile /dev/null
   ruby -pi -e 'gsub(%q{World")}, %q{World!");})' HelloWorld.java
-) 2>&1 | fragment
+) | fragment
 (
   echo '  %p It works!'
   hcat "javac HelloWorld.java && java HelloWorld"
@@ -190,8 +192,8 @@ hsection 'Show diff'
 hsection 'Ignore build results'
 (
   echo '  %p Create file .gitignore with content:'
-  hfile '/*.class' > .gitignore
-) 2>&1 | fragment
+  printf '/*.class' | hfile .gitignore
+) | fragment
 (
   echo '  %p Check status'
   hcat git status
