@@ -31,13 +31,12 @@ function hcat(){
 }
 
 function hfile(){
-  ruby -e '
-    require "cgi"
+  a2h | ruby -e '
     data = $stdin.read.chomp
     ARGV.each do |path|
       File.open(path, "w"){ |f| f.puts data }
     end
-    puts "  <pre><code>#{CGI.escapeHTML(data).gsub("\n", "<br />")}</code></pre>"
+    puts "  <pre><code>#{data.gsub("\n", "<br />")}</code></pre>"
   ' $*
 }
 
