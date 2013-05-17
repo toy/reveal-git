@@ -70,91 +70,24 @@
 
 				%section{data: {state: "whiteout"}}
 					%h2 Plan
+					%p.fragment Main points
+					%p.fragment Hands-on
+					%p.fragment What is git?
+					%p.fragment Commands
 					%p.fragment Why git?
 					%p.fragment Cons
-					%p.fragment What is git?
 					%p.fragment Dos and don'ts
-					%p.fragment Commands
-					%p.fragment Hands-on
 					%p.fragment Resources
 
 				%section{data: {state: "soothe"}}
-					%section
-						%h2 Why git?
-						%p Branching and merging
-						%p Distributed
-						%p Small and fast
-						%p Robust
-						%p Staging area
-						%aside.notes
-							%p Stash, clean, bisect
-							%p Open source
+					%h2 Main points
 
-					%section
-						%h2 Why git?
-						%h3 Branching and merging
-						%p.fragment Branches are cheap
-						%p.fragment Just named references, no copying or linking files, no history entry
-						%p.fragment Create branch for every feature, test or experiment
-						%p.fragment Easily switch branches
-						%p.fragment Merge worthwhile and delete unseccessful
-						%p.fragment No obligation to share branches
-
-					%section
-						%h2 Why git?
-						%h3 Distributed VCS
-						%p.fragment
-							Every repository is self-contained
-							%span.fragment and works as a backup
-						%p.fragment
-							Commit early, commit often, commit without disturbing others
-							%sup.fragment helps merging
-						%p.fragment Merge before sharing changes, not before you commit
-						%p.fragment Server is not required until you need to share/publish work
-						%p.fragment Different workflows (git flow, pull requests)
-						%p.fragment Workflow depends on your team, not on your VCS
-						%p.fragment <code>git init</code> is enough when you need source control
-
-					%section
-						%h2 Why git?
-						%h3 Small and fast
-						%p.fragment Nearly all operations run locally
-						%p.fragment
-							%a{href: "http://git-scm.com/about/small-and-fast"} Even network operations are several times faster than SVN (except clone)
-						%p.fragment Was built for speed, performance and handling big projects from start
-						.fragment
-							An example:
-							%p.fragment
-								po/.svn
-								%span.fragment — 4.1M
-								%span.fragment — 1 revision
-							%p.fragment
-								po/.git
-								%span.fragment — 3.2M
-								%span.fragment — 1839 commits
-
-					%section
-						%h2 Why git?
-						%h3 Robust
-						%p.fragment Simple data model with integrity using SHA1 hashes
-						%p.fragment Tracks content rather than differences/files
-						%p.fragment Tries its best to protect your data
-						%p.fragment Allows changing history (Ministry of Truth is satisfied)
-						%p.fragment But makes it obviously alternative (Ministry of Truth is furious)
-
-					%section
-						%h2 Why git?
-						%h3 Staging area
-						%p.fragment Prepare and review changes before committing
-						%p.fragment Easily split changes to multiple commits (including in one file)
-						%p.fragment Commit while still working
-
-				%section{data: {state: "alert"}}
-					%h2 Cons
-					%p.fragment No subtree checkout
-					%p.fragment Commmits are not sequentially numbered
-					%p.fragment Higher learning curve
-					%p.fragment Directories are not tracked
+				%section{data: {state: "lila"}}
+					- script, cache_dir = %w[create-hello-world.sh .create-hello-world.cache]
+					- cache = "#{cache_dir}/#{`git hash-object #{script}`.strip}"
+					- Dir.mkdir(cache_dir) unless File.directory?(cache_dir)
+					- system "./#{script} | haml > #{cache}" unless File.exist?(cache)
+					= File.read(cache)
 
 				%section{data: {state: "cobalt"}}
 					%section
@@ -288,17 +221,6 @@
 							* `.git/info/exclude` — for you
 							* `~/.gitignore` — for all your repos (name specified in `~/.gitconfig`)
 
-				%section{data: {state: "sunset"}}
-					%h2 Dos and don'ts
-					%p.fragment.highlight-green Commit early and often
-					%p.fragment.highlight-green Choose (and agree with your team) a workflow
-					%p.fragment.highlight-green Create branches
-					%p.fragment.highlight-green Make useful commit messages
-					%p.fragment.highlight-green Keep up to date
-					%p.fragment.highlight-green Enforce standards
-					%p.fragment.highlight-red Don't change <del>official</del> published history
-					%p.fragment.highlight-red Don't change tags
-
 				%section{data: {state: "submerge"}}
 					%section
 						%h2 Commands
@@ -378,12 +300,94 @@
 							%h4 Create your commands
 							%p Everything in PATH like <code>git-*</code> can be called like <code>git *</code>
 
-				%section{data: {state: "lila"}}
-					- script, cache_dir = %w[create-hello-world.sh .create-hello-world.cache]
-					- cache = "#{cache_dir}/#{`git hash-object #{script}`.strip}"
-					- Dir.mkdir(cache_dir) unless File.directory?(cache_dir)
-					- system "./#{script} | haml > #{cache}" unless File.exist?(cache)
-					= File.read(cache)
+				%section{data: {state: "soothe"}}
+					%section
+						%h2 Why git?
+						%p Branching and merging
+						%p Distributed
+						%p Small and fast
+						%p Robust
+						%p Staging area
+						%aside.notes
+							%p Stash, clean, bisect
+							%p Open source
+
+					%section
+						%h2 Why git?
+						%h3 Branching and merging
+						%p.fragment Branches are cheap
+						%p.fragment Just named references, no copying or linking files, no history entry
+						%p.fragment Create branch for every feature, test or experiment
+						%p.fragment Easily switch branches
+						%p.fragment Merge worthwhile and delete unseccessful
+						%p.fragment No obligation to share branches
+
+					%section
+						%h2 Why git?
+						%h3 Distributed VCS
+						%p.fragment
+							Every repository is self-contained
+							%span.fragment and works as a backup
+						%p.fragment
+							Commit early, commit often, commit without disturbing others
+							%sup.fragment helps merging
+						%p.fragment Merge before sharing changes, not before you commit
+						%p.fragment Server is not required until you need to share/publish work
+						%p.fragment Different workflows (git flow, pull requests)
+						%p.fragment Workflow depends on your team, not on your VCS
+						%p.fragment <code>git init</code> is enough when you need source control
+
+					%section
+						%h2 Why git?
+						%h3 Small and fast
+						%p.fragment Nearly all operations run locally
+						%p.fragment
+							%a{href: "http://git-scm.com/about/small-and-fast"} Even network operations are several times faster than SVN (except clone)
+						%p.fragment Was built for speed, performance and handling big projects from start
+						.fragment
+							An example:
+							%p.fragment
+								po/.svn
+								%span.fragment — 4.1M
+								%span.fragment — 1 revision
+							%p.fragment
+								po/.git
+								%span.fragment — 3.2M
+								%span.fragment — 1839 commits
+
+					%section
+						%h2 Why git?
+						%h3 Robust
+						%p.fragment Simple data model with integrity using SHA1 hashes
+						%p.fragment Tracks content rather than differences/files
+						%p.fragment Tries its best to protect your data
+						%p.fragment Allows changing history (Ministry of Truth is satisfied)
+						%p.fragment But makes it obviously alternative (Ministry of Truth is furious)
+
+					%section
+						%h2 Why git?
+						%h3 Staging area
+						%p.fragment Prepare and review changes before committing
+						%p.fragment Easily split changes to multiple commits (including in one file)
+						%p.fragment Commit while still working
+
+				%section{data: {state: "alert"}}
+					%h2 Cons
+					%p.fragment No subtree checkout
+					%p.fragment Commmits are not sequentially numbered
+					%p.fragment Higher learning curve
+					%p.fragment Directories are not tracked
+
+				%section{data: {state: "sunset"}}
+					%h2 Dos and don'ts
+					%p.fragment.highlight-green Commit early and often
+					%p.fragment.highlight-green Choose (and agree with your team) a workflow
+					%p.fragment.highlight-green Create branches
+					%p.fragment.highlight-green Make useful commit messages
+					%p.fragment.highlight-green Keep up to date
+					%p.fragment.highlight-green Enforce standards
+					%p.fragment.highlight-red Don't change <del>official</del> published history
+					%p.fragment.highlight-red Don't change tags
 
 				%section{data: {state: "mint"}}
 					%section
