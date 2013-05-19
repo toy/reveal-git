@@ -221,8 +221,8 @@
 						%h3 Essential 1/2
 						%p.fragment <code>help</code>
 						.fragment
-							%p <code>init</code> — init repository
-							%p <code>clone</code> — clone repository
+							%p <code>init</code> — init repository [<code>svnadmin</code>]
+							%p <code>clone</code> — clone repository [<code>svn checkout</code>]
 						%p.fragment <code>status</code> — show status of workspace and stage area
 						%p.fragment <code>add</code>, <code>mv</code>, <code>rm</code> or just <code>add -A</code> — stage changes
 						%p.fragment <code>commit</code> — create commit
@@ -230,32 +230,32 @@
 						%p.fragment <code>diff</code> — show changes
 						.fragment
 							%p <code>merge</code> — join histories
-							%p <code>rebase</code> — move history changes
-							%p <code>cherry-pick</code> — copy history changes
+							%p <code>rebase</code> — move history changes [<del>svn</del>]
+							%p <code>cherry-pick</code> — copy history changes [<code>svn merge -c</code>]
 
 					%section
 						%h2 Commands
 						%h3 Essential 2/2
-						%p.fragment <code>checkout</code> — checkout branch or paths
-						%p.fragment <code>reset</code> — reset current HEAD, workspace, stage area
+						%p.fragment <code>checkout</code> — checkout branch or paths [<code>svn revert</code>]
+						%p.fragment <code>reset</code> — reset current HEAD, workspace, stage area [<del>svn</del>]
 						.fragment
 							%p <code>branch</code> — crete, list, delete branches
 							%p <code>tag</code> — crete, list, delete tags
-							%p <code>remote</code> — crete, list, delete remotes
+							%p <code>remote</code> — crete, list, delete remotes [<del>svn</del>]
 						.fragment
-							%p <code>fetch</code> — fetch remote refs and objects
-							%p <code>pull</code> — fetch and merge from remote
-							%p <code>push</code> — update remote refs and upload objects
+							%p <code>fetch</code> — fetch remote refs and objects [<del>svn</del>]
+							%p <code>pull</code> — fetch and merge from remote [<code>svn update</code>]
+							%p <code>push</code> — update remote refs and upload objects [part of <code>svn commit</code>]
 
 					%section
 						%h2 Commands
 						%h3 Helpful
 						%p.fragment <code>revert</code> — commit reverting change
-						%p.fragment <code>clean</code> — remove untracked files
-						%p.fragment <code>show</code> — show objects
+						%p.fragment <code>clean</code> — remove untracked files [<del>svn</del>]
+						%p.fragment <code>show</code> — show objects [<code>svn cat|list|log|diff</code>]
 						%p.fragment <code>blame</code> — show author of changes
-						%p.fragment <code>stash</code> — put aside your work
-						%p.fragment <code>bisect</code> — find <del>the bad guy</del> commit introducing bug
+						%p.fragment <code>stash</code> — put aside your work [<del>svn</del>]
+						%p.fragment <code>bisect</code> — find <del>the bad guy</del> commit introducing bug [<del>svn</del>]
 						%h3.fragment and advanced
 						%p.fragment <code>svn</code> — work with svn repository
 						%p.fragment <code>submodule</code>, <code>subtree</code> — attach foreigh repositories
