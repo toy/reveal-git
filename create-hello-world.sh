@@ -219,7 +219,7 @@ hsection 'Merge branch'
   hcat git co master
 ) | fragment
 (
-  echo '  %p Merge branch (<code>--no-ff</code> — create merge commit even if fast forward can be used)'
+  echo '  %p <code>--no-ff</code> — create merge commit even if fast forward can be used'
   hcat "git merge --no-ff implementation --message 'merge initial implementation'"
 ) | fragment
 
