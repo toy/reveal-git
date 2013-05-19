@@ -5,14 +5,15 @@ A framework for easily creating beautiful presentations using HTML. [Check out t
 reveal.js comes with a broad range of features including [nested slides](https://github.com/hakimel/reveal.js#markup), [markdown contents](https://github.com/hakimel/reveal.js#markdown), [PDF export](https://github.com/hakimel/reveal.js#pdf-export), [speaker notes](https://github.com/hakimel/reveal.js#speaker-notes) and a [JavaScript API](https://github.com/hakimel/reveal.js#api). It's best viewed in a browser with support for CSS 3D transforms but [fallbacks](https://github.com/hakimel/reveal.js/wiki/Browser-Support) are available to make sure your presentation can still be viewed elsewhere.
 
 
-#### More reading in the Wiki:
+#### More reading::
+- [Installation](#installation): Step-by-step instructions for getting reveal.js running on your computer.
 - [Changelog](https://github.com/hakimel/reveal.js/wiki/Changelog): Up-to-date version history.
 - [Examples](https://github.com/hakimel/reveal.js/wiki/Example-Presentations): Presentations created with reveal.js, add your own!
 - [Browser Support](https://github.com/hakimel/reveal.js/wiki/Browser-Support): Explanation of browser support and fallbacks.
 
-## rvl.io
+## Slides
 
-Slides are written using HTML or markdown but there's also an online editor for those of you who prefer a more traditional user interface. Give it a try at [www.rvl.io](http://www.rvl.io).
+Presentations are written using HTML or markdown but there's also an online editor for those of you who prefer a graphical interface. Give it a try at [http://slid.es](http://slid.es).
 
 
 ## Instructions
@@ -37,7 +38,7 @@ Markup hierarchy needs to be ``<div class="reveal"> <div class="slides"> <sectio
 
 It's possible to write your slides using Markdown. To enable Markdown, add the ```data-markdown``` attribute to your ```<section>``` elements and wrap the contents in a ```<script type="text/template">``` like the example below.
 
-This is based on [data-markdown](https://gist.github.com/1343518) from [Paul Irish](https://github.com/paulirish) which in turn uses [showdown](https://github.com/coreyti/showdown/). Sensitive to indentation (avoid mixing tabs and spaces) and line breaks (avoid consecutive breaks).
+This is based on [data-markdown](https://gist.github.com/1343518) from [Paul Irish](https://github.com/paulirish) modified to use [marked](https://github.com/chjj/marked) to support [Github Flavoured Markdown](https://help.github.com/articles/github-flavored-markdown). Sensitive to indentation (avoid mixing tabs and spaces) and line breaks (avoid consecutive breaks).
 
 ```html
 <section data-markdown>
@@ -161,7 +162,7 @@ Reveal.initialize({
 		{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 
 		// Interpret Markdown in <section> elements
-		{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 		{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 
 		// Syntax highlight for <code> elements
@@ -332,11 +333,11 @@ Reveal.addEventListener( 'fragmenthidden', function( event ) {
 
 ### Code syntax highlighting
 
-By default, Reveal is configured with [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) for code syntax highlighting. Below is an example with clojure code that will be syntax highlighted:
+By default, Reveal is configured with [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) for code syntax highlighting. Below is an example with clojure code that will be syntax highlighted. When the `data-trim` attribute is present surrounding whitespace is automatically removed.
 
 ```html
 <section>
-	<pre><code>
+	<pre><code data-trim>
 (def lazy-fib
   (concat
    [0 1]
@@ -362,6 +363,16 @@ Reveal.toggleOverview();
 
 ### Fullscreen mode
 Just press »F« on your keyboard to show your presentation in fullscreen mode. Press the »ESC« key to exit fullscreen mode.
+
+
+### Embedded media
+Embedded HTML5 `<video>`/`<audio>` and YouTube iframes are automatically paused when your navigate away from a slide. This can be disabled by decorating your element with a `data-ignore` attribute.
+
+Add `data-autoplay` to your media element if you want it to automatically start playing when the slide is shown:
+
+```html
+<video data-autoplay src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"></video>
+```
 
 
 ## PDF Export
@@ -396,19 +407,6 @@ Each theme is available as a separate stylesheet. To change theme you will need 
 ```
 
 If you want to add a theme of your own see the instructions here: [/css/theme/README.md](https://github.com/hakimel/reveal.js/blob/master/css/theme/README.md).
-
-
-## Development Environment
-
-reveal.js is built using the task-based command line build tool [grunt.js](http://gruntjs.com) ([installation instructions](http://gruntjs.com/getting-started#installing-the-cli)). With Node.js and grunt.js installed, you need to start by running ```npm install``` in the reveal.js root. When the dependencies have been installed you should run ```grunt watch``` to start monitoring files for changes.
-
-If you want to customise reveal.js without running grunt.js you can alter the HTML to point to the uncompressed source files (css/reveal.css & js/reveal.js).
-
-### Folder Structure
-- **css/** Core styles without which the project does not function
-- **js/** Like above but for JavaScript
-- **plugin/** Components that have been developed as extensions to reveal.js
-- **lib/** All other third party assets (JavaScript, CSS, fonts)
 
 
 ## Speaker Notes
@@ -578,6 +576,54 @@ Reveal.initialize({
 	]
 });
 ```
+
+## Installation
+
+The **basic setup** is for authoring presentations only. The **full setup** gives you access to all reveal.js features as well as the development tasks needed to make changes to the source.
+
+### Basic setup
+
+The core of reveal.js is very easy to install. You'll simply need to download a copy of this repository and open the index.html file directly in your browser.g
+
+1. Download a copy of reveal.js from <https://github.com/hakimel/reveal.js/archive/master.zip>
+
+2. Unizp and replace the example contents in index.html with your own
+
+3. Open index.html in a browser to view it
+
+
+### Full setup
+
+Some reveal.js features, like external markdown, require that presentations run from a local web server. The following instructions will set up such a server as well as all of the development tasks needed to make edits to the reveal.js source code.
+
+1. Install [Node.js](http://nodejs.org/)
+
+2. Install [Grunt](http://gruntjs.com/getting-started#installing-the-cli)
+
+4. Clone the reveal.js repository  
+```
+$ git clone git@github.com:hakimel/reveal.js.git
+```
+
+5. Install dependencies  
+```
+$ npm install
+```
+
+6. Serve the presentation and monitor source files for changes  
+```
+$ grunt serve
+```
+
+7. Open <http://localhost:8000> to view your presentation
+
+
+### Folder Structure
+- **css/** Core styles without which the project does not function
+- **js/** Like above but for JavaScript
+- **plugin/** Components that have been developed as extensions to reveal.js
+- **lib/** All other third party assets (JavaScript, CSS, fonts)
+
 
 
 ## License
