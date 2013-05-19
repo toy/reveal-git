@@ -202,19 +202,23 @@
 				%section{data: {state: "commands"}}
 					%section
 						%h2 Commands
-						%h4.fragment{data: {fragment_index: 1}} porcelain (high level)
+						%h4.fragment{data: {fragment_index: 1}}
+							%span.fragment.fade-out{data: {fragment_index: 6}} porcelain (high level)
+						- essential_commands = %w[add bisect branch checkout cherry-pick clean clone commit diff fetch grep init log merge mv pull push rebase remote reset revert rm show stash status tag blame]
+						- command_attributes = proc{ |command| essential_commands.include?(command) ? {} : {:class => 'fragment fade-out', :data => {fragment_index: 6}} }
 						%p.fragment.commands.small{data: {fragment_index: 3}}
-							Main:
+							%span.fragment.fade-out{data: {fragment_index: 6}} Main:
 							- %w[add am archive bisect branch bundle checkout cherry-pick citool clean clone commit describe diff fetch format-patch gc grep gui init log merge mv notes pull push rebase reset revert rm shortlog show stash status submodule tag gitk].each do |command|
-								%code= command
+								%code{command_attributes[command]}= command
 						%p.fragment.commands.small{data: {fragment_index: 4}}
-							Ancillary:
+							%span.fragment.fade-out{data: {fragment_index: 6}} Ancillary:
 							- %w[annotate archimport blame cherry config count-objects cvsexportcommit cvsimport cvsserver difftool fast-export fast-import filter-branch fsck get-tar-commit-id help imap-send instaweb merge-tree mergetool p4 pack-refs prune quiltimport reflog relink remote repack replace request-pull rerere rev-parse send-email show-branch svn verify-tag whatchanged].each do |command|
-								%code= command
-						%h4.fragment{data: {fragment_index: 2}} plumbing (low level)
+								%code{command_attributes[command]}= command
+						%h4.fragment{data: {fragment_index: 2}}
+							%span.fragment.fade-out{data: {fragment_index: 6}} plumbing (low level)
 						%p.fragment.commands.small{data: {fragment_index: 5}}
 							- %w[apply cat-file check-attr check-ignore check-ref-format checkout-index column commit-tree credential credential-cache credential-store daemon diff-files diff-index diff-tree fetch-pack fmt-merge-msg for-each-ref hash-object http-backend http-fetch http-push index-pack ls-files ls-remote ls-tree mailinfo mailsplit merge-base merge-file merge-index merge-one-file mktag mktree name-rev pack-objects pack-redundant parse-remote patch-id prune-packed read-tree receive-pack rev-list send-pack sh-i18n sh-setup shell show-index show-ref stripspace symbolic-ref unpack-file unpack-objects update-index update-ref update-server-info upload-archive upload-pack var verify-pack write-tree].each do |command|
-								%code= command
+								%code{command_attributes[command]}= command
 
 					%section
 						%h2 Commands
