@@ -186,8 +186,8 @@ hsection 'Check status'
 
 hsection 'Ignore build results'
 (
-  echo '  %p Create file .gitignore with content:'
-  printf '/*.class' | htee .gitignore
+  echo '  %p Create file <code>.gitignore</code> with content:'
+  printf '*.class' | htee .gitignore
 ) | fragment
 (
   echo '  %p Check status'
@@ -209,7 +209,7 @@ hsection 'Commit changes separately'
   echo '  %p Commit ignore pattern'
   hcat git add .gitignore
   (
-    hcat "git commit --message 'ignore /*.class'"
+    hcat "git commit --message 'ignore *.class'"
   ) | fragment
 ) | fragment
 
