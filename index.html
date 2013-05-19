@@ -3,7 +3,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>git for svn users [19f759]</title>
+    <title>git for svn users [67fcc7]</title>
     <meta content="Presentatation about git for svn users" name="description">
     <meta content="Ivan Kuchin" name="author">
     <meta content="yes" name="apple-mobile-web-app-capable">
@@ -402,6 +402,55 @@
           </section>
         </section>
         <section data-state="commands">
+          <section id="commands_essential-1-2">
+            <h2>Commands</h2>
+            <h3>Essential 1/2</h3>
+            <p class="fragment"><code>help</code></p>
+            <div class="fragment">
+              <p><code>init</code> — init repository [<code>svnadmin</code>]</p>
+              <p><code>clone</code> — clone repository [<code>svn checkout</code>]</p>
+            </div>
+            <p class="fragment"><code>status</code> — show status of workspace and stage area</p>
+            <p class="fragment"><code>add</code>, <code>mv</code>, <code>rm</code> or just <code>add -A</code> — stage changes</p>
+            <p class="fragment"><code>commit</code> — create commit</p>
+            <p class="fragment"><code>log</code> — show commit history</p>
+            <p class="fragment"><code>diff</code> — show changes</p>
+            <div class="fragment">
+              <p><code>merge</code> — join histories</p>
+              <p><code>rebase</code> — move history changes [<del>svn</del>]</p>
+              <p><code>cherry-pick</code> — copy history changes [<code>svn merge -c</code>]</p>
+            </div>
+          </section>
+          <section id="commands_essential-2-2">
+            <h2>Commands</h2>
+            <h3>Essential 2/2</h3>
+            <p class="fragment"><code>checkout</code> — checkout branch or paths [<code>svn revert</code>]</p>
+            <p class="fragment"><code>reset</code> — reset current HEAD, workspace, stage area [<del>svn</del>]</p>
+            <div class="fragment">
+              <p><code>branch</code> — crete, list, delete branches</p>
+              <p><code>tag</code> — crete, list, delete tags</p>
+              <p><code>remote</code> — crete, list, delete remotes [<del>svn</del>]</p>
+            </div>
+            <div class="fragment">
+              <p><code>fetch</code> — fetch remote refs and objects [<del>svn</del>]</p>
+              <p><code>pull</code> — fetch and merge from remote [<code>svn update</code>]</p>
+              <p><code>push</code> — update remote refs and upload objects [part of <code>svn commit</code>]</p>
+            </div>
+          </section>
+          <section id="commands_helpful_and-advanced">
+            <h2>Commands</h2>
+            <h3>Helpful</h3>
+            <p class="fragment"><code>revert</code> — commit reverting change</p>
+            <p class="fragment"><code>clean</code> — remove untracked files [<del>svn</del>]</p>
+            <p class="fragment"><code>show</code> — show objects [<code>svn cat|list|log|diff</code>]</p>
+            <p class="fragment"><code>blame</code> — show author of changes</p>
+            <p class="fragment"><code>stash</code> — put aside your work [<del>svn</del>]</p>
+            <p class="fragment"><code>bisect</code> — find <del>the bad guy</del> commit introducing bug [<del>svn</del>]</p>
+            <h3 class="fragment">and advanced</h3>
+            <p class="fragment"><code>svn</code> — work with svn repository</p>
+            <p class="fragment"><code>submodule</code>, <code>subtree</code> — attach foreigh repositories</p>
+            <p class="fragment"><code>filter-branch</code> — rewrite history using filters</p>
+          </section>
           <section id="commands">
             <h2>Commands</h2>
             <h4 class="fragment" data-fragment-index="1">
@@ -553,55 +602,6 @@
               <code class="fragment fade-out" data-fragment-index="6">verify-pack</code>
               <code class="fragment fade-out" data-fragment-index="6">write-tree</code>
             </p>
-          </section>
-          <section id="commands_essential-1-2">
-            <h2>Commands</h2>
-            <h3>Essential 1/2</h3>
-            <p class="fragment"><code>help</code></p>
-            <div class="fragment">
-              <p><code>init</code> — init repository [<code>svnadmin</code>]</p>
-              <p><code>clone</code> — clone repository [<code>svn checkout</code>]</p>
-            </div>
-            <p class="fragment"><code>status</code> — show status of workspace and stage area</p>
-            <p class="fragment"><code>add</code>, <code>mv</code>, <code>rm</code> or just <code>add -A</code> — stage changes</p>
-            <p class="fragment"><code>commit</code> — create commit</p>
-            <p class="fragment"><code>log</code> — show commit history</p>
-            <p class="fragment"><code>diff</code> — show changes</p>
-            <div class="fragment">
-              <p><code>merge</code> — join histories</p>
-              <p><code>rebase</code> — move history changes [<del>svn</del>]</p>
-              <p><code>cherry-pick</code> — copy history changes [<code>svn merge -c</code>]</p>
-            </div>
-          </section>
-          <section id="commands_essential-2-2">
-            <h2>Commands</h2>
-            <h3>Essential 2/2</h3>
-            <p class="fragment"><code>checkout</code> — checkout branch or paths [<code>svn revert</code>]</p>
-            <p class="fragment"><code>reset</code> — reset current HEAD, workspace, stage area [<del>svn</del>]</p>
-            <div class="fragment">
-              <p><code>branch</code> — crete, list, delete branches</p>
-              <p><code>tag</code> — crete, list, delete tags</p>
-              <p><code>remote</code> — crete, list, delete remotes [<del>svn</del>]</p>
-            </div>
-            <div class="fragment">
-              <p><code>fetch</code> — fetch remote refs and objects [<del>svn</del>]</p>
-              <p><code>pull</code> — fetch and merge from remote [<code>svn update</code>]</p>
-              <p><code>push</code> — update remote refs and upload objects [part of <code>svn commit</code>]</p>
-            </div>
-          </section>
-          <section id="commands_helpful_and-advanced">
-            <h2>Commands</h2>
-            <h3>Helpful</h3>
-            <p class="fragment"><code>revert</code> — commit reverting change</p>
-            <p class="fragment"><code>clean</code> — remove untracked files [<del>svn</del>]</p>
-            <p class="fragment"><code>show</code> — show objects [<code>svn cat|list|log|diff</code>]</p>
-            <p class="fragment"><code>blame</code> — show author of changes</p>
-            <p class="fragment"><code>stash</code> — put aside your work [<del>svn</del>]</p>
-            <p class="fragment"><code>bisect</code> — find <del>the bad guy</del> commit introducing bug [<del>svn</del>]</p>
-            <h3 class="fragment">and advanced</h3>
-            <p class="fragment"><code>svn</code> — work with svn repository</p>
-            <p class="fragment"><code>submodule</code>, <code>subtree</code> — attach foreigh repositories</p>
-            <p class="fragment"><code>filter-branch</code> — rewrite history using filters</p>
           </section>
           <section id="commands_customize">
             <h2>Commands</h2>
