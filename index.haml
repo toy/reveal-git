@@ -44,21 +44,21 @@
 				}
 			}
 
-			.blackout .reveal .state-background { background: rgba( 0, 0, 0, 0.2 ); }
-			.alert .reveal .state-background { background: rgba( 200, 50, 30, 0.2 ); }
-			.soothe .reveal .state-background { background: rgba( 50, 200, 90, 0.2 ); }
-			.whiteout .reveal .state-background { background: rgba( 255, 255, 255, 0.2 ); }
-			.cobalt .reveal .state-background { background: rgba( 22, 152, 213, 0.2 ); }
-			.mint .reveal .state-background { background: rgba( 22, 213, 75, 0.2 ); }
-			.submerge .reveal .state-background { background: rgba( 12, 25, 77, 0.2); }
-			.lila .reveal .state-background { background: rgba( 180, 50, 140, 0.2 ); }
-			.sunset .reveal .state-background { background: rgba( 255, 122, 0, 0.2 ); }
+			.begin-end   .reveal .state-background { background: rgba(   0,   0,   0, 0.2 ); }
+			.plan        .reveal .state-background { background: rgba( 255, 255, 255, 0.2 ); }
+			.why         .reveal .state-background { background: rgba(  50, 200,  90, 0.2 ); }
+			.example     .reveal .state-background { background: rgba( 239,  57,  26, 0.2 ); }
+			.what        .reveal .state-background { background: rgba(  22, 152, 213, 0.2 ); }
+			.commands    .reveal .state-background { background: rgba(  12,  25,  77, 0.2 ); }
+			.cons        .reveal .state-background { background: rgba( 200,  50,  30, 0.2 ); }
+			.suggestions .reveal .state-background { background: rgba( 255, 122,   0, 0.2 ); }
+			.resources   .reveal .state-background { background: rgba(  22, 213,  75, 0.2 ); }
 
 	%body
 		.reveal
 			.slides
 
-				%section#begin{data: {state: "blackout"}}
+				%section#begin{data: {state: "begin-end"}}
 					%h1
 						git
 						%span{style: 'font-size: 0.2em'} for svn users
@@ -68,17 +68,221 @@
 					%p.small{style: 'margin-top: 3em'}
 						Presentation by Ivan Kuchin (PH-EDU/GS-AIS-GDI)
 
-				%section{data: {state: "whiteout"}}
+				%section{data: {state: "plan"}}
 					%h2 Plan
-					%p.fragment Why git?
-					%p.fragment Cons
-					%p.fragment What is git?
-					%p.fragment Dos and don'ts
-					%p.fragment Commands
-					%p.fragment Hands-on
-					%p.fragment Resources
+					%p Main points
+					%p Hands-on
+					%p What is git?
+					%p Commands
+					%p Why git?
+					%p Cons
+					%p Dos and don'ts
+					%p Resources
 
-				%section{data: {state: "soothe"}}
+				%section{data: {state: "why"}}
+					%h2 Main points
+					%p.fragment <strong>Distributed</strong> — everything is in your repo
+					%p.fragment Easy <strong>branching</strong> and <strong>merging</strong>
+					%p.fragment <strong>Small</strong> and <strong>fast</strong>
+					%p.fragment <strong>Commit</strong> is a SHA1 hash of content and meta info
+					%p.fragment <strong>Staging area</strong> — know what you commit
+
+				%section{data: {state: "example"}}
+					- script, cache_dir = %w[create-hello-world.sh .create-hello-world.cache]
+					- cache = "#{cache_dir}/#{`git hash-object #{script}`.strip}"
+					- Dir.mkdir(cache_dir) unless File.directory?(cache_dir)
+					- system "./#{script} | haml > #{cache}" unless File.exist?(cache)
+					= File.read(cache)
+
+				%section{data: {state: "what"}}
+					%section
+						%h2 What is git?
+						%h3 Terms 1/2
+						%p.fragment <strong>Workspace</strong> — directory associated with repository
+						%p.fragment <strong>Staging area</strong> (or Index) — changes registered for commit
+						%p.fragment <strong>Repository</strong> — commits, branches, tags, HEAD
+						%p.fragment <strong>Remote repository</strong> — name for linked repository like <code>origin</code> or <code>central</code>
+
+					%section
+						%h2 What is git?
+						%h3 Terms 2/2
+						%p.fragment <strong>Commit</strong> — snapshot of repository, parent commit(s), message, author, date
+						%p.fragment <strong>Branch</strong> — named reference to a commit like <code>master</code> or <code>dev</code>
+						%p.fragment <strong>Tag</strong> — also reference to a commit but not moving
+						%p.fragment <strong>HEAD</strong> — reference to current branch or to current commmit
+						%p.fragment <strong>Remote branch</strong> — local reference to the state of remote branch
+						%p.fragment
+							Advanced:
+							<a href="http://git-scm.com/book/en/Git-Internals-Git-Objects">objects</a>,
+							<a href="https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html">gitrevisions</a>
+
+					%section.narrowSnippets
+						%h2 What is git?
+						%h3 Merging 1/2
+						%p Merge feature to master:
+						:markdown
+								>>                   C---D feature
+								>>                  /
+								>>             A---B master
+						.fragment
+							%p Fast-forward:
+							:markdown
+									>>             A---B---C---D master, feature
+						.fragment
+							%p No fast-forward:
+							:markdown
+									>>                   C---D feature
+									>>                  /     \
+									>>             A---B-------M master
+
+					%section.narrowSnippets
+						%h2 What is git?
+						%h3 Merging 2/2
+						%p Merge non fast-forward feature to master:
+						:markdown
+								>>                   C---D feature
+								>>                  /
+								>>             A---B---E master
+						.fragment
+							%p Merge:
+							:markdown
+									>>                   C---D feature
+									>>                  /     \
+									>>             A---B---E---M master
+
+					%section.narrowSnippets
+						%h2 What is git?
+						%h3 Rebasing
+						%p Move commits on top of master:
+						:markdown
+								>>                   C---D feature
+								>>                  /
+								>>             A---B---E master
+						.fragment
+							%p Rebase:
+							:markdown
+									>>                       C'--D' feature
+									>>                      /
+									>>             A---B---E master
+
+					%section.narrowSnippets
+						%h2 What is git?
+						%h3 Cherry picking
+						%p Copy change to master:
+						:markdown
+								>>                   C---X---E feature
+								>>                  /
+								>>             A---B master
+						.fragment
+							%p Cherry-pick:
+							:markdown
+									>>                   C---X---E feature
+									>>                  /
+									>>             A---B---X' master
+						.fragment
+							%p Rebase skips change:
+							:markdown
+									>>                       C'--E' feature
+									>>                      /
+									>>             A---B---X' master
+
+					%section.narrowSnippets
+						%h2 What is git?
+						%h3 Ignore patterns
+						:markdown
+								*.zip
+								/stacktrace.log
+								/target/
+								/out/
+						:markdown
+							* `.gitignore` — for team, tracked, can be in subdirectories
+							* `.git/info/exclude` — for you
+							* `~/.gitignore` — for all your repos (name specified in `~/.gitconfig`)
+
+				%section{data: {state: "commands"}}
+					%section
+						%h2 Commands
+						%h3 Essential 1/2
+						%p.fragment <code>help</code>
+						.fragment
+							%p <code>init</code> — init repository [<code>svnadmin</code>]
+							%p <code>clone</code> — clone repository [<code>svn checkout</code>]
+						%p.fragment <code>status</code> — show status of workspace and stage area
+						%p.fragment <code>add</code>, <code>mv</code>, <code>rm</code> or just <code>add -A</code> — stage changes
+						%p.fragment <code>commit</code> — create commit
+						%p.fragment <code>log</code> — show commit history
+						%p.fragment <code>diff</code> — show changes
+						.fragment
+							%p <code>merge</code> — join histories
+							%p <code>rebase</code> — move history changes [<del>svn</del>]
+							%p <code>cherry-pick</code> — copy history changes [<code>svn merge -c</code>]
+
+					%section
+						%h2 Commands
+						%h3 Essential 2/2
+						%p.fragment <code>checkout</code> — checkout branch or paths [<code>svn revert</code>]
+						%p.fragment <code>reset</code> — reset current HEAD, workspace, stage area [<del>svn</del>]
+						.fragment
+							%p <code>branch</code> — crete, list, delete branches
+							%p <code>tag</code> — crete, list, delete tags
+							%p <code>remote</code> — crete, list, delete remotes [<del>svn</del>]
+						.fragment
+							%p <code>fetch</code> — fetch remote refs and objects [<del>svn</del>]
+							%p <code>pull</code> — fetch and merge from remote [<code>svn update</code>]
+							%p <code>push</code> — update remote refs and upload objects [part of <code>svn commit</code>]
+
+					%section
+						%h2 Commands
+						%h3 Helpful
+						%p.fragment <code>revert</code> — commit reverting change
+						%p.fragment <code>clean</code> — remove untracked files [<del>svn</del>]
+						%p.fragment <code>show</code> — show objects [<code>svn cat|list|log|diff</code>]
+						%p.fragment <code>blame</code> — show author of changes
+						%p.fragment <code>stash</code> — put aside your work [<del>svn</del>]
+						%p.fragment <code>bisect</code> — find <del>the bad guy</del> commit introducing bug [<del>svn</del>]
+						%h3.fragment and advanced
+						%p.fragment <code>svn</code> — work with svn repository
+						%p.fragment <code>submodule</code>, <code>subtree</code> — attach foreigh repositories
+						%p.fragment <code>filter-branch</code> — rewrite history using filters
+
+					%section
+						%h2 Commands
+						%h4.fragment{data: {fragment_index: 1}}
+							%span.fragment.fade-out{data: {fragment_index: 6}} porcelain (high level)
+						- essential_commands = %w[add bisect branch checkout cherry-pick clean clone commit diff fetch grep init log merge mv pull push rebase remote reset revert rm show stash status tag blame]
+						- command_attributes = proc{ |command| essential_commands.include?(command) ? {} : {:class => 'fragment fade-out', :data => {fragment_index: 6}} }
+						%p.fragment.commands.small{data: {fragment_index: 3}}
+							%span.fragment.fade-out{data: {fragment_index: 6}} Main:
+							- %w[add am archive bisect branch bundle checkout cherry-pick citool clean clone commit describe diff fetch format-patch gc grep gui init log merge mv notes pull push rebase reset revert rm shortlog show stash status submodule tag gitk].each do |command|
+								%code{command_attributes[command]}= command
+						%p.fragment.commands.small{data: {fragment_index: 4}}
+							%span.fragment.fade-out{data: {fragment_index: 6}} Ancillary:
+							- %w[annotate archimport blame cherry config count-objects cvsexportcommit cvsimport cvsserver difftool fast-export fast-import filter-branch fsck get-tar-commit-id help imap-send instaweb merge-tree mergetool p4 pack-refs prune quiltimport reflog relink remote repack replace request-pull rerere rev-parse send-email show-branch svn verify-tag whatchanged].each do |command|
+								%code{command_attributes[command]}= command
+						%h4.fragment{data: {fragment_index: 2}}
+							%span.fragment.fade-out{data: {fragment_index: 6}} plumbing (low level)
+						%p.fragment.commands.small{data: {fragment_index: 5}}
+							- %w[apply cat-file check-attr check-ignore check-ref-format checkout-index column commit-tree credential credential-cache credential-store daemon diff-files diff-index diff-tree fetch-pack fmt-merge-msg for-each-ref hash-object http-backend http-fetch http-push index-pack ls-files ls-remote ls-tree mailinfo mailsplit merge-base merge-file merge-index merge-one-file mktag mktree name-rev pack-objects pack-redundant parse-remote patch-id prune-packed read-tree receive-pack rev-list send-pack sh-i18n sh-setup shell show-index show-ref stripspace symbolic-ref unpack-file unpack-objects update-index update-ref update-server-info upload-archive upload-pack var verify-pack write-tree].each do |command|
+								%code{command_attributes[command]}= command
+
+					%section
+						%h2 Commands
+						%h3 Customize
+						.fragment
+							%h4 Define aliases
+							:markdown
+									[alias]
+										s = status
+										ci = commit
+										a = add --all
+										d = diff --ignore-space-change
+										wd = diff --color-words
+										lg = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+						.fragment
+							%h4 Create your commands
+							%p Everything in PATH like <code>git-*</code> can be called like <code>git *</code>
+
+				%section{data: {state: "why"}}
 					%section
 						%h2 Why git?
 						%p Branching and merging
@@ -109,7 +313,7 @@
 						%p.fragment
 							Commit early, commit often, commit without disturbing others
 							%sup.fragment helps merging
-						%p.fragment Merge before sharing changes, not before you commit
+						%p.fragment Commit before merge rather than update than commit
 						%p.fragment Server is not required until you need to share/publish work
 						%p.fragment Different workflows (git flow, pull requests)
 						%p.fragment Workflow depends on your team, not on your VCS
@@ -149,146 +353,15 @@
 						%p.fragment Easily split changes to multiple commits (including in one file)
 						%p.fragment Commit while still working
 
-				%section{data: {state: "alert"}}
+				%section{data: {state: "cons"}}
 					%h2 Cons
 					%p.fragment No subtree checkout
 					%p.fragment Commmits are not sequentially numbered
 					%p.fragment Higher learning curve
 					%p.fragment Directories are not tracked
+					%p.fragment Limited file mode tracking
 
-				%section{data: {state: "cobalt"}}
-					%section
-						%h2 What is git?
-						%h3 Parts
-						%p Workspace — checked out files
-						%p Stage area or Index — changes staged for commit
-						%p Repository — commits, branches, tags
-						%p Remote repository — named url (ssh, git, http, https, local/file), shared commits, branches, tags
-
-					%section
-						%h2 What is git?
-						%h3 Example
-						.fragment.fade-in{style: "font-size: 0.9em;"}
-							<pre style="width: 90%">* <b><span style='color:#0A0'>4d89687</span></b> - <span style='color:#AAA'>change markdown code…</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'> (hakimel&#x2F;master, hakimel&#x2F;dev)</span></b><br>*   <b><span style='color:#0A0'>cb7a9c9</span></b> - <span style='color:#AAA'>merge master into dev</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>|\  <br>| * <b><span style='color:#0A0'>5132ccd</span></b> - <span style='color:#AAA'>setup instructions #357</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>* |   <b><span style='color:#0A0'>f157aec</span></b> - <span style='color:#AAA'>Merge branch &#x27;remotes-plugin-natural-bindings&#x27;…</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>|\ \  <br>| * | <b><span style='color:#0A0'>352ec7e</span></b> - <span style='color:#AAA'>remotes plugin more…</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'> (HEAD, remotes-plugin-natural-bindings)</span></b><br>| |&#x2F;  <br>* | <b><span style='color:#0A0'>0344f2f</span></b> - <span style='color:#AAA'>fix ios flicker bug with linear transition #410</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>* | <b><span style='color:#0A0'>028d918</span></b> - <span style='color:#AAA'>merge marked tweak</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'> (origin&#x2F;dev)</span></b><br>* | <b><span style='color:#0A0'>39b53a7</span></b> - <span style='color:#AAA'>minify marked #433</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>* |   <b><span style='color:#0A0'>beda5f4</span></b> - <span style='color:#AAA'>merge showdown to marked migration</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>|\ \  <br>| * | <b><span style='color:#0A0'>381da38</span></b> - <span style='color:#AAA'>Replace the ShowDown Markdown engine with marked</span> <b><span style='color:#AAA'>— Amit Kotlovski</span></b><b><span style='color:#A50'></span></b><br>| |&#x2F;  <br>* | <b><span style='color:#0A0'>0441c26</span></b> - <span style='color:#AAA'>Adds support for auto escaping HTML in code blocks.</span> <b><span style='color:#AAA'>— Raymond Camden</span></b><b><span style='color:#A50'></span></b><br>|&#x2F;  <br>* <b><span style='color:#0A0'>247771e</span></b> - <span style='color:#AAA'>update control styles…</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'> (origin&#x2F;master, origin&#x2F;HEAD, master)</span></b><br>* <b><span style='color:#0A0'>36a8f12</span></b> - <span style='color:#AAA'>add isVerticalSlide utility method</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b></pre>
-
-					%section
-						%h2 What is git?
-						%h3 Objects
-						%p 4 object types identified by SHA1 hash:
-						:markdown
-							* `blob` — file content
-							* `tree` — «directory content» — names and permissions of `blobs` and `trees`
-							* `commit` — author/committer + date, message, `tree` and parent `commits`
-							* `tag` — tagger + date, message and `commit`
-
-					%section
-						%h2 What is git?
-						%h3 References
-						%p Names pointing at commits
-						%ul
-							%li Branches at <code>refs/heads/*</code>
-							%li
-								Tags at <code>refs/tags/*</code>
-								%ul
-									%li lightweight tags point to commits
-									%li annotated and signed tags point to tag objects
-							%li
-								<code>HEAD</code> — reference to current commit/parent for next commit
-								%br
-								can be a reference to branch, tag or simply commit hash
-							%li
-								Remote branches at <code>refs/remotes/*</code>
-								%ul
-									%li Fetching from remote creates remote branches
-									%li Pushing to remote changes remote branches
-							%li Stashing work in progress also creates reference
-
-					%section.narrowSnippets
-						%h2 What is git?
-						%h3 Merging
-						%p Merge feature to master:
-						:markdown
-								>>                   C---D feature
-								>>                  /
-								>>             A---B master
-						.fragment
-							%p Fast-forward:
-							:markdown
-									>>             A---B---C---D master, feature
-						.fragment
-							%p No fast-forward:
-							:markdown
-									>>                   C---D feature
-									>>                  /     \
-									>>             A---B-------M master
-
-					%section.narrowSnippets
-						%h2 What is git?
-						%h3 Merging and rebasing
-						%p Merge non fast-forward feature to master:
-						:markdown
-								>>                   C---D feature
-								>>                  /
-								>>             A---B---E master
-						.fragment
-							%p Merge:
-							:markdown
-									>>                   C---D feature
-									>>                  /     \
-									>>             A---B---E---M master
-						.fragment
-							%p Rebase and merge:
-							:markdown
-									>>                       C'--D' feature
-									>>                      /     \
-									>>             A---B---E-------M master
-
-					%section.narrowSnippets
-						%h2 What is git?
-						%h3 Cherry picking
-						%p Copy change to master:
-						:markdown
-								>>                   C---X---E feature
-								>>                  /
-								>>             A---B master
-						.fragment
-							%p Cherry-pick:
-							:markdown
-									>>                   C---X---E feature
-									>>                  /
-									>>             A---B---X' master
-						.fragment
-							%p Rebase skips change:
-							:markdown
-									>>                       C'--E' feature
-									>>                      /
-									>>             A---B---X' master
-
-					%section
-						%h2 What is git?
-						%h3 Revisions
-						:markdown
-							* SHA1 hash `2477`, `247771e129`, `247771e129f431fc751140d8da4c2fe60815a51f`
-							* Reference `HEAD`, `master`, `heads/master`, `refs/heads/master`, `v1.0`
-							* Ancestor commit `HEAD~`, `HEAD~~`, `master~10`, `master^`, `feature^2`
-							* Reflog (prior value of reference) `HEAD@{1}`, `master@{10}`, `@{10}`, `@{yesterday}`
-							* Upstream `@{u}`, `feature@{u}`
-							* Read more about [gitrevisions](https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html)
-
-					%section.narrowSnippets
-						%h2 What is git?
-						%h3 Ignore patterns
-						:markdown
-								*.zip
-								/stacktrace.log
-								/target/
-								/out/
-						:markdown
-							* `.gitignore` — for team, tracked, can be in subdirectories
-							* `.git/info/exclude` — for you
-							* `~/.gitignore` — for all your repos (name specified in `~/.gitconfig`)
-
-				%section{data: {state: "sunset"}}
+				%section{data: {state: "suggestions"}}
 					%h2 Dos and don'ts
 					%p.fragment.highlight-green Commit early and often
 					%p.fragment.highlight-green Choose (and agree with your team) a workflow
@@ -299,91 +372,7 @@
 					%p.fragment.highlight-red Don't change <del>official</del> published history
 					%p.fragment.highlight-red Don't change tags
 
-				%section{data: {state: "submerge"}}
-					%section
-						%h2 Commands
-						%h4.fragment{data: {fragment_index: 1}} porcelain (high level)
-						%p.fragment.commands.small{data: {fragment_index: 3}}
-							Main:
-							- %w[add am archive bisect branch bundle checkout cherry-pick citool clean clone commit describe diff fetch format-patch gc grep gui init log merge mv notes pull push rebase reset revert rm shortlog show stash status submodule tag gitk].each do |command|
-								%code= command
-						%p.fragment.commands.small{data: {fragment_index: 4}}
-							Ancillary:
-							- %w[annotate archimport blame cherry config count-objects cvsexportcommit cvsimport cvsserver difftool fast-export fast-import filter-branch fsck get-tar-commit-id help imap-send instaweb merge-tree mergetool p4 pack-refs prune quiltimport reflog relink remote repack replace request-pull rerere rev-parse send-email show-branch svn verify-tag whatchanged].each do |command|
-								%code= command
-						%h4.fragment{data: {fragment_index: 2}} plumbing (low level)
-						%p.fragment.commands.small{data: {fragment_index: 5}}
-							- %w[apply cat-file check-attr check-ignore check-ref-format checkout-index column commit-tree credential credential-cache credential-store daemon diff-files diff-index diff-tree fetch-pack fmt-merge-msg for-each-ref hash-object http-backend http-fetch http-push index-pack ls-files ls-remote ls-tree mailinfo mailsplit merge-base merge-file merge-index merge-one-file mktag mktree name-rev pack-objects pack-redundant parse-remote patch-id prune-packed read-tree receive-pack rev-list send-pack sh-i18n sh-setup shell show-index show-ref stripspace symbolic-ref unpack-file unpack-objects update-index update-ref update-server-info upload-archive upload-pack var verify-pack write-tree].each do |command|
-								%code= command
-
-					%section
-						%h2 Commands
-						%h3 Essential 1/2
-						%p.fragment <code>help</code>
-						.fragment
-							%p <code>init</code> — init repository
-							%p <code>clone</code> — clone repository
-						%p.fragment <code>status</code> — show status of workspace and stage area
-						%p.fragment <code>add</code>, <code>mv</code>, <code>rm</code> or just <code>add -A</code> — stage changes
-						%p.fragment <code>commit</code> — create commit
-						%p.fragment <code>log</code> — show commit history
-						%p.fragment <code>diff</code> — show changes
-						.fragment
-							%p <code>merge</code> — join histories
-							%p <code>rebase</code> — move history changes
-							%p <code>cherry-pick</code> — copy history changes
-
-					%section
-						%h2 Commands
-						%h3 Essential 2/2
-						%p.fragment <code>checkout</code> — checkout branch or paths
-						%p.fragment <code>reset</code> — reset current HEAD, workspace, stage area
-						.fragment
-							%p <code>branch</code> — crete, list, delete branches
-							%p <code>tag</code> — crete, list, delete tags
-							%p <code>remote</code> — crete, list, delete remotes
-						.fragment
-							%p <code>fetch</code> — fetch remote refs and objects
-							%p <code>pull</code> — fetch and merge from remote
-							%p <code>push</code> — update remote refs and upload objects
-
-					%section
-						%h2 Commands
-						%h3 Helpful
-						%p.fragment <code>revert</code> — commit reverting change
-						%p.fragment <code>clean</code> — remove untracked files
-						%p.fragment <code>show</code> — show objects
-						%p.fragment <code>blame</code> — show author of changes
-						%p.fragment <code>stash</code> — put aside your work
-						%p.fragment <code>bisect</code> — find <del>the bad guy</del> commit introducing bug
-						%h3.fragment and advanced
-						%p.fragment <code>svn</code> — work with svn repository
-						%p.fragment <code>submodule</code>, <code>subtree</code> — attach foreigh repositories
-						%p.fragment <code>filter-branch</code> — rewrite history using filters
-
-					%section
-						%h2 Commands
-						%h3 Customize
-						.fragment
-							%h4 Define aliases
-							:markdown
-									[alias]
-										s = status
-										ci = commit
-										a = add --all
-										d = diff --ignore-space-change
-										wd = diff --color-words
-										lg = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
-						.fragment
-							%h4 Create your commands
-							%p Everything in PATH like <code>git-*</code> can be called like <code>git *</code>
-
-				%section{data: {state: "lila"}}
-					- script, cache = %w[create-hello-world.sh .create-hello-world.cache]
-					- system "./#{script} 2>&1 | haml > #{cache}" unless File.exist?(cache) && File.mtime(cache) > File.mtime(script)
-					= File.read(cache)
-
-				%section{data: {state: "mint"}}
+				%section{data: {state: "resources"}}
 					%section
 						%h2 Resources
 						%h3 Guis
@@ -443,9 +432,11 @@
 								%a{href: 'http://ndpsoftware.com/git-cheatsheet.html'} ndpsoftware.com/git-cheatsheet.html
 								%a{href: 'https://github.com/ndp/git-cheatsheet'} @github
 							%li
+								%a{href: 'https://git.wiki.kernel.org/index.php/GitSvnCrashCourse'} GitSvnCrashCourse
+							%li
 								%a{href: "https://www.kernel.org/pub/software/scm/git/docs/"} kernel.org/pub/software/scm/git/docs
 
-				%section#end{data: {state: "blackout"}}
+				%section#end{data: {state: "begin-end"}}
 					%h1 so, git?
 					%p.fragment{style: 'margin-top: 3em'}
 						Created using:
@@ -455,6 +446,9 @@
 							%a{href: "http://haml-lang.com/"} HAML
 						= succeed ',' do
 							%a{href: "http://sass-lang.com/"} SASS
+						= succeed ',' do
+							%a{href: "http://ruby-lang.org/"} Ruby
+						Shell script,
 						%a{href: "http://daringfireball.net/projects/markdown/"} Markdown
 						and
 						%a{href: "http://git-scm.com/"} git
