@@ -199,6 +199,9 @@ hsection 'Commit changes separately'
   echo '  %p Amend last commit with fix'
   hcat git add HelloWorld.java
   (
+    echo '  %p <code>commit --amend</code> — enhance last commit with staged changes + change message'
+  ) | fragment
+  (
     hcat "git commit --amend --message 'Implemented HelloWorld'"
   ) | fragment
 ) | fragment
