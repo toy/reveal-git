@@ -97,49 +97,24 @@
 				%section{data: {state: "what"}}
 					%section
 						%h2 What is git?
-						%h3 Parts
-						%p Workspace — checked out files
-						%p Stage area or Index — changes staged for commit
-						%p Repository — commits, branches, tags
-						%p Remote repository — named url (ssh, git, http, https, local/file), shared commits, branches, tags
+						%h3 Terms 1/2
+						%p.fragment <strong>Workspace</strong> — directory associated with repository
+						%p.fragment <strong>Staging area</strong> (or Index) — changes registered for commit
+						%p.fragment <strong>Repository</strong> — commits, branches, tags, HEAD
+						%p.fragment <strong>Remote repository</strong> — name for linked repository like <code>origin</code> or <code>central</code>
 
 					%section
 						%h2 What is git?
-						%h3 Example
-						.fragment.fade-in{style: "font-size: 0.9em;"}
-							<pre style="width: 90%">* <b><span style='color:#0A0'>4d89687</span></b> - <span style='color:#AAA'>change markdown code…</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'> (hakimel&#x2F;master, hakimel&#x2F;dev)</span></b><br>*   <b><span style='color:#0A0'>cb7a9c9</span></b> - <span style='color:#AAA'>merge master into dev</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>|\  <br>| * <b><span style='color:#0A0'>5132ccd</span></b> - <span style='color:#AAA'>setup instructions #357</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>* |   <b><span style='color:#0A0'>f157aec</span></b> - <span style='color:#AAA'>Merge branch &#x27;remotes-plugin-natural-bindings&#x27;…</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>|\ \  <br>| * | <b><span style='color:#0A0'>352ec7e</span></b> - <span style='color:#AAA'>remotes plugin more…</span> <b><span style='color:#AAA'>— Ivan Kuchin</span></b><b><span style='color:#A50'> (HEAD, remotes-plugin-natural-bindings)</span></b><br>| |&#x2F;  <br>* | <b><span style='color:#0A0'>0344f2f</span></b> - <span style='color:#AAA'>fix ios flicker bug with linear transition #410</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>* | <b><span style='color:#0A0'>028d918</span></b> - <span style='color:#AAA'>merge marked tweak</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'> (origin&#x2F;dev)</span></b><br>* | <b><span style='color:#0A0'>39b53a7</span></b> - <span style='color:#AAA'>minify marked #433</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>* |   <b><span style='color:#0A0'>beda5f4</span></b> - <span style='color:#AAA'>merge showdown to marked migration</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b><br>|\ \  <br>| * | <b><span style='color:#0A0'>381da38</span></b> - <span style='color:#AAA'>Replace the ShowDown Markdown engine with marked</span> <b><span style='color:#AAA'>— Amit Kotlovski</span></b><b><span style='color:#A50'></span></b><br>| |&#x2F;  <br>* | <b><span style='color:#0A0'>0441c26</span></b> - <span style='color:#AAA'>Adds support for auto escaping HTML in code blocks.</span> <b><span style='color:#AAA'>— Raymond Camden</span></b><b><span style='color:#A50'></span></b><br>|&#x2F;  <br>* <b><span style='color:#0A0'>247771e</span></b> - <span style='color:#AAA'>update control styles…</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'> (origin&#x2F;master, origin&#x2F;HEAD, master)</span></b><br>* <b><span style='color:#0A0'>36a8f12</span></b> - <span style='color:#AAA'>add isVerticalSlide utility method</span> <b><span style='color:#AAA'>— Hakim El Hattab</span></b><b><span style='color:#A50'></span></b></pre>
-
-					%section
-						%h2 What is git?
-						%h3 Objects
-						%p 4 object types identified by SHA1 hash:
-						:markdown
-							* `blob` — file content
-							* `tree` — «directory content» — names and permissions of `blobs` and `trees`
-							* `commit` — author/committer + date, message, `tree` and parent `commits`
-							* `tag` — tagger + date, message and `commit`
-
-					%section
-						%h2 What is git?
-						%h3 References
-						%p Names pointing at commits
-						%ul
-							%li Branches at <code>refs/heads/*</code>
-							%li
-								Tags at <code>refs/tags/*</code>
-								%ul
-									%li lightweight tags point to commits
-									%li annotated and signed tags point to tag objects
-							%li
-								<code>HEAD</code> — reference to current commit/parent for next commit
-								%br
-								can be a reference to branch, tag or simply commit hash
-							%li
-								Remote branches at <code>refs/remotes/*</code>
-								%ul
-									%li Fetching from remote creates remote branches
-									%li Pushing to remote changes remote branches
-							%li Stashing work in progress also creates reference
+						%h3 Terms 2/2
+						%p.fragment <strong>Commit</strong> — snapshot of repository, parent commit(s), message, author, date
+						%p.fragment <strong>Branch</strong> — named reference to a commit like <code>master</code> or <code>dev</code>
+						%p.fragment <strong>Tag</strong> — also reference to a commit but not moving
+						%p.fragment <strong>HEAD</strong> — reference to current branch or to current commmit
+						%p.fragment <strong>Remote branch</strong> — local reference to the state of remote branch
+						%p.fragment
+							Advanced:
+							<a href="http://git-scm.com/book/en/Git-Internals-Git-Objects">objects</a>,
+							<a href="https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html">gitrevisions</a>
 
 					%section.narrowSnippets
 						%h2 What is git?
@@ -201,17 +176,6 @@
 									>>                       C'--E' feature
 									>>                      /
 									>>             A---B---X' master
-
-					%section
-						%h2 What is git?
-						%h3 Revisions
-						:markdown
-							* SHA1 hash `2477`, `247771e129`, `247771e129f431fc751140d8da4c2fe60815a51f`
-							* Reference `HEAD`, `master`, `heads/master`, `refs/heads/master`, `v1.0`
-							* Ancestor commit `HEAD~`, `HEAD~~`, `master~10`, `master^`, `feature^2`
-							* Reflog (prior value of reference) `HEAD@{1}`, `master@{10}`, `@{10}`, `@{yesterday}`
-							* Upstream `@{u}`, `feature@{u}`
-							* Read more about [gitrevisions](https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html)
 
 					%section.narrowSnippets
 						%h2 What is git?

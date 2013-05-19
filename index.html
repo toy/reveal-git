@@ -3,7 +3,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>git for svn users [58a7de]</title>
+    <title>git for svn users [bbd84c]</title>
     <meta content="Presentatation about git for svn users" name="description">
     <meta content="Ivan Kuchin" name="author">
     <meta content="yes" name="apple-mobile-web-app-capable">
@@ -285,67 +285,27 @@
           </section>
         </section>
         <section data-state="what">
-          <section id="what-is-git_parts">
+          <section id="what-is-git_terms-1-2">
             <h2>What is git?</h2>
-            <h3>Parts</h3>
-            <p>Workspace — checked out files</p>
-            <p>Stage area or Index — changes staged for commit</p>
-            <p>Repository — commits, branches, tags</p>
-            <p>Remote repository — named url (ssh, git, http, https, local/file), shared commits, branches, tags</p>
+            <h3>Terms 1/2</h3>
+            <p class="fragment"><strong>Workspace</strong> — directory associated with repository</p>
+            <p class="fragment"><strong>Staging area</strong> (or Index) — changes registered for commit</p>
+            <p class="fragment"><strong>Repository</strong> — commits, branches, tags, HEAD</p>
+            <p class="fragment"><strong>Remote repository</strong> — name for linked repository like <code>origin</code> or <code>central</code></p>
           </section>
-          <section id="what-is-git_example">
+          <section id="what-is-git_terms-2-2">
             <h2>What is git?</h2>
-            <h3>Example</h3>
-            <div class="fragment fade-in" style="font-size: 0.9em;">
-              <pre style="width: 90%">* <b><span style="color:#0A0">4d89687</span></b> - <span style="color:#AAA">change markdown code…</span> <b><span style="color:#AAA">— Hakim El Hattab</span></b><b><span style="color:#A50"> (hakimel/master, hakimel/dev)</span></b><br>*   <b><span style="color:#0A0">cb7a9c9</span></b> - <span style="color:#AAA">merge master into dev</span> <b><span style="color:#AAA">— Hakim El Hattab</span></b><b><span style="color:#A50"></span></b><br>|\  <br>| * <b><span style="color:#0A0">5132ccd</span></b> - <span style="color:#AAA">setup instructions #357</span> <b><span style="color:#AAA">— Hakim El Hattab</span></b><b><span style="color:#A50"></span></b><br>* |   <b><span style="color:#0A0">f157aec</span></b> - <span style="color:#AAA">Merge branch 'remotes-plugin-natural-bindings'…</span> <b><span style="color:#AAA">— Hakim El Hattab</span></b><b><span style="color:#A50"></span></b><br>|\ \  <br>| * | <b><span style="color:#0A0">352ec7e</span></b> - <span style="color:#AAA">remotes plugin more…</span> <b><span style="color:#AAA">— Ivan Kuchin</span></b><b><span style="color:#A50"> (HEAD, remotes-plugin-natural-bindings)</span></b><br>| |/  <br>* | <b><span style="color:#0A0">0344f2f</span></b> - <span style="color:#AAA">fix ios flicker bug with linear transition #410</span> <b><span style="color:#AAA">— Hakim El Hattab</span></b><b><span style="color:#A50"></span></b><br>* | <b><span style="color:#0A0">028d918</span></b> - <span style="color:#AAA">merge marked tweak</span> <b><span style="color:#AAA">— Hakim El Hattab</span></b><b><span style="color:#A50"> (origin/dev)</span></b><br>* | <b><span style="color:#0A0">39b53a7</span></b> - <span style="color:#AAA">minify marked #433</span> <b><span style="color:#AAA">— Hakim El Hattab</span></b><b><span style="color:#A50"></span></b><br>* |   <b><span style="color:#0A0">beda5f4</span></b> - <span style="color:#AAA">merge showdown to marked migration</span> <b><span style="color:#AAA">— Hakim El Hattab</span></b><b><span style="color:#A50"></span></b><br>|\ \  <br>| * | <b><span style="color:#0A0">381da38</span></b> - <span style="color:#AAA">Replace the ShowDown Markdown engine with marked</span> <b><span style="color:#AAA">— Amit Kotlovski</span></b><b><span style="color:#A50"></span></b><br>| |/  <br>* | <b><span style="color:#0A0">0441c26</span></b> - <span style="color:#AAA">Adds support for auto escaping HTML in code blocks.</span> <b><span style="color:#AAA">— Raymond Camden</span></b><b><span style="color:#A50"></span></b><br>|/  <br>* <b><span style="color:#0A0">247771e</span></b> - <span style="color:#AAA">update control styles…</span> <b><span style="color:#AAA">— Hakim El Hattab</span></b><b><span style="color:#A50"> (origin/master, origin/HEAD, master)</span></b><br>* <b><span style="color:#0A0">36a8f12</span></b> - <span style="color:#AAA">add isVerticalSlide utility method</span> <b><span style="color:#AAA">— Hakim El Hattab</span></b><b><span style="color:#A50"></span></b></pre>
-            </div>
-          </section>
-          <section id="what-is-git_objects">
-            <h2>What is git?</h2>
-            <h3>Objects</h3>
-            <p>4 object types identified by SHA1 hash:</p>
-            <ul>
-              <li>
-<code>blob</code> — file content</li>
-              <li>
-<code>tree</code> — «directory content» — names and permissions of <code>blobs</code> and <code>trees</code>
-</li>
-              <li>
-<code>commit</code> — author/committer + date, message, <code>tree</code> and parent <code>commits</code>
-</li>
-              <li>
-<code>tag</code> — tagger + date, message and <code>commit</code>
-</li>
-            </ul>
-          </section>
-          <section id="what-is-git_references">
-            <h2>What is git?</h2>
-            <h3>References</h3>
-            <p>Names pointing at commits</p>
-            <ul>
-              <li>Branches at <code>refs/heads/*</code>
-</li>
-              <li>
-                Tags at <code>refs/tags/*</code>
-                <ul>
-                  <li>lightweight tags point to commits</li>
-                  <li>annotated and signed tags point to tag objects</li>
-                </ul>
-              </li>
-              <li>
-                <code>HEAD</code> — reference to current commit/parent for next commit
-                <br>
-                can be a reference to branch, tag or simply commit hash
-              </li>
-              <li>
-                Remote branches at <code>refs/remotes/*</code>
-                <ul>
-                  <li>Fetching from remote creates remote branches</li>
-                  <li>Pushing to remote changes remote branches</li>
-                </ul>
-              </li>
-              <li>Stashing work in progress also creates reference</li>
-            </ul>
+            <h3>Terms 2/2</h3>
+            <p class="fragment"><strong>Commit</strong> — snapshot of repository, parent commit(s), message, author, date</p>
+            <p class="fragment"><strong>Branch</strong> — named reference to a commit like <code>master</code> or <code>dev</code></p>
+            <p class="fragment"><strong>Tag</strong> — also reference to a commit but not moving</p>
+            <p class="fragment"><strong>HEAD</strong> — reference to current branch or to current commmit</p>
+            <p class="fragment"><strong>Remote branch</strong> — local reference to the state of remote branch</p>
+            <p class="fragment">
+              Advanced:
+              <a href="http://git-scm.com/book/en/Git-Internals-Git-Objects">objects</a>,
+              <a href="https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html">gitrevisions</a>
+            </p>
           </section>
           <section class="narrowSnippets" id="what-is-git_merging">
             <h2>What is git?</h2>
@@ -413,24 +373,6 @@
              A---B---X' master
 </code></pre>
             </div>
-          </section>
-          <section id="what-is-git_revisions">
-            <h2>What is git?</h2>
-            <h3>Revisions</h3>
-            <ul>
-              <li>SHA1 hash <code>2477</code>, <code>247771e129</code>, <code>247771e129f431fc751140d8da4c2fe60815a51f</code>
-</li>
-              <li>Reference <code>HEAD</code>, <code>master</code>, <code>heads/master</code>, <code>refs/heads/master</code>, <code>v1.0</code>
-</li>
-              <li>Ancestor commit <code>HEAD~</code>, <code>HEAD~~</code>, <code>master~10</code>, <code>master^</code>, <code>feature^2</code>
-</li>
-              <li>Reflog (prior value of reference) <code>HEAD@{1}</code>, <code>master@{10}</code>, <code>@{10}</code>, <code>@{yesterday}</code>
-</li>
-              <li>Upstream <code>@{u}</code>, <code>feature@{u}</code>
-</li>
-              <li>Read more about <a href="https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html">gitrevisions</a>
-</li>
-            </ul>
           </section>
           <section class="narrowSnippets" id="what-is-git_ignore-patterns">
             <h2>What is git?</h2>
