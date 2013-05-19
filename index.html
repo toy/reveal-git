@@ -3,7 +3,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>git for svn users [0a4888]</title>
+    <title>git for svn users [c655e6]</title>
     <meta content="Presentatation about git for svn users" name="description">
     <meta content="Ivan Kuchin" name="author">
     <meta content="yes" name="apple-mobile-web-app-capable">
@@ -307,9 +307,9 @@
               <a href="https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html">gitrevisions</a>
             </p>
           </section>
-          <section class="narrowSnippets" id="what-is-git_merging">
+          <section class="narrowSnippets" id="what-is-git_merging-1-2">
             <h2>What is git?</h2>
-            <h3>Merging</h3>
+            <h3>Merging 1/2</h3>
             <p>Merge feature to master:</p>
             <pre><code>                   C---D feature
                   /
@@ -328,9 +328,9 @@
 </code></pre>
             </div>
           </section>
-          <section class="narrowSnippets" id="what-is-git_merging-and-rebasing">
+          <section class="narrowSnippets" id="what-is-git_merging-2-2">
             <h2>What is git?</h2>
-            <h3>Merging and rebasing</h3>
+            <h3>Merging 2/2</h3>
             <p>Merge non fast-forward feature to master:</p>
             <pre><code>                   C---D feature
                   /
@@ -343,11 +343,20 @@
              A---B---E---M master
 </code></pre>
             </div>
+          </section>
+          <section class="narrowSnippets" id="what-is-git_rebasing">
+            <h2>What is git?</h2>
+            <h3>Rebasing</h3>
+            <p>Move commits on top of master:</p>
+            <pre><code>                   C---D feature
+                  /
+             A---B---E master
+</code></pre>
             <div class="fragment">
-              <p>Rebase and merge:</p>
+              <p>Rebase:</p>
               <pre><code>                       C'--D' feature
-                      /     \
-             A---B---E-------M master
+                      /
+             A---B---E master
 </code></pre>
             </div>
           </section>

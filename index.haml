@@ -118,7 +118,7 @@
 
 					%section.narrowSnippets
 						%h2 What is git?
-						%h3 Merging
+						%h3 Merging 1/2
 						%p Merge feature to master:
 						:markdown
 								>>                   C---D feature
@@ -137,7 +137,7 @@
 
 					%section.narrowSnippets
 						%h2 What is git?
-						%h3 Merging and rebasing
+						%h3 Merging 2/2
 						%p Merge non fast-forward feature to master:
 						:markdown
 								>>                   C---D feature
@@ -149,12 +149,21 @@
 									>>                   C---D feature
 									>>                  /     \
 									>>             A---B---E---M master
+
+					%section.narrowSnippets
+						%h2 What is git?
+						%h3 Rebasing
+						%p Move commits on top of master:
+						:markdown
+								>>                   C---D feature
+								>>                  /
+								>>             A---B---E master
 						.fragment
-							%p Rebase and merge:
+							%p Rebase:
 							:markdown
 									>>                       C'--D' feature
-									>>                      /     \
-									>>             A---B---E-------M master
+									>>                      /
+									>>             A---B---E master
 
 					%section.narrowSnippets
 						%h2 What is git?
