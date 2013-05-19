@@ -44,21 +44,21 @@
 				}
 			}
 
-			.blackout .reveal .state-background { background: rgba( 0, 0, 0, 0.2 ); }
-			.alert .reveal .state-background { background: rgba( 200, 50, 30, 0.2 ); }
-			.soothe .reveal .state-background { background: rgba( 50, 200, 90, 0.2 ); }
-			.whiteout .reveal .state-background { background: rgba( 255, 255, 255, 0.2 ); }
-			.cobalt .reveal .state-background { background: rgba( 22, 152, 213, 0.2 ); }
-			.mint .reveal .state-background { background: rgba( 22, 213, 75, 0.2 ); }
-			.submerge .reveal .state-background { background: rgba( 12, 25, 77, 0.2); }
-			.lila .reveal .state-background { background: rgba( 239, 57, 26, 0.2 ); }
-			.sunset .reveal .state-background { background: rgba( 255, 122, 0, 0.2 ); }
+			.begin-end   .reveal .state-background { background: rgba(   0,   0,   0, 0.2 ); }
+			.plan        .reveal .state-background { background: rgba( 255, 255, 255, 0.2 ); }
+			.why         .reveal .state-background { background: rgba(  50, 200,  90, 0.2 ); }
+			.example     .reveal .state-background { background: rgba( 239,  57,  26, 0.2 ); }
+			.what        .reveal .state-background { background: rgba(  22, 152, 213, 0.2 ); }
+			.commands    .reveal .state-background { background: rgba(  12,  25,  77, 0.2 ); }
+			.cons        .reveal .state-background { background: rgba( 200,  50,  30, 0.2 ); }
+			.suggestions .reveal .state-background { background: rgba( 255, 122,   0, 0.2 ); }
+			.resources   .reveal .state-background { background: rgba(  22, 213,  75, 0.2 ); }
 
 	%body
 		.reveal
 			.slides
 
-				%section#begin{data: {state: "blackout"}}
+				%section#begin{data: {state: "begin-end"}}
 					%h1
 						git
 						%span{style: 'font-size: 0.2em'} for svn users
@@ -68,7 +68,7 @@
 					%p.small{style: 'margin-top: 3em'}
 						Presentation by Ivan Kuchin (PH-EDU/GS-AIS-GDI)
 
-				%section{data: {state: "whiteout"}}
+				%section{data: {state: "plan"}}
 					%h2 Plan
 					%p.fragment Main points
 					%p.fragment Hands-on
@@ -79,17 +79,17 @@
 					%p.fragment Dos and don'ts
 					%p.fragment Resources
 
-				%section{data: {state: "soothe"}}
+				%section{data: {state: "why"}}
 					%h2 Main points
 
-				%section{data: {state: "lila"}}
+				%section{data: {state: "example"}}
 					- script, cache_dir = %w[create-hello-world.sh .create-hello-world.cache]
 					- cache = "#{cache_dir}/#{`git hash-object #{script}`.strip}"
 					- Dir.mkdir(cache_dir) unless File.directory?(cache_dir)
 					- system "./#{script} | haml > #{cache}" unless File.exist?(cache)
 					= File.read(cache)
 
-				%section{data: {state: "cobalt"}}
+				%section{data: {state: "what"}}
 					%section
 						%h2 What is git?
 						%h3 Parts
@@ -221,7 +221,7 @@
 							* `.git/info/exclude` — for you
 							* `~/.gitignore` — for all your repos (name specified in `~/.gitconfig`)
 
-				%section{data: {state: "submerge"}}
+				%section{data: {state: "commands"}}
 					%section
 						%h2 Commands
 						%h4.fragment{data: {fragment_index: 1}} porcelain (high level)
@@ -300,7 +300,7 @@
 							%h4 Create your commands
 							%p Everything in PATH like <code>git-*</code> can be called like <code>git *</code>
 
-				%section{data: {state: "soothe"}}
+				%section{data: {state: "why"}}
 					%section
 						%h2 Why git?
 						%p Branching and merging
@@ -371,14 +371,14 @@
 						%p.fragment Easily split changes to multiple commits (including in one file)
 						%p.fragment Commit while still working
 
-				%section{data: {state: "alert"}}
+				%section{data: {state: "cons"}}
 					%h2 Cons
 					%p.fragment No subtree checkout
 					%p.fragment Commmits are not sequentially numbered
 					%p.fragment Higher learning curve
 					%p.fragment Directories are not tracked
 
-				%section{data: {state: "sunset"}}
+				%section{data: {state: "suggestions"}}
 					%h2 Dos and don'ts
 					%p.fragment.highlight-green Commit early and often
 					%p.fragment.highlight-green Choose (and agree with your team) a workflow
@@ -389,7 +389,7 @@
 					%p.fragment.highlight-red Don't change <del>official</del> published history
 					%p.fragment.highlight-red Don't change tags
 
-				%section{data: {state: "mint"}}
+				%section{data: {state: "resources"}}
 					%section
 						%h2 Resources
 						%h3 Guis
@@ -451,7 +451,7 @@
 							%li
 								%a{href: "https://www.kernel.org/pub/software/scm/git/docs/"} kernel.org/pub/software/scm/git/docs
 
-				%section#end{data: {state: "blackout"}}
+				%section#end{data: {state: "begin-end"}}
 					%h1 so, git?
 					%p.fragment{style: 'margin-top: 3em'}
 						Created using:

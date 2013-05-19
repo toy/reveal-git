@@ -3,7 +3,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>git for svn users [812e1b]</title>
+    <title>git for svn users [6a41ed]</title>
     <meta content="Presentatation about git for svn users" name="description">
     <meta content="Ivan Kuchin" name="author">
     <meta content="yes" name="apple-mobile-web-app-capable">
@@ -48,39 +48,39 @@
           .reveal .narrowSnippets pre code {
             word-wrap: normal; }
         
-        .blackout .reveal .state-background {
+        .begin-end .reveal .state-background {
           background: rgba(0, 0, 0, 0.2); }
         
-        .alert .reveal .state-background {
-          background: rgba(200, 50, 30, 0.2); }
-        
-        .soothe .reveal .state-background {
-          background: rgba(50, 200, 90, 0.2); }
-        
-        .whiteout .reveal .state-background {
+        .plan .reveal .state-background {
           background: rgba(255, 255, 255, 0.2); }
         
-        .cobalt .reveal .state-background {
-          background: rgba(22, 152, 213, 0.2); }
+        .why .reveal .state-background {
+          background: rgba(50, 200, 90, 0.2); }
         
-        .mint .reveal .state-background {
-          background: rgba(22, 213, 75, 0.2); }
-        
-        .submerge .reveal .state-background {
-          background: rgba(12, 25, 77, 0.2); }
-        
-        .lila .reveal .state-background {
+        .example .reveal .state-background {
           background: rgba(239, 57, 26, 0.2); }
         
-        .sunset .reveal .state-background {
+        .what .reveal .state-background {
+          background: rgba(22, 152, 213, 0.2); }
+        
+        .commands .reveal .state-background {
+          background: rgba(12, 25, 77, 0.2); }
+        
+        .cons .reveal .state-background {
+          background: rgba(200, 50, 30, 0.2); }
+        
+        .suggestions .reveal .state-background {
           background: rgba(255, 122, 0, 0.2); }
+        
+        .resources .reveal .state-background {
+          background: rgba(22, 213, 75, 0.2); }
       /*]]>*/
     </style>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
-        <section data-state="blackout" id="begin">
+        <section data-state="begin-end" id="begin">
           <h1>
             git
             <span style="font-size: 0.2em">for svn users</span>
@@ -93,7 +93,7 @@
             Presentation by Ivan Kuchin (PH-EDU/GS-AIS-GDI)
           </p>
         </section>
-        <section data-state="whiteout" id="plan">
+        <section data-state="plan" id="plan">
           <h2>Plan</h2>
           <p class="fragment">Main points</p>
           <p class="fragment">Hands-on</p>
@@ -104,10 +104,10 @@
           <p class="fragment">Dos and don'ts</p>
           <p class="fragment">Resources</p>
         </section>
-        <section data-state="soothe" id="main-points">
+        <section data-state="why" id="main-points">
           <h2>Main points</h2>
         </section>
-        <section data-state="lila">
+        <section data-state="example">
           <section id="hands-on_a-bit-of-config">
             <h2>Hands-on</h2>
             <h3>A bit of config</h3>
@@ -279,7 +279,7 @@
             <pre><code><b><span style="color:#A50">~/hello-world</span></b><b>×<b><span style="color:#0AA">master</span></b></b><b>$</b> git show HEAD:README<br>Prints "Hello, World".</code></pre>
           </section>
         </section>
-        <section data-state="cobalt">
+        <section data-state="what">
           <section id="what-is-git_parts">
             <h2>What is git?</h2>
             <h3>Parts</h3>
@@ -445,7 +445,7 @@
             </ul>
           </section>
         </section>
-        <section data-state="submerge">
+        <section data-state="commands">
           <section id="commands">
             <h2>Commands</h2>
             <h4 class="fragment" data-fragment-index="1">porcelain (high level)</h4>
@@ -663,7 +663,7 @@
             </div>
           </section>
         </section>
-        <section data-state="soothe">
+        <section data-state="why">
           <section id="why-git">
             <h2>Why git?</h2>
             <p>Branching and merging</p>
@@ -742,14 +742,14 @@
             <p class="fragment">Commit while still working</p>
           </section>
         </section>
-        <section data-state="alert" id="cons">
+        <section data-state="cons" id="cons">
           <h2>Cons</h2>
           <p class="fragment">No subtree checkout</p>
           <p class="fragment">Commmits are not sequentially numbered</p>
           <p class="fragment">Higher learning curve</p>
           <p class="fragment">Directories are not tracked</p>
         </section>
-        <section data-state="sunset" id="dos-and-don-ts">
+        <section data-state="suggestions" id="dos-and-don-ts">
           <h2>Dos and don'ts</h2>
           <p class="fragment highlight-green">Commit early and often</p>
           <p class="fragment highlight-green">Choose (and agree with your team) a workflow</p>
@@ -760,7 +760,7 @@
           <p class="fragment highlight-red">Don't change <del>official</del> published history</p>
           <p class="fragment highlight-red">Don't change tags</p>
         </section>
-        <section data-state="mint">
+        <section data-state="resources">
           <section id="resources_guis">
             <h2>Resources</h2>
             <h3>Guis</h3>
@@ -833,7 +833,7 @@
             </ul>
           </section>
         </section>
-        <section data-state="blackout" id="end">
+        <section data-state="begin-end" id="end">
           <h1>so, git?</h1>
           <p class="fragment" style="margin-top: 3em">
             Created using:
