@@ -56,6 +56,9 @@ var Reveal = (function(){
 			// Change the presentation direction to be RTL
 			rtl: false,
 
+			// Turns fragments on and off globally
+			fragments: true,
+
 			// Number of milliseconds between automatically proceeding to the
 			// next slide, disabled when set to 0, this value can be overwritten
 			// by using a data-autoslide attribute on your slides
@@ -328,7 +331,8 @@ var Reveal = (function(){
 	}
 
 	/**
-	 * Applies the configuration settings from the config object.
+	 * Applies the configuration settings from the config
+	 * object. May be called multiple times.
 	 */
 	function configure( options ) {
 
@@ -396,28 +400,7 @@ var Reveal = (function(){
 			}
 		}
 
-		postConfigure();
-
-	}
-
-	/**
-	 * Updates various parts of the presentatio after the
-	 * configuration has changed.
-	 */
-	function postConfigure() {
-
-		// Subscribe to input
-		removeEventListeners();
-		addEventListeners();
-
-		// Force a layout to make sure the current config is accounted for
-		layout();
-
-		// Reflect the current autoSlide value
-		autoSlide = config.autoSlide;
-
-		// Start auto-sliding if it's enabled
-		cueAutoSlide();
+		sync();
 
 	}
 
@@ -733,6 +716,8 @@ var Reveal = (function(){
 
 			}
 
+			updateProgress();
+
 		}
 
 	}
@@ -763,7 +748,10 @@ var Reveal = (function(){
 	function getPreviousVerticalIndex( stack ) {
 
 		if( typeof stack === 'object' && typeof stack.setAttribute === 'function' && stack.classList.contains( 'stack' ) ) {
-			return parseInt( stack.getAttribute( 'data-previous-indexv' ) || 0, 10 );
+			// Prefer manually defined start-indexv
+			var attributeName = stack.hasAttribute( 'data-start-indexv' ) ? 'data-start-indexv' : 'data-previous-indexv';
+
+			return parseInt( stack.getAttribute( attributeName ) || 0, 10 );
 		}
 
 		return 0;
@@ -802,7 +790,8 @@ var Reveal = (function(){
 
 				for( var i = 0, len1 = horizontalSlides.length; i < len1; i++ ) {
 					var hslide = horizontalSlides[i],
-						htransform = 'translateZ(-2500px) translate(' + ( ( i - indexh ) * 105 ) + '%, 0%)';
+						hoffset = config.rtl ? -105 : 105,
+						htransform = 'translateZ(-2500px) translate(' + ( ( i - indexh ) * hoffset ) + '%, 0%)';
 
 					hslide.setAttribute( 'data-index-h', i );
 					hslide.style.display = 'block';
@@ -943,6 +932,22 @@ var Reveal = (function(){
 	function isOverview() {
 
 		return dom.wrapper.classList.contains( 'overview' );
+
+	}
+
+	/**
+	 * Checks if the current or specified slide is vertical
+	 * (nested within another slide).
+	 *
+	 * @param {HTMLElement} slide [optional] The slide to check
+	 * orientation of
+	 */
+	function isVerticalSlide( slide ) {
+
+		// Prefer slide argument, otherwise use current slide
+		slide = slide ? slide : currentSlide;
+
+		return slide && !!slide.parentNode.nodeName.match( /section/i );
 
 	}
 
@@ -1162,6 +1167,35 @@ var Reveal = (function(){
 			}
 		}
 
+		// Handle embedded content
+		stopEmbeddedContent( previousSlide );
+		startEmbeddedContent( currentSlide );
+
+		updateControls();
+		updateProgress();
+
+	}
+
+	/**
+	 * Syncs the presentation with the current DOM. Useful
+	 * when new slides or control elements are added or when
+	 * the configuration has changed.
+	 */
+	function sync() {
+
+		// Subscribe to input
+		removeEventListeners();
+		addEventListeners();
+
+		// Force a layout to make sure the current config is accounted for
+		layout();
+
+		// Reflect the current autoSlide value
+		autoSlide = config.autoSlide;
+
+		// Start auto-sliding if it's enabled
+		cueAutoSlide();
+
 		updateControls();
 		updateProgress();
 
@@ -1214,22 +1248,24 @@ var Reveal = (function(){
 					element.style.display = distance > 3 ? 'none' : 'block';
 				}
 
-				slides[i].classList.remove( 'past' );
-				slides[i].classList.remove( 'present' );
-				slides[i].classList.remove( 'future' );
+				var reverse = config.rtl && !isVerticalSlide( element );
+
+				element.classList.remove( 'past' );
+				element.classList.remove( 'present' );
+				element.classList.remove( 'future' );
 
 				if( i < index ) {
 					// Any element previous to index is given the 'past' class
-					slides[i].classList.add( 'past' );
+					element.classList.add( reverse ? 'future' : 'past' );
 				}
 				else if( i > index ) {
 					// Any element subsequent to index is given the 'future' class
-					slides[i].classList.add( 'future' );
+					element.classList.add( reverse ? 'past' : 'future' );
 				}
 
 				// If this element contains vertical slides
 				if( element.querySelector( 'section' ) ) {
-					slides[i].classList.add( 'stack' );
+					element.classList.add( 'stack' );
 				}
 			}
 
@@ -1321,6 +1357,7 @@ var Reveal = (function(){
 		if ( config.controls && dom.controls ) {
 
 			var routes = availableRoutes();
+			var fragments = availableFragments();
 
 			// Remove the 'enabled' class from all directions
 			dom.controlsLeft.concat( dom.controlsRight )
@@ -1329,6 +1366,7 @@ var Reveal = (function(){
 							.concat( dom.controlsPrev )
 							.concat( dom.controlsNext ).forEach( function( node ) {
 				node.classList.remove( 'enabled' );
+				node.classList.remove( 'fragmented' );
 			} );
 
 			// Add the 'enabled' class to the available routes
@@ -1340,6 +1378,25 @@ var Reveal = (function(){
 			// Prev/next buttons
 			if( routes.left || routes.up ) dom.controlsPrev.forEach( function( el ) { el.classList.add( 'enabled' ); } );
 			if( routes.right || routes.down ) dom.controlsNext.forEach( function( el ) { el.classList.add( 'enabled' ); } );
+
+			// Highlight fragment directions
+			if( currentSlide ) {
+
+				// Always apply fragment decorator to prev/next buttons
+				if( fragments.prev ) dom.controlsPrev.forEach( function( el ) { el.classList.add( 'fragmented', 'enabled' ); } );
+				if( fragments.next ) dom.controlsNext.forEach( function( el ) { el.classList.add( 'fragmented', 'enabled' ); } );
+
+				// Apply fragment decorators to directional buttons based on
+				// what slide axis they are in
+				if( isVerticalSlide( currentSlide ) ) {
+					if( fragments.prev ) dom.controlsUp.forEach( function( el ) { el.classList.add( 'fragmented', 'enabled' ); } );
+					if( fragments.next ) dom.controlsDown.forEach( function( el ) { el.classList.add( 'fragmented', 'enabled' ); } );
+				}
+				else {
+					if( fragments.prev ) dom.controlsLeft.forEach( function( el ) { el.classList.add( 'fragmented', 'enabled' ); } );
+					if( fragments.next ) dom.controlsRight.forEach( function( el ) { el.classList.add( 'fragmented', 'enabled' ); } );
+				}
+			}
 
 		}
 
@@ -1355,12 +1412,92 @@ var Reveal = (function(){
 		var horizontalSlides = document.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR ),
 			verticalSlides = document.querySelectorAll( VERTICAL_SLIDES_SELECTOR );
 
-		return {
+		var routes = {
 			left: indexh > 0 || config.loop,
 			right: indexh < horizontalSlides.length - 1 || config.loop,
 			up: indexv > 0,
 			down: indexv < verticalSlides.length - 1
 		};
+
+		// reverse horizontal controls for rtl
+		if( config.rtl ) {
+			var left = routes.left;
+			routes.left = routes.right;
+			routes.right = left;
+		}
+
+		return routes;
+
+	}
+
+	/**
+	 * Returns an object describing the available fragment
+	 * directions.
+	 *
+	 * @return {Object} two boolean properties: prev/next
+	 */
+	function availableFragments() {
+
+		if( currentSlide && config.fragments ) {
+			var fragments = currentSlide.querySelectorAll( '.fragment' );
+			var hiddenFragments = currentSlide.querySelectorAll( '.fragment:not(.visible)' );
+
+			return {
+				prev: fragments.length - hiddenFragments.length > 0,
+				next: !!hiddenFragments.length
+			};
+		}
+		else {
+			return { prev: false, next: false };
+		}
+
+	}
+
+	/**
+	 * Start playback of any embedded content inside of
+	 * the targeted slide.
+	 */
+	function startEmbeddedContent( slide ) {
+
+		if( slide ) {
+			// HTML5 media elements
+			toArray( slide.querySelectorAll( 'video, audio' ) ).forEach( function( el ) {
+				if( el.hasAttribute( 'data-autoplay' ) ) {
+					el.play();
+				}
+			} );
+
+			// YouTube embeds
+			toArray( slide.querySelectorAll( 'iframe[src*="youtube.com/embed/"]' ) ).forEach( function( el ) {
+				if( el.hasAttribute( 'data-autoplay' ) ) {
+					el.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+				}
+			});
+		}
+
+	}
+
+	/**
+	 * Stop playback of any embedded content inside of
+	 * the targeted slide.
+	 */
+	function stopEmbeddedContent( slide ) {
+
+		if( slide ) {
+			// HTML5 media elements
+			toArray( slide.querySelectorAll( 'video, audio' ) ).forEach( function( el ) {
+				if( !el.hasAttribute( 'data-ignore' ) ) {
+					el.pause();
+				}
+			} );
+
+			// YouTube embeds
+			toArray( slide.querySelectorAll( 'iframe[src*="youtube.com/embed/"]' ) ).forEach( function( el ) {
+				if( !el.hasAttribute( 'data-ignore' ) && typeof el.contentWindow.postMessage === 'function' ) {
+					el.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+				}
+			});
+		}
 
 	}
 
@@ -1457,7 +1594,7 @@ var Reveal = (function(){
 
 		// If a slide is specified, return the indices of that slide
 		if( slide ) {
-			var isVertical = !!slide.parentNode.nodeName.match( /section/gi );
+			var isVertical = isVerticalSlide( slide );
 			var slideh = isVertical ? slide.parentNode : slide;
 
 			// Select all horizontal slides
@@ -1491,27 +1628,24 @@ var Reveal = (function(){
 	 */
 	function nextFragment() {
 
-		// Vertical slides:
-		if( document.querySelector( VERTICAL_SLIDES_SELECTOR + '.present' ) ) {
-			var verticalFragments = sortFragments( document.querySelectorAll( VERTICAL_SLIDES_SELECTOR + '.present .fragment:not(.visible)' ) );
+		if( currentSlide && config.fragments ) {
+			var fragments = sortFragments( currentSlide.querySelectorAll( '.fragment:not(.visible)' ) );
 
-			if( verticalFragments.length ) {
-				verticalFragments[0].classList.add( 'visible' );
+			if( fragments.length ) {
+				// Find the index of the next fragment
+				var index = fragments[0].getAttribute( 'data-fragment-index' );
 
-				// Notify subscribers of the change
-				dispatchEvent( 'fragmentshown', { fragment: verticalFragments[0] } );
-				return true;
-			}
-		}
-		// Horizontal slides:
-		else {
-			var horizontalFragments = sortFragments( document.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR + '.present .fragment:not(.visible)' ) );
+				// Find all fragments with the same index
+				fragments = currentSlide.querySelectorAll( '.fragment[data-fragment-index="'+ index +'"]' );
 
-			if( horizontalFragments.length ) {
-				horizontalFragments[0].classList.add( 'visible' );
+				toArray( fragments ).forEach( function( element ) {
+					element.classList.add( 'visible' );
 
-				// Notify subscribers of the change
-				dispatchEvent( 'fragmentshown', { fragment: horizontalFragments[0] } );
+					// Notify subscribers of the change
+					dispatchEvent( 'fragmentshown', { fragment: element } );
+				} );
+
+				updateControls();
 				return true;
 			}
 		}
@@ -1528,27 +1662,24 @@ var Reveal = (function(){
 	 */
 	function previousFragment() {
 
-		// Vertical slides:
-		if( document.querySelector( VERTICAL_SLIDES_SELECTOR + '.present' ) ) {
-			var verticalFragments = sortFragments( document.querySelectorAll( VERTICAL_SLIDES_SELECTOR + '.present .fragment.visible' ) );
+		if( currentSlide && config.fragments ) {
+			var fragments = sortFragments( currentSlide.querySelectorAll( '.fragment.visible' ) );
 
-			if( verticalFragments.length ) {
-				verticalFragments[ verticalFragments.length - 1 ].classList.remove( 'visible' );
+			if( fragments.length ) {
+				// Find the index of the previous fragment
+				var index = fragments[ fragments.length - 1 ].getAttribute( 'data-fragment-index' );
 
-				// Notify subscribers of the change
-				dispatchEvent( 'fragmenthidden', { fragment: verticalFragments[ verticalFragments.length - 1 ] } );
-				return true;
-			}
-		}
-		// Horizontal slides:
-		else {
-			var horizontalFragments = sortFragments( document.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR + '.present .fragment.visible' ) );
+				// Find all fragments with the same index
+				fragments = currentSlide.querySelectorAll( '.fragment[data-fragment-index="'+ index +'"]' );
 
-			if( horizontalFragments.length ) {
-				horizontalFragments[ horizontalFragments.length - 1 ].classList.remove( 'visible' );
+				toArray( fragments ).forEach( function( f ) {
+					f.classList.remove( 'visible' );
 
-				// Notify subscribers of the change
-				dispatchEvent( 'fragmenthidden', { fragment: horizontalFragments[ horizontalFragments.length - 1 ] } );
+					// Notify subscribers of the change
+					dispatchEvent( 'fragmenthidden', { fragment: f } );
+				} );
+
+				updateControls();
 				return true;
 			}
 		}
@@ -1582,8 +1713,14 @@ var Reveal = (function(){
 
 	function navigateLeft() {
 
-		// Prioritize hiding fragments
-		if( ( isOverview() || previousFragment() === false ) && availableRoutes().left ) {
+		// Reverse for RTL
+		if( config.rtl ) {
+			if( ( isOverview() || nextFragment() === false ) && availableRoutes().left ) {
+				slide( indexh + 1 );
+			}
+		}
+		// Normal navigation
+		else if( ( isOverview() || previousFragment() === false ) && availableRoutes().left ) {
 			slide( indexh - 1 );
 		}
 
@@ -1591,8 +1728,14 @@ var Reveal = (function(){
 
 	function navigateRight() {
 
-		// Prioritize revealing fragments
-		if( ( isOverview() || nextFragment() === false ) && availableRoutes().right ) {
+		// Reverse for RTL
+		if( config.rtl ) {
+			if( ( isOverview() || previousFragment() === false ) && availableRoutes().right ) {
+				slide( indexh - 1 );
+			}
+		}
+		// Normal navigation
+		else if( ( isOverview() || nextFragment() === false ) && availableRoutes().right ) {
 			slide( indexh + 1 );
 		}
 
@@ -1983,6 +2126,7 @@ var Reveal = (function(){
 	return {
 		initialize: initialize,
 		configure: configure,
+		sync: sync,
 
 		// Navigation methods
 		slide: slide,
@@ -2009,6 +2153,9 @@ var Reveal = (function(){
 
 		// Returns an object with the available routes as booleans (left/right/top/bottom)
 		availableRoutes: availableRoutes,
+
+		// Returns an object with the available fragments as booleans (prev/next)
+		availableFragments: availableFragments,
 
 		// Toggles the overview mode on/off
 		toggleOverview: toggleOverview,
