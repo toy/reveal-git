@@ -165,8 +165,10 @@
           <section id="hands-on_checkout-new-branch">
             <h2>Hands-on</h2>
             <h3>Checkout new branch</h3>
-            <p><code>git checkout -b abc</code> == <code>git branch abc &amp;&amp; git checkout abc</code></p>
-            <pre><code><b><span style="color:#A50">~/hello-world</span></b><b>×<b><span style="color:#0AA">master</span></b></b><b>$</b> git checkout -b implementation<br>Switched to a new branch 'implementation'</code></pre>
+            <p><code>git branch abc &amp;&amp; git checkout abc</code><span class="fragment"> == <code>git checkout -b abc</code></span></p>
+            <div class="fragment">
+              <pre><code><b><span style="color:#A50">~/hello-world</span></b><b>×<b><span style="color:#0AA">master</span></b></b><b>$</b> git checkout -b implementation<br>Switched to a new branch 'implementation'</code></pre>
+            </div>
             <div class="fragment">
               <p>Status</p>
               <pre><code><b><span style="color:#A50">~/hello-world</span></b><b>×<b><span style="color:#0AA">implementation</span></b></b><b>$</b> git status<br># On branch implementation<br>nothing to commit, working directory clean</code></pre>
@@ -237,6 +239,9 @@
               <p>Amend last commit with fix</p>
               <pre><code><b><span style="color:#A50">~/hello-world</span></b><b>×<b><span style="color:#0AA">implementation *%</span></b></b><b>$</b> git add HelloWorld.java</code></pre>
               <div class="fragment">
+                <p><code>commit --amend</code> — enhance last commit with staged changes + change message</p>
+              </div>
+              <div class="fragment">
                 <pre><code><b><span style="color:#A50">~/hello-world</span></b><b>×<b><span style="color:#0AA">implementation +%</span></b></b><b>$</b> git commit --amend --message 'Implemented HelloWorld'<br>[implementation abb7cf3] Implemented HelloWorld<br> 1 file changed, 5 insertions(+)<br> create mode 100644 HelloWorld.java</code></pre>
               </div>
             </div>
@@ -256,7 +261,7 @@
               <pre><code><b><span style="color:#A50">~/hello-world</span></b><b>×<b><span style="color:#0AA">implementation</span></b></b><b>$</b> git co master<br>Switched to branch 'master'</code></pre>
             </div>
             <div class="fragment">
-              <p>Merge branch</p>
+              <p>Merge branch (<code>--no-ff</code> — create merge commit even if fast forward can be used)</p>
               <pre><code><b><span style="color:#A50">~/hello-world</span></b><b>×<b><span style="color:#0AA">master %</span></b></b><b>$</b> git merge --no-ff implementation --message 'merge initial implementation'<br>Merge made by the 'recursive' strategy.<br> .gitignore      | 1 <span style="color:#0A0">+</span><br> HelloWorld.java | 5 <span style="color:#0A0">+++++</span><br> 2 files changed, 6 insertions(+)<br> create mode 100644 .gitignore<br> create mode 100644 HelloWorld.java</code></pre>
             </div>
           </section>

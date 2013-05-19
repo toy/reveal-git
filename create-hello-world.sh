@@ -132,8 +132,10 @@ hsection 'Commit first file'
 ) | fragment
 
 hsection 'Checkout new branch'
-echo '  %p <code>git checkout -b abc</code> == <code>git branch abc && git checkout abc</code>'
-hcat git checkout -b implementation
+echo '  %p <code>git branch abc && git checkout abc</code><span class="fragment"> == <code>git checkout -b abc</code></span>'
+(
+  hcat git checkout -b implementation
+) | fragment
 (
   echo '  %p Status'
   hcat git status
@@ -197,6 +199,9 @@ hsection 'Commit changes separately'
   echo '  %p Amend last commit with fix'
   hcat git add HelloWorld.java
   (
+    echo '  %p <code>commit --amend</code> — enhance last commit with staged changes + change message'
+  ) | fragment
+  (
     hcat "git commit --amend --message 'Implemented HelloWorld'"
   ) | fragment
 ) | fragment
@@ -214,7 +219,7 @@ hsection 'Merge branch'
   hcat git co master
 ) | fragment
 (
-  echo '  %p Merge branch'
+  echo '  %p Merge branch (<code>--no-ff</code> — create merge commit even if fast forward can be used)'
   hcat "git merge --no-ff implementation --message 'merge initial implementation'"
 ) | fragment
 
