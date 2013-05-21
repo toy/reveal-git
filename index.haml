@@ -220,12 +220,12 @@
 					%section
 						%h2 Commands
 						%h3 Essential 2/2
-						%p.fragment <code>checkout</code> — checkout branch or paths [<code>svn revert</code>]
+						%p.fragment <code>checkout</code> — checkout branch or paths [<code>svn revert|switch</code>]
 						%p.fragment <code>reset</code> — reset current HEAD, workspace, stage area [<del>svn</del>]
 						.fragment
-							%p <code>branch</code> — crete, list, delete branches
-							%p <code>tag</code> — crete, list, delete tags
-							%p <code>remote</code> — crete, list, delete remotes [<del>svn</del>]
+							%p <code>branch</code> — create, list, delete branches
+							%p <code>tag</code> — create, list, delete tags
+							%p <code>remote</code> — create, list, delete remotes [<del>svn</del>]
 						.fragment
 							%p <code>fetch</code> — fetch remote refs and objects [<del>svn</del>]
 							%p <code>pull</code> — fetch and merge from remote [<code>svn update</code>]
@@ -301,7 +301,7 @@
 						%p.fragment Just named references, no copying or linking files, no history entry
 						%p.fragment Create branch for every feature, test or experiment
 						%p.fragment Easily switch branches
-						%p.fragment Merge worthwhile and delete unseccessful
+						%p.fragment Merge worthwhile and delete unsuccessful
 						%p.fragment No obligation to share branches
 
 					%section
@@ -312,10 +312,10 @@
 							%span.fragment and works as a backup
 						%p.fragment
 							Commit early, commit often, commit without disturbing others
-							%sup.fragment helps merging
-						%p.fragment Commit before merge rather than update than commit
+							%sup.fragment helps to merge
+						%p.fragment Commit before merge rather than update then commit
 						%p.fragment Server is not required until you need to share/publish work
-						%p.fragment Different workflows (git flow, pull requests)
+						%p.fragment Different workflows (git flow, pull requests, …)
 						%p.fragment Workflow depends on your team, not on your VCS
 						%p.fragment <code>git init</code> is enough when you need source control
 
@@ -350,7 +350,7 @@
 						%h2 Why git?
 						%h3 Staging area
 						%p.fragment Prepare and review changes before committing
-						%p.fragment Easily split changes to multiple commits (including in one file)
+						%p.fragment Easily split changes to multiple commits (also in one file)
 						%p.fragment Commit while still working
 
 				%section{data: {state: "cons"}}
@@ -364,10 +364,10 @@
 				%section{data: {state: "suggestions"}}
 					%h2 Dos and don'ts
 					%p.fragment.highlight-green Commit early and often
-					%p.fragment.highlight-green Choose (and agree with your team) a workflow
+					%p.fragment.highlight-green Choose a workflow and agree upon it with your team
 					%p.fragment.highlight-green Create branches
 					%p.fragment.highlight-green Make useful commit messages
-					%p.fragment.highlight-green Keep up to date
+					%p.fragment.highlight-green Keep up to date (sync early, sync often)
 					%p.fragment.highlight-green Enforce standards
 					%p.fragment.highlight-red Don't change <del>official</del> published history
 					%p.fragment.highlight-red Don't change tags
