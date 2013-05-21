@@ -3,7 +3,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>git for svn users [67fcc7]</title>
+    <title>git for svn users [93cebf]</title>
     <meta content="Presentatation about git for svn users" name="description">
     <meta content="Ivan Kuchin" name="author">
     <meta content="yes" name="apple-mobile-web-app-capable">
@@ -424,12 +424,12 @@
           <section id="commands_essential-2-2">
             <h2>Commands</h2>
             <h3>Essential 2/2</h3>
-            <p class="fragment"><code>checkout</code> — checkout branch or paths [<code>svn revert</code>]</p>
+            <p class="fragment"><code>checkout</code> — checkout branch or paths [<code>svn revert|switch</code>]</p>
             <p class="fragment"><code>reset</code> — reset current HEAD, workspace, stage area [<del>svn</del>]</p>
             <div class="fragment">
-              <p><code>branch</code> — crete, list, delete branches</p>
-              <p><code>tag</code> — crete, list, delete tags</p>
-              <p><code>remote</code> — crete, list, delete remotes [<del>svn</del>]</p>
+              <p><code>branch</code> — create, list, delete branches</p>
+              <p><code>tag</code> — create, list, delete tags</p>
+              <p><code>remote</code> — create, list, delete remotes [<del>svn</del>]</p>
             </div>
             <div class="fragment">
               <p><code>fetch</code> — fetch remote refs and objects [<del>svn</del>]</p>
@@ -643,7 +643,7 @@
             <p class="fragment">Just named references, no copying or linking files, no history entry</p>
             <p class="fragment">Create branch for every feature, test or experiment</p>
             <p class="fragment">Easily switch branches</p>
-            <p class="fragment">Merge worthwhile and delete unseccessful</p>
+            <p class="fragment">Merge worthwhile and delete unsuccessful</p>
             <p class="fragment">No obligation to share branches</p>
           </section>
           <section id="why-git_distributed-vcs">
@@ -655,11 +655,11 @@
             </p>
             <p class="fragment">
               Commit early, commit often, commit without disturbing others
-              <sup class="fragment">helps merging</sup>
+              <sup class="fragment">helps to merge</sup>
             </p>
-            <p class="fragment">Commit before merge rather than update than commit</p>
+            <p class="fragment">Commit before merge rather than update then commit</p>
             <p class="fragment">Server is not required until you need to share/publish work</p>
-            <p class="fragment">Different workflows (git flow, pull requests)</p>
+            <p class="fragment">Different workflows (git flow, pull requests, …)</p>
             <p class="fragment">Workflow depends on your team, not on your VCS</p>
             <p class="fragment"><code>git init</code> is enough when you need source control</p>
           </section>
@@ -698,7 +698,7 @@
             <h2>Why git?</h2>
             <h3>Staging area</h3>
             <p class="fragment">Prepare and review changes before committing</p>
-            <p class="fragment">Easily split changes to multiple commits (including in one file)</p>
+            <p class="fragment">Easily split changes to multiple commits (also in one file)</p>
             <p class="fragment">Commit while still working</p>
           </section>
         </section>
@@ -713,10 +713,10 @@
         <section data-state="suggestions" id="dos-and-don-ts">
           <h2>Dos and don'ts</h2>
           <p class="fragment highlight-green">Commit early and often</p>
-          <p class="fragment highlight-green">Choose (and agree with your team) a workflow</p>
+          <p class="fragment highlight-green">Choose a workflow and agree upon it with your team</p>
           <p class="fragment highlight-green">Create branches</p>
           <p class="fragment highlight-green">Make useful commit messages</p>
-          <p class="fragment highlight-green">Keep up to date</p>
+          <p class="fragment highlight-green">Keep up to date (sync early, sync often)</p>
           <p class="fragment highlight-green">Enforce standards</p>
           <p class="fragment highlight-red">Don't change <del>official</del> published history</p>
           <p class="fragment highlight-red">Don't change tags</p>
