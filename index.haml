@@ -448,22 +448,29 @@
 
 				%section#end{data: {state: "begin-end"}}
 					%h1 so, git?
-					%p.fragment{style: 'margin-top: 3em'}
-						Created using:
-						= succeed ',' do
-							%a{href: "https://github.com/hakimel/reveal.js"} reveal.js
-						= succeed ',' do
-							%a{href: "http://haml-lang.com/"} HAML
-						= succeed ',' do
-							%a{href: "http://sass-lang.com/"} SASS
-						= succeed ',' do
-							%a{href: "http://ruby-lang.org/"} Ruby
-						Shell script,
-						%a{href: "http://daringfireball.net/projects/markdown/"} Markdown
-						and
-						%a{href: "http://git-scm.com/"} git
-						:plain
-							:)
+					.fragment{style: 'margin-top: 3em'}
+						%p
+							Online:
+							%a{href: 'http://toy.github.io/reveal-git/'} toy.github.io/reveal-git
+						%p
+							Source:
+							%a{href: 'https://github.com/toy/reveal-git/'} github.com/toy/reveal-git
+						%p
+							Created using:
+							= succeed ',' do
+								%a{href: "https://github.com/hakimel/reveal.js"} reveal.js
+							= succeed ',' do
+								%a{href: "http://haml-lang.com/"} HAML
+							= succeed ',' do
+								%a{href: "http://sass-lang.com/"} SASS
+							= succeed ',' do
+								%a{href: "http://ruby-lang.org/"} Ruby
+							Shell script,
+							%a{href: "http://daringfireball.net/projects/markdown/"} Markdown
+							and
+							%a{href: "http://git-scm.com/"} git
+							:plain
+								:)
 
 		%script{:src => "reveal.js/lib/js/head.min.js"}
 		%script{:src => "reveal.js/js/reveal.min.js"}
